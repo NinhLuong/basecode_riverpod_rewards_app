@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
@@ -12,33 +12,55 @@ import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/auth/presentation/blocs/login/login_bloc.dart';
+import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/register_route.dart';
 import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
 
-class LogInScreen extends StatefulWidget {
+class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  ConsumerState<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _LogInScreenState extends ConsumerState<LogInScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _logInTapped(BuildContext context) {
-    context.read<LoginBloc>().add(LoginButtonTappedEvent(
-        username: _usernameController.text,
-        password: _passwordController.text));
+  void _logInTapped() {
+    if (_formKey.currentState?.validate() ?? false) {
+      ref.read(loginProvider.notifier).login(
+            username: _usernameController.text,
+            password: _passwordController.text,
+          );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Listen to login state changes
+    ref.listen<AsyncValue<UserEntity?>>(loginProvider, (previous, next) {
+      next.whenOrNull(
+        data: (user) {
+          if (user != null) {
+            // Set the current user and navigate
+            ref.read(currentUserProvider.notifier).setUser(user);
+            showToast(message: S.of(context).loggedInSuccessfully);
+            context.go(MainRoute.name);
+          }
+        },
+        error: (error, stackTrace) {
+          if (error is Exception) {
+            // Convert to a generic failure - you might want to create a more specific failure type
+            FailureComponent.handleFailure(context: context, failure: error as dynamic, ref: ref);
+          }
+        },
+      );
+    });
+
     return AppScaffold(
       body: ListView(
         children: [
@@ -82,23 +104,18 @@ class _LogInScreenState extends State<LogInScreen> {
             ]).validate,
           ),
           const SizedBox(height: 20),
-          BlocConsumer<LoginBloc, BaseState<UserEntity>>(
-              listener: (context, state) {
-            if (state.isSuccess) {
-              showToast(message: S.of(context).loggedInSuccessfully);
-              context.go(MainRoute.name);
-            } else if (state.isError) {
-              FailureComponent.handleFailure(
-                  context: context, failure: state.failure);
-            }
-          }, builder: (context, state) {
-            return AppButton(
-              text: S.of(context).signIn,
-              loading: state.isLoading,
-              type: AppButtonType.gradientBlue,
-              onPressed: () => _logInTapped(context),
-            );
-          }),
+          Consumer(
+            builder: (context, ref, child) {
+              final isLoading = ref.watch(isLoginLoadingProvider);
+              
+              return AppButton(
+                text: S.of(context).signIn,
+                loading: isLoading,
+                type: AppButtonType.gradientBlue,
+                onPressed: () => _logInTapped(),
+              );
+            },
+          ),
           const SizedBox(height: 30),
           AppRichText(
               text: S.of(context).dontHaveAnAccount,

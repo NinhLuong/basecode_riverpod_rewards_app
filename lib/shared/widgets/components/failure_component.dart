@@ -3,7 +3,7 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
@@ -12,7 +12,7 @@ import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
-import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
+import 'package:magic_rewards/core/presentation/providers/app_config_providers.dart';
 
 /// The [FailureComponent] class is a generic component that takes a [Failure] object and dynamically selects the appropriate
 /// sub-component based on the runtime type of the failure. It uses a switch statement to determine the failure type and
@@ -29,13 +29,22 @@ class FailureComponent extends StatelessWidget {
   final VoidCallback? retry;
   final bool refresh;
 
-  static handleFailure(
-      {required BuildContext context, required Failure failure}) {
+  static handleFailure({
+    required BuildContext context, 
+    required Failure failure,
+    WidgetRef? ref,
+  }) {
     showToast(message: failure.message);
-    if (failure is SessionExpiredFailure) {
+    if (failure is SessionExpiredFailure && ref != null) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (timeStamp) async {
+          await ref.read(appConfigProvider.notifier).logOut();
+          context.go(LoginRoute.name);
+        },
+      );
+    } else if (failure is SessionExpiredFailure) {
       WidgetsBinding.instance.addPostFrameCallback(
         (timeStamp) {
-          context.read<AppConfigBloc>().add(const LogOutEvent());
           context.go(LoginRoute.name);
         },
       );
@@ -48,7 +57,6 @@ class FailureComponent extends StatelessWidget {
       WidgetsBinding.instance.addPostFrameCallback(
         (timeStamp) {
           showToast(message: failure.message);
-          context.read<AppConfigBloc>().add(const LogOutEvent());
           context.go(LoginRoute.name);
         },
       );

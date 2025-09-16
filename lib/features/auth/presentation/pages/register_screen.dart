@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
@@ -14,23 +14,21 @@ import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/auth/presentation/blocs/check_email/check_email_bloc.dart';
-import 'package:magic_rewards/features/auth/presentation/blocs/register/register_bloc.dart';
+import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -42,31 +40,68 @@ class _RegisterScreenState extends State<RegisterScreen> {
       TextEditingController();
 
   String verifiedEmail = '';
-
   bool showNotificationsEmail = false;
 
-  void _registerTapped(BuildContext context) {
+  void _registerTapped() {
     if (_formKey.currentState?.validate() ?? true) {
-      if (verifiedEmail != _secondaryEmailController.text) {
-        context.read<CheckEmailBloc>().add(
-            CheckEmailButtonTappedEvent(email: _secondaryEmailController.text));
+      if (verifiedEmail != _secondaryEmailController.text && showNotificationsEmail) {
+        ref.read(emailCheckProvider.notifier).checkEmail(_secondaryEmailController.text);
       } else {
-        _register(context);
+        _register();
       }
     }
   }
 
-  void _register(BuildContext context) {
-    context.read<RegisterBloc>().add(RegisterButtonTappedEvent(
-        userName: _usernameController.text,
-        email: _emailController.text,
-        password: _passwordController.text,
-        fullName: _fullNameController.text,
-        secondaryEmail: _secondaryEmailController.text));
+  void _register() {
+    ref.read(registerProvider.notifier).register(
+          userName: _usernameController.text,
+          email: _emailController.text,
+          password: _passwordController.text,
+          fullName: _fullNameController.text,
+          secondaryEmail: _secondaryEmailController.text,
+        );
   }
 
   @override
   Widget build(BuildContext context) {
+    // Listen to register state changes
+    ref.listen<AsyncValue<UserEntity?>>(registerProvider, (previous, next) {
+      next.whenOrNull(
+        data: (user) {
+          if (user != null) {
+            ref.read(currentUserProvider.notifier).setUser(user);
+            showToast(message: S.of(context).signedUpScuccessfully);
+            context.go(MainRoute.name);
+          }
+        },
+        error: (error, stackTrace) {
+          if (error is Exception) {
+            FailureComponent.handleFailure(context: context, failure: error as dynamic, ref: ref);
+          }
+        },
+      );
+    });
+
+    // Listen to email check state changes
+    ref.listen<AsyncValue<CheckEmailEntity?>>(emailCheckProvider, (previous, next) {
+      next.whenOrNull(
+        data: (checkEmailResult) {
+          if (checkEmailResult != null) {
+            if (checkEmailResult.verifyCode != null) {
+              _showVerifyEmailDialog(context, checkEmailResult.verifyCode!);
+            } else {
+              _register();
+            }
+          }
+        },
+        error: (error, stackTrace) {
+          if (error is Exception) {
+            FailureComponent.handleFailure(context: context, failure: error as dynamic, ref: ref);
+          }
+        },
+      );
+    });
+
     return AppScaffold(
       body: ListView(
         children: [
@@ -167,38 +202,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   AppValidator(validators: [InputValidator.email]).validate,
             ),
           const SizedBox(height: 20),
-          BlocConsumer<RegisterBloc, BaseState<UserEntity>>(
-              listener: (context, state) {
-            if (state.isSuccess) {
-              showToast(message: S.of(context).signedUpScuccessfully);
-              context.go(MainRoute.name);
-            } else if (state.isError) {
-              FailureComponent.handleFailure(
-                  context: context, failure: state.failure);
-            }
-          }, builder: (context, state) {
-            return BlocConsumer<CheckEmailBloc, BaseState<CheckEmailEntity>>(
-                listener: (context, checkEmailState) {
-              if (checkEmailState.isSuccess) {
-                if (checkEmailState.data?.verifyCode != null) {
-                  _showVerifyEmailDialog(
-                      context, checkEmailState.data!.verifyCode!);
-                } else {
-                  _register(context);
-                }
-              } else if (checkEmailState.isError) {
-                FailureComponent.handleFailure(
-                    context: context, failure: checkEmailState.failure);
-              }
-            }, builder: (context, checkEmailState) {
+          Consumer(
+            builder: (context, ref, child) {
+              final isRegisterLoading = ref.watch(isRegisterLoadingProvider);
+              final isEmailCheckLoading = ref.watch(isEmailCheckLoadingProvider);
+              
               return AppButton(
                 text: S.of(context).signUp,
-                loading: state.isLoading || checkEmailState.isLoading,
+                loading: isRegisterLoading || isEmailCheckLoading,
                 type: AppButtonType.gradientBlue,
-                onPressed: () => _registerTapped(context),
+                onPressed: () => _registerTapped(),
               );
-            });
-          }),
+            },
+          ),
           const SizedBox(height: 30),
           AppRichText(
             text: S.of(context).alreadyHaveAnAccount,
@@ -261,7 +277,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 message:
                                     S.of(context).emailVerifiedSuccessfully);
                             verifiedEmail = _secondaryEmailController.text;
-                            context.pop(true);
+                            Navigator.of(context).pop(true);
                           } else {
                             showToast(
                                 message: S.of(context).wrongVerificationCode);
@@ -273,8 +289,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           );
         }).then((value) {
-      if (value) {
-        _register(context);
+      if (value == true) {
+        _register();
       }
     });
   }
