@@ -14,8 +14,6 @@ class TransactionsRoute {
       if (!CacheStorageServices().hasToken) return LoginRoute.name;
       return null;
     },
-    builder: (context, state) => BlocProvider(
-        create: (context) => getIt<TransactionsBloc>(),
-        child: TransactionsScreen()),
+    builder: (context, state) => TransactionsScreen(),
   );
 }

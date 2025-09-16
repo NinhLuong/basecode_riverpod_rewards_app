@@ -7,7 +7,7 @@ import 'package:magic_rewards/features/tasks/presentation/widgets/task_order_car
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TasksOrdersSection extends ConsumerStatefulWidget {
-  TasksOrdersSection({super.key});
+  const TasksOrdersSection({super.key});
 
   @override
   ConsumerState<TasksOrdersSection> createState() => _TasksOrdersSectionState();

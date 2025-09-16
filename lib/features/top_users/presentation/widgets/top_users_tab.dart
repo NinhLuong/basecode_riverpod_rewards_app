@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
@@ -39,9 +40,7 @@ class _TopUsersTapState extends ConsumerState<TopUsersTap> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: topUsersAsync.when(
         loading: () => const LoadingComponent(),
-        error: (error, stack) => Center(
-          child: Text('Error: $error'),
-        ),
+        error: (error, stack) => FailureComponent(failure: error as Failure),
         data: (topUsersEntity) => SmartRefresher(
           controller: _refreshController,
           onRefresh: () async {

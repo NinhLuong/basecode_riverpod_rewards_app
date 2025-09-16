@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
@@ -19,9 +20,7 @@ class RedeemSection extends ConsumerWidget {
 
     return payoutsAsync.when(
       loading: () => const LoadingComponent(),
-      error: (error, stack) => Center(
-        child: Text('Error: $error'),
-      ),
+      error: (error, stack) => FailureComponent(failure: error as Failure),
       data: (payoutsEntity) => SmartRefresher(
         controller: refreshController,
         onRefresh: () async {

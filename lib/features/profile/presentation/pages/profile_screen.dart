@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_avatar.dart';
 import 'package:magic_rewards/shared/widgets/components/app_dialogs.dart';
@@ -77,9 +78,7 @@ class ProfileScreen extends ConsumerWidget {
               value: "-")
         ],
       ),
-      error: (error, stack) => Center(
-        child: Text('Error: $error'),
-      ),
+      error: (error, stack) => FailureComponent(failure: error as Failure),
       data: (profile) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
