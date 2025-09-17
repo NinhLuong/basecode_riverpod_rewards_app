@@ -4,7 +4,7 @@ import 'package:magic_rewards/features/top_users/domain/entities/top_users_entit
 part 'top_users_state.freezed.dart';
 
 @freezed
-class TopUsersState with _$TopUsersState {
+sealed class TopUsersState with _$TopUsersState {
   const factory TopUsersState.initial() = _TopUsersInitial;
   const factory TopUsersState.loading() = _TopUsersLoading;
   const factory TopUsersState.success(TopUsersEntity data) = _TopUsersSuccess;

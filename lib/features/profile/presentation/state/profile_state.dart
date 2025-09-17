@@ -4,7 +4,7 @@ import 'package:magic_rewards/features/profile/domain/entities/profile_entity.da
 part 'profile_state.freezed.dart';
 
 @freezed
-class ProfileState with _$ProfileState {
+sealed class ProfileState with _$ProfileState {
   const factory ProfileState.initial() = _ProfileInitial;
   const factory ProfileState.loading() = _ProfileLoading;
   const factory ProfileState.success(ProfileEntity data) = _ProfileSuccess;

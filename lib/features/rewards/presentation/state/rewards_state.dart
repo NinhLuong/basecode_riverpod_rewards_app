@@ -6,7 +6,7 @@ import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.da
 part 'rewards_state.freezed.dart';
 
 @freezed
-class OrdersState with _$OrdersState {
+sealed class OrdersState with _$OrdersState {
   const factory OrdersState.initial() = _OrdersInitial;
   const factory OrdersState.loading() = _OrdersLoading;
   const factory OrdersState.success(OrdersEntity data) = _OrdersSuccess;
@@ -32,7 +32,7 @@ extension OrdersStateX on OrdersState {
 }
 
 @freezed
-class TransactionsState with _$TransactionsState {
+sealed class TransactionsState with _$TransactionsState {
   const factory TransactionsState.initial() = _TransactionsInitial;
   const factory TransactionsState.loading() = _TransactionsLoading;
   const factory TransactionsState.success(TransactionsEntity data) = _TransactionsSuccess;
@@ -58,7 +58,7 @@ extension TransactionsStateX on TransactionsState {
 }
 
 @freezed
-class PayoutsState with _$PayoutsState {
+sealed class PayoutsState with _$PayoutsState {
   const factory PayoutsState.initial() = _PayoutsInitial;
   const factory PayoutsState.loading() = _PayoutsLoading;
   const factory PayoutsState.success(PayoutsEntity data) = _PayoutsSuccess;
@@ -83,7 +83,7 @@ extension PayoutsStateX on PayoutsState {
 }
 
 @freezed
-class RedeemState with _$RedeemState {
+sealed class RedeemState with _$RedeemState {
   const factory RedeemState.initial() = _RedeemInitial;
   const factory RedeemState.loading() = _RedeemLoading;
   const factory RedeemState.success() = _RedeemSuccess;

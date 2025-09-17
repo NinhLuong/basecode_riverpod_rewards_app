@@ -89,10 +89,7 @@ return initial(_that);case _TasksLoading():
 return loading(_that);case _TasksSuccess():
 return success(_that);case _TasksError():
 return error(_that);case _TasksRefreshing():
-return refreshing(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -163,10 +160,7 @@ return initial();case _TasksLoading():
 return loading();case _TasksSuccess():
 return success(_that.data);case _TasksError():
 return error(_that.message);case _TasksRefreshing():
-return refreshing(_that.currentData);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -553,10 +547,7 @@ return initial(_that);case _TaskOrdersLoading():
 return loading(_that);case _TaskOrdersSuccess():
 return success(_that);case _TaskOrdersError():
 return error(_that);case _TaskOrdersRefreshing():
-return refreshing(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -627,10 +618,7 @@ return initial();case _TaskOrdersLoading():
 return loading();case _TaskOrdersSuccess():
 return success(_that.data);case _TaskOrdersError():
 return error(_that.message);case _TaskOrdersRefreshing():
-return refreshing(_that.currentData);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1015,10 +1003,7 @@ case _ReserveCommentInitial():
 return initial(_that);case _ReserveCommentLoading():
 return loading(_that);case _ReserveCommentSuccess():
 return success(_that);case _ReserveCommentError():
-return error(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return error(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -1086,10 +1071,7 @@ case _ReserveCommentInitial():
 return initial();case _ReserveCommentLoading():
 return loading();case _ReserveCommentSuccess():
 return success(_that.result);case _ReserveCommentError():
-return error(_that.message);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return error(_that.message);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1398,10 +1380,7 @@ case _AddTaskOrderInitial():
 return initial(_that);case _AddTaskOrderLoading():
 return loading(_that);case _AddTaskOrderSuccess():
 return success(_that);case _AddTaskOrderError():
-return error(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return error(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -1469,10 +1448,7 @@ case _AddTaskOrderInitial():
 return initial();case _AddTaskOrderLoading():
 return loading();case _AddTaskOrderSuccess():
 return success();case _AddTaskOrderError():
-return error(_that.message);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return error(_that.message);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///

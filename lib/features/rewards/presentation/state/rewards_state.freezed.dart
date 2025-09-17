@@ -89,10 +89,7 @@ return initial(_that);case _OrdersLoading():
 return loading(_that);case _OrdersSuccess():
 return success(_that);case _OrdersError():
 return error(_that);case _OrdersRefreshing():
-return refreshing(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -163,10 +160,7 @@ return initial();case _OrdersLoading():
 return loading();case _OrdersSuccess():
 return success(_that.data);case _OrdersError():
 return error(_that.message);case _OrdersRefreshing():
-return refreshing(_that.currentData);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -553,10 +547,7 @@ return initial(_that);case _TransactionsLoading():
 return loading(_that);case _TransactionsSuccess():
 return success(_that);case _TransactionsError():
 return error(_that);case _TransactionsRefreshing():
-return refreshing(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -627,10 +618,7 @@ return initial();case _TransactionsLoading():
 return loading();case _TransactionsSuccess():
 return success(_that.data);case _TransactionsError():
 return error(_that.message);case _TransactionsRefreshing():
-return refreshing(_that.currentData);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1017,10 +1005,7 @@ return initial(_that);case _PayoutsLoading():
 return loading(_that);case _PayoutsSuccess():
 return success(_that);case _PayoutsError():
 return error(_that);case _PayoutsRefreshing():
-return refreshing(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -1091,10 +1076,7 @@ return initial();case _PayoutsLoading():
 return loading();case _PayoutsSuccess():
 return success(_that.data);case _PayoutsError():
 return error(_that.message);case _PayoutsRefreshing():
-return refreshing(_that.currentData);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1479,10 +1461,7 @@ case _RedeemInitial():
 return initial(_that);case _RedeemLoading():
 return loading(_that);case _RedeemSuccess():
 return success(_that);case _RedeemError():
-return error(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return error(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -1550,10 +1529,7 @@ case _RedeemInitial():
 return initial();case _RedeemLoading():
 return loading();case _RedeemSuccess():
 return success();case _RedeemError():
-return error(_that.message);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return error(_that.message);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///

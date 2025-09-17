@@ -5,7 +5,7 @@ import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.d
 part 'auth_state.freezed.dart';
 
 @freezed
-class LoginState with _$LoginState {
+sealed class LoginState with _$LoginState {
   const factory LoginState.initial() = _LoginInitial;
   const factory LoginState.loading() = _LoginLoading;
   const factory LoginState.success(UserEntity user) = _LoginSuccess;
@@ -24,7 +24,7 @@ extension LoginStateX on LoginState {
 }
 
 @freezed
-class RegisterState with _$RegisterState {
+sealed class RegisterState with _$RegisterState {
   const factory RegisterState.initial() = _RegisterInitial;
   const factory RegisterState.loading() = _RegisterLoading;
   const factory RegisterState.success(UserEntity user) = _RegisterSuccess;
@@ -43,7 +43,7 @@ extension RegisterStateX on RegisterState {
 }
 
 @freezed
-class EmailCheckState with _$EmailCheckState {
+sealed class EmailCheckState with _$EmailCheckState {
   const factory EmailCheckState.initial() = _EmailCheckInitial;
   const factory EmailCheckState.loading() = _EmailCheckLoading;
   const factory EmailCheckState.success(CheckEmailEntity result) = _EmailCheckSuccess;
@@ -62,7 +62,7 @@ extension EmailCheckStateX on EmailCheckState {
 }
 
 @freezed
-class CurrentUserState with _$CurrentUserState {
+sealed class CurrentUserState with _$CurrentUserState {
   const factory CurrentUserState.initial() = _CurrentUserInitial;
   const factory CurrentUserState.loading() = _CurrentUserLoading;
   const factory CurrentUserState.authenticated(UserEntity user) = _CurrentUserAuthenticated;

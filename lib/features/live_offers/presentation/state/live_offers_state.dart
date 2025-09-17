@@ -4,7 +4,7 @@ import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_en
 part 'live_offers_state.freezed.dart';
 
 @freezed
-class LiveOffersState with _$LiveOffersState {
+sealed class LiveOffersState with _$LiveOffersState {
   const factory LiveOffersState.initial() = _Initial;
   const factory LiveOffersState.loading() = _Loading;
   const factory LiveOffersState.success(LiveOffersEntity data) = _Success;

@@ -89,10 +89,7 @@ return initial(_that);case _Loading():
 return loading(_that);case _Success():
 return success(_that);case _Error():
 return error(_that);case _LoadingMore():
-return loadingMore(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return loadingMore(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -163,10 +160,7 @@ return initial();case _Loading():
 return loading();case _Success():
 return success(_that.data);case _Error():
 return error(_that.message);case _LoadingMore():
-return loadingMore(_that.currentData);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return loadingMore(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///

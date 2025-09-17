@@ -5,7 +5,7 @@ import 'package:magic_rewards/features/home/domain/entities/home_with_user_entit
 part 'home_state.freezed.dart';
 
 @freezed
-class HomeState with _$HomeState {
+sealed class HomeState with _$HomeState {
   const factory HomeState.initial() = _HomeInitial;
   const factory HomeState.loading() = _HomeLoading;
   const factory HomeState.success(HomeWithUserEntity data) = _HomeSuccess;

@@ -6,7 +6,7 @@ import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_ent
 part 'tasks_state.freezed.dart';
 
 @freezed
-class TasksState with _$TasksState {
+sealed class TasksState with _$TasksState {
   const factory TasksState.initial() = _TasksInitial;
   const factory TasksState.loading() = _TasksLoading;
   const factory TasksState.success(TasksEntity data) = _TasksSuccess;
@@ -32,7 +32,7 @@ extension TasksStateX on TasksState {
 }
 
 @freezed
-class TaskOrdersState with _$TaskOrdersState {
+sealed class TaskOrdersState with _$TaskOrdersState {
   const factory TaskOrdersState.initial() = _TaskOrdersInitial;
   const factory TaskOrdersState.loading() = _TaskOrdersLoading;
   const factory TaskOrdersState.success(TasksOrdersEntity data) = _TaskOrdersSuccess;
@@ -57,7 +57,7 @@ extension TaskOrdersStateX on TaskOrdersState {
 }
 
 @freezed
-class ReserveCommentState with _$ReserveCommentState {
+sealed class ReserveCommentState with _$ReserveCommentState {
   const factory ReserveCommentState.initial() = _ReserveCommentInitial;
   const factory ReserveCommentState.loading() = _ReserveCommentLoading;
   const factory ReserveCommentState.success(ReserveCommentEntity result) = _ReserveCommentSuccess;
@@ -76,7 +76,7 @@ extension ReserveCommentStateX on ReserveCommentState {
 }
 
 @freezed
-class AddTaskOrderState with _$AddTaskOrderState {
+sealed class AddTaskOrderState with _$AddTaskOrderState {
   const factory AddTaskOrderState.initial() = _AddTaskOrderInitial;
   const factory AddTaskOrderState.loading() = _AddTaskOrderLoading;
   const factory AddTaskOrderState.success() = _AddTaskOrderSuccess;
