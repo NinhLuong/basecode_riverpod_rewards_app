@@ -1,6 +1,6 @@
-# Base Code Flutter Clean Architecture Template
+# Base Code Flutter Clean Architecture Template with Riverpod
 
-A Flutter application designed as a robust starting point for new projects, showcasing clean architecture and a feature-rich UI. This rewards-based application provides a clear, scalable, and maintainable codebase for building modern mobile apps with Flutter.
+A Flutter application designed as a robust starting point for new projects, showcasing clean architecture and a feature-rich UI. This rewards-based application provides a clear, scalable, and maintainable codebase for building modern mobile apps with Flutter, utilizing Riverpod for state management.
 
 ## ✨ Features
 
@@ -30,8 +30,8 @@ Follow these instructions to get the project up and running on your local machin
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/NinhLuong/basecode_cubit_rewards_app.git
-   cd basecode_cubit_rewards_app
+   git clone https://github.com/NinhLuong/basecode_riverpod_rewards_app.git
+   cd basecode_riverpod_rewards_app
    ```
 
 2. **Install Dependencies:**
@@ -50,7 +50,7 @@ Follow these instructions to get the project up and running on your local machin
 
 5. **Run the App:**
    - For development: `flutter run`
-   - For production: `flutter run --release `
+   - For production: `flutter run --release`
    - To run tests: `flutter test`
 
 ### Build and Deployment
@@ -70,7 +70,7 @@ lib/
 ├── core/                             # Shared core functionality
 │   ├── data/                         # Data layer (datasources, models, repositories)
 │   ├── domain/                       # Domain layer (entities, usecases)
-│   └── presentation/                 # Presentation layer (blocs, routes)
+│   └── presentation/                 # Presentation layer (providers, routes)
 ├── features/                         # Feature-specific modules
 │   ├── auth/                         # Authentication feature
 │   ├── home/                         # Home dashboard
@@ -86,13 +86,13 @@ lib/
 
 - **Data Layer:** Handles API calls, database interactions, and data models.
 - **Domain Layer:** Contains business logic, entities, and repository interfaces.
-- **Presentation Layer:** Manages UI components, state management with BLoC, and routing.
+- **Presentation Layer:** Manages UI components, state management with Riverpod, and routing.
 
 ## 📦 Key Dependencies
 
 This project leverages several packages for a robust, maintainable codebase:
 
-- **State Management:** [`flutter_bloc`](https://pub.dev/packages/flutter_bloc) - Predictable state management.
+- **State Management:** [`riverpod`](https://pub.dev/packages/riverpod) - Reactive state management.
 - **Routing:** [`go_router`](https://pub.dev/packages/go_router) - Declarative routing.
 - **Dependency Injection:** [`get_it`](https://pub.dev/packages/get_it) & [`injectable`](https://pub.dev/packages/injectable) - Service locator and code generation.
 - **Networking:** [`dio`](https://pub.dev/packages/dio) - HTTP client for API requests.
@@ -107,7 +107,7 @@ For a full list, see `pubspec.yaml`.
 
 ### Architecture
 
-This project adheres to **Clean Architecture** principles, ensuring separation of concerns and testability. It uses the **BLoC (Business Logic Component)** pattern for state management, promoting a clear distinction between business logic and UI. Features are organized into independent modules, each following the layered architecture (Data, Domain, Presentation).
+This project adheres to **Clean Architecture** principles, ensuring separation of concerns and testability. It uses **Riverpod** for state management, promoting a clear distinction between business logic and UI. Features are organized into independent modules, each following the layered architecture (Data, Domain, Presentation).
 
 ### Code Style
 
@@ -132,7 +132,7 @@ Run tests with `flutter test`. Aim for high coverage, especially in domain and d
 - Use `Either<Failure, Success>` from Dartz for functional error handling.
 - Implement custom `Failure` classes for domain-specific errors.
 - Display errors in UI using `SelectableText.rich` with red color for visibility.
-- Handle loading and error states within BLoC states.
+- Handle loading and error states within Riverpod providers.
 
 ### Performance Optimization
 
@@ -167,6 +167,4 @@ We welcome contributions! To contribute:
 ## 📧 Contact Information
 
 For questions or support, contact [ninhluongvh.dev@gmail.com](mailto:ninhluongvh.dev@gmail.com).
-
----
 

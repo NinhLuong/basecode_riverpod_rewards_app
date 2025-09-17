@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 import 'package:magic_rewards/features/live_offers/presentation/state/live_offers_state.dart';
@@ -12,7 +12,7 @@ import 'package:magic_rewards/features/live_offers/presentation/providers/live_o
 import 'package:magic_rewards/features/live_offers/presentation/widgets/live_offer_component.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class LiveOffersScreen extends HookConsumerWidget {
+class LiveOffersScreen extends ConsumerWidget {
   const LiveOffersScreen({super.key});
 
   @override
