@@ -5,6 +5,7 @@ import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/features/rewards/presentation/providers/rewards_providers.dart';
+import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
 import 'package:magic_rewards/features/rewards/presentation/widgets/order_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -15,12 +16,13 @@ class OrdersSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ordersAsync = ref.watch(ordersProvider);
+    final ordersState = ref.watch(ordersProvider);
 
-    return ordersAsync.when(
+    return ordersState.when(
+      initial: () => const LoadingComponent(),
       loading: () => const LoadingComponent(),
-      error: (error, stack) => FailureComponent(failure: error as Failure),
-      data: (ordersEntity) => SmartRefresher(
+      error: (errorMessage) => FailureComponent(failure: Failure(errorMessage)),
+      success: (ordersEntity) => SmartRefresher(
         controller: refreshController,
         onRefresh: () async {
           await ref.read(ordersProvider.notifier).refresh();
@@ -36,6 +38,29 @@ class OrdersSection extends ConsumerWidget {
                       .toList(),
                   const SizedBox(height: 100),
                 ],
+        ),
+      ),
+      refreshing: (currentData) => SmartRefresher(
+        controller: refreshController,
+        onRefresh: () async {
+          await ref.read(ordersProvider.notifier).refresh();
+          refreshController.refreshCompleted();
+        },
+        child: ListView(
+          children: [
+            const SizedBox(height: 10),
+            if (currentData.orders.isEmpty)
+              const EmptyComponent()
+            else
+              ...currentData.orders
+                  .map((e) => OrderCard(order: e))
+                  .toList(),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            const SizedBox(height: 100),
+          ],
         ),
       ),
     );

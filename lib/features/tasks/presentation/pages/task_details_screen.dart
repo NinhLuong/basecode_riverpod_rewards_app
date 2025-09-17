@@ -3,16 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
+import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/providers/tasks_providers.dart';
+import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
 import 'package:magic_rewards/features/tasks/presentation/routes/do_task_route.dart';
 
 class TaskDetailsScreen extends ConsumerWidget {
@@ -22,23 +21,17 @@ class TaskDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final reserveCommentAsync = ref.watch(reserveCommentProvider);
-
     // Listen to state changes
-    ref.listen<AsyncValue<ReserveCommentEntity?>>(reserveCommentProvider, (previous, next) {
+    ref.listen(reserveCommentProvider, (previous, next) {
       next.whenOrNull(
-        data: (reserveComment) {
-          if (reserveComment != null) {
-            context.push(DoTaskRoute.name, extra: {
-              'comment': reserveComment.commentEntity,
-              'taskUrl': task.url
-            });
-          }
+        success: (reserveComment) {
+          context.push(DoTaskRoute.name, extra: {
+            'comment': reserveComment.commentEntity,
+            'taskUrl': task.url
+          });
         },
-        error: (error, stackTrace) {
-          if (error is Exception) {
-            FailureComponent.handleFailure(context: context, failure: error as Failure);
-          }
+        error: (errorMessage) {
+          showToast(message: errorMessage);
         },
       );
     });
@@ -57,7 +50,7 @@ class TaskDetailsScreen extends ConsumerWidget {
           onPressed: () => _onPressed(ref),
           type: AppButtonType.solidYellow,
           text: "Do Task ( + ${task.price} Points)",
-          loading: reserveCommentAsync.isLoading,
+          loading: ref.watch(isReserveCommentLoadingProvider),
         ),
       ),
       floatingActionButtonLocation:

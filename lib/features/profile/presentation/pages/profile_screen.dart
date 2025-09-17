@@ -15,6 +15,7 @@ import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/core/presentation/providers/app_config_providers.dart';
 import 'package:magic_rewards/features/profile/presentation/providers/profile_providers.dart';
+import 'package:magic_rewards/features/profile/presentation/state/profile_state.dart';
 import 'package:magic_rewards/features/profile/presentation/widgets/profile_tile.dart';
 import 'package:magic_rewards/features/profile/presentation/routes/contact_us_route.dart';
 import 'package:magic_rewards/features/profile/presentation/routes/terms_route.dart';
@@ -58,9 +59,26 @@ class ProfileScreen extends ConsumerWidget {
   }
 
   Widget buildPoints(BuildContext context, WidgetRef ref) {
-    final profileAsync = ref.watch(profileProvider);
+    final profileState = ref.watch(profileProvider);
     
-    return profileAsync.when(
+    return profileState.when(
+      initial: () => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          buildInfoColumn(context,
+              icon: ImagesPaths.balanceSvg,
+              title: S.of(context).balance,
+              value: "-"),
+          buildInfoColumn(context,
+              icon: ImagesPaths.redeemSvg,
+              title: S.of(context).redeem,
+              value: "-"),
+          buildInfoColumn(context,
+              icon: ImagesPaths.totalEarnSvg,
+              title: S.of(context).totalEarn,
+              value: "-")
+        ],
+      ),
       loading: () => Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -78,8 +96,8 @@ class ProfileScreen extends ConsumerWidget {
               value: "-")
         ],
       ),
-      error: (error, stack) => FailureComponent(failure: error as Failure),
-      data: (profile) => Row(
+      error: (errorMessage) => FailureComponent(failure: Failure(errorMessage)),
+      success: (profile) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           buildInfoColumn(context,
@@ -94,6 +112,23 @@ class ProfileScreen extends ConsumerWidget {
               icon: ImagesPaths.totalEarnSvg,
               title: S.of(context).totalEarn,
               value: profile.totalPoints)
+        ],
+      ),
+      refreshing: (currentData) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          buildInfoColumn(context,
+              icon: ImagesPaths.balanceSvg,
+              title: S.of(context).balance,
+              value: currentData.balance),
+          buildInfoColumn(context,
+              icon: ImagesPaths.redeemSvg,
+              title: S.of(context).redeem,
+              value: currentData.redeemedPoints),
+          buildInfoColumn(context,
+              icon: ImagesPaths.totalEarnSvg,
+              title: S.of(context).totalEarn,
+              value: currentData.totalPoints)
         ],
       ),
     );

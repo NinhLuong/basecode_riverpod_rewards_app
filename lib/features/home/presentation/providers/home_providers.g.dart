@@ -102,7 +102,7 @@ String _$homeUserLocalDataSourceHash() =>
 const homeProvider = HomeNotifierProvider._();
 
 final class HomeNotifierProvider
-    extends $AsyncNotifierProvider<HomeNotifier, HomeWithUserEntity> {
+    extends $NotifierProvider<HomeNotifier, HomeState> {
   const HomeNotifierProvider._()
     : super(
         from: null,
@@ -120,23 +120,30 @@ final class HomeNotifierProvider
   @$internal
   @override
   HomeNotifier create() => HomeNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(HomeState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<HomeState>(value),
+    );
+  }
 }
 
-String _$homeNotifierHash() => r'1c1290181534de806b4369aa03cccdec2ff01ac2';
+String _$homeNotifierHash() => r'5e894d94d52a690aee9ba746515ee7515b5f4b93';
 
-abstract class _$HomeNotifier extends $AsyncNotifier<HomeWithUserEntity> {
-  FutureOr<HomeWithUserEntity> build();
+abstract class _$HomeNotifier extends $Notifier<HomeState> {
+  HomeState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref =
-        this.ref as $Ref<AsyncValue<HomeWithUserEntity>, HomeWithUserEntity>;
+    final ref = this.ref as $Ref<HomeState, HomeState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<HomeWithUserEntity>, HomeWithUserEntity>,
-              AsyncValue<HomeWithUserEntity>,
+              AnyNotifier<HomeState, HomeState>,
+              HomeState,
               Object?,
               Object?
             >;
@@ -183,7 +190,7 @@ final class HomeDataProvider
   }
 }
 
-String _$homeDataHash() => r'1ad17260443962ee182b089462aa98609b427afe';
+String _$homeDataHash() => r'a5df0441e56606c962354ac4e16fc55f429ec8a9';
 
 @ProviderFor(homeUserData)
 const homeUserDataProvider = HomeUserDataProvider._();
@@ -224,7 +231,7 @@ final class HomeUserDataProvider
   }
 }
 
-String _$homeUserDataHash() => r'8076c6ceadc32b761dd1f719086f22fd9b568f22';
+String _$homeUserDataHash() => r'dffc5eb3adb0ac7d913a7cb196a38a0ef020cadf';
 
 @ProviderFor(userBalance)
 const userBalanceProvider = UserBalanceProvider._();
@@ -265,7 +272,7 @@ final class UserBalanceProvider
   }
 }
 
-String _$userBalanceHash() => r'5685a038f0519df1337f5790b311aa442a058c5f';
+String _$userBalanceHash() => r'8c2afc1c735add2783ca06cc514e26286c7ea4b1';
 
 @ProviderFor(offerWalls)
 const offerWallsProvider = OfferWallsProvider._();
@@ -312,7 +319,7 @@ final class OfferWallsProvider
   }
 }
 
-String _$offerWallsHash() => r'615e7dc5988cf4102e5d672fcf86a560a0bcd8f5';
+String _$offerWallsHash() => r'a55dfcd905f62d7806f0cf1aab7280896ede2b66';
 
 @ProviderFor(currentUserName)
 const currentUserNameProvider = CurrentUserNameProvider._();
@@ -353,7 +360,7 @@ final class CurrentUserNameProvider
   }
 }
 
-String _$currentUserNameHash() => r'66cbb83b339e3fb4b67b1eb91f7712c3e0fe59cd';
+String _$currentUserNameHash() => r'8135b6a0c83ea1733d936f93bc2ecd289cf7687f';
 
 @ProviderFor(userFullName)
 const userFullNameProvider = UserFullNameProvider._();
@@ -394,7 +401,7 @@ final class UserFullNameProvider
   }
 }
 
-String _$userFullNameHash() => r'97b857684d0cdde0678fa6a18a51702a42d1ef8e';
+String _$userFullNameHash() => r'ea740231e7e23be32bd778a5a9b2b8356733c67c';
 
 @ProviderFor(userEmail)
 const userEmailProvider = UserEmailProvider._();
@@ -435,7 +442,7 @@ final class UserEmailProvider
   }
 }
 
-String _$userEmailHash() => r'00a5bdf80869321adb9b5b61f8bafc6229d3ad5d';
+String _$userEmailHash() => r'e9e38d60fa4c57074bf569ea61dd3748abecca47';
 
 @ProviderFor(userPoints)
 const userPointsProvider = UserPointsProvider._();
@@ -476,7 +483,7 @@ final class UserPointsProvider
   }
 }
 
-String _$userPointsHash() => r'b8274e3748c7aacc95e17afbbc546eea4de8e429';
+String _$userPointsHash() => r'7a133c9a0c1ce5430c13dd1e6b54039fa869d05e';
 
 @ProviderFor(userRedeemedPoints)
 const userRedeemedPointsProvider = UserRedeemedPointsProvider._();
@@ -518,7 +525,7 @@ final class UserRedeemedPointsProvider
 }
 
 String _$userRedeemedPointsHash() =>
-    r'e9ea0052b57dd1a7e9c022a9bdadce4fc47b10f5';
+    r'f2eb3ebeed210d83266d02de8b5d6057785e7736';
 
 @ProviderFor(isHomeLoading)
 const isHomeLoadingProvider = IsHomeLoadingProvider._();
@@ -558,7 +565,7 @@ final class IsHomeLoadingProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$isHomeLoadingHash() => r'2954d79017bfa941fad89ef5f91a2c69ba75a63e';
+String _$isHomeLoadingHash() => r'c7239b6b1eecdc7ec0cc73a8c18d8e5585d114bb';
 
 @ProviderFor(hasHomeError)
 const hasHomeErrorProvider = HasHomeErrorProvider._();
@@ -598,7 +605,7 @@ final class HasHomeErrorProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$hasHomeErrorHash() => r'c052fed80a15413c301e2bb052f64740b79b5dbf';
+String _$hasHomeErrorHash() => r'185d71ed949034d843bf7f736e15f34c1bbe2281';
 
 @ProviderFor(homeErrorMessage)
 const homeErrorMessageProvider = HomeErrorMessageProvider._();
@@ -639,7 +646,7 @@ final class HomeErrorMessageProvider
   }
 }
 
-String _$homeErrorMessageHash() => r'8e5730a7ab2a06c1c7fd8a2e8deaf1a2c28ad3b4';
+String _$homeErrorMessageHash() => r'06b3973dd65176b7a073f0460e29644c737078ee';
 
 @ProviderFor(hasHomeData)
 const hasHomeDataProvider = HasHomeDataProvider._();
@@ -679,4 +686,92 @@ final class HasHomeDataProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$hasHomeDataHash() => r'ee6391b0c1ce4b86c2b1b31edaa268806c3b1284';
+String _$hasHomeDataHash() => r'505fed1336dbffd66bf77d1585c6ddc1e6c4d992';
+
+@ProviderFor(isHomeRefreshing)
+const isHomeRefreshingProvider = IsHomeRefreshingProvider._();
+
+final class IsHomeRefreshingProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const IsHomeRefreshingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isHomeRefreshingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isHomeRefreshingHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return isHomeRefreshing(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isHomeRefreshingHash() => r'8d07e5a0c7a3f965f4fd9318d4a8a3c3b96b3188';
+
+@ProviderFor(homeWithUserData)
+const homeWithUserDataProvider = HomeWithUserDataProvider._();
+
+final class HomeWithUserDataProvider
+    extends
+        $FunctionalProvider<
+          HomeWithUserEntity?,
+          HomeWithUserEntity?,
+          HomeWithUserEntity?
+        >
+    with $Provider<HomeWithUserEntity?> {
+  const HomeWithUserDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'homeWithUserDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$homeWithUserDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<HomeWithUserEntity?> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  HomeWithUserEntity? create(Ref ref) {
+    return homeWithUserData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(HomeWithUserEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<HomeWithUserEntity?>(value),
+    );
+  }
+}
+
+String _$homeWithUserDataHash() => r'041de333ff3b508f45c6d6a27831a148da1d00ae';

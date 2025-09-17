@@ -61,7 +61,7 @@ String _$getLiveOffersUseCaseHash() =>
 const liveOffersProvider = LiveOffersNotifierProvider._();
 
 final class LiveOffersNotifierProvider
-    extends $AsyncNotifierProvider<LiveOffersNotifier, LiveOffersEntity> {
+    extends $NotifierProvider<LiveOffersNotifier, LiveOffersState> {
   const LiveOffersNotifierProvider._()
     : super(
         from: null,
@@ -79,24 +79,31 @@ final class LiveOffersNotifierProvider
   @$internal
   @override
   LiveOffersNotifier create() => LiveOffersNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(LiveOffersState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LiveOffersState>(value),
+    );
+  }
 }
 
 String _$liveOffersNotifierHash() =>
-    r'8ea63b51d6580000a9035a397d58f89cd6ab1400';
+    r'7c253be82e80de3f690d3497c3c21a18b0a6394a';
 
-abstract class _$LiveOffersNotifier extends $AsyncNotifier<LiveOffersEntity> {
-  FutureOr<LiveOffersEntity> build();
+abstract class _$LiveOffersNotifier extends $Notifier<LiveOffersState> {
+  LiveOffersState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref =
-        this.ref as $Ref<AsyncValue<LiveOffersEntity>, LiveOffersEntity>;
+    final ref = this.ref as $Ref<LiveOffersState, LiveOffersState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<LiveOffersEntity>, LiveOffersEntity>,
-              AsyncValue<LiveOffersEntity>,
+              AnyNotifier<LiveOffersState, LiveOffersState>,
+              LiveOffersState,
               Object?,
               Object?
             >;
@@ -149,7 +156,7 @@ final class LiveOffersDataProvider
   }
 }
 
-String _$liveOffersDataHash() => r'2022a74cc0414b84f13a433885f90aee976011b3';
+String _$liveOffersDataHash() => r'5551e80f7bf530508625a99930eecbd10e3f30e0';
 
 @ProviderFor(isLoadingLiveOffers)
 const isLoadingLiveOffersProvider = IsLoadingLiveOffersProvider._();
@@ -191,27 +198,27 @@ final class IsLoadingLiveOffersProvider
 }
 
 String _$isLoadingLiveOffersHash() =>
-    r'f8494f9e0bf8d7f24df92dc1c256a0189541cc99';
+    r'665e1496d076b5b6e9135e14fb1b00a4f5a59eda';
 
-@ProviderFor(hasLiveOffersError)
-const hasLiveOffersErrorProvider = HasLiveOffersErrorProvider._();
+@ProviderFor(isLoadingMoreLiveOffers)
+const isLoadingMoreLiveOffersProvider = IsLoadingMoreLiveOffersProvider._();
 
-final class HasLiveOffersErrorProvider
+final class IsLoadingMoreLiveOffersProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasLiveOffersErrorProvider._()
+  const IsLoadingMoreLiveOffersProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'hasLiveOffersErrorProvider',
+        name: r'isLoadingMoreLiveOffersProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$hasLiveOffersErrorHash();
+  String debugGetCreateSourceHash() => _$isLoadingMoreLiveOffersHash();
 
   @$internal
   @override
@@ -220,7 +227,7 @@ final class HasLiveOffersErrorProvider
 
   @override
   bool create(Ref ref) {
-    return hasLiveOffersError(ref);
+    return isLoadingMoreLiveOffers(ref);
   }
 
   /// {@macro riverpod.override_with_value}
@@ -232,8 +239,8 @@ final class HasLiveOffersErrorProvider
   }
 }
 
-String _$hasLiveOffersErrorHash() =>
-    r'3e78412fc03b1bccf7a3baffcd879d305a1c56c7';
+String _$isLoadingMoreLiveOffersHash() =>
+    r'90c73f799e14d67abb9bcd99f8ed81a1ddff538f';
 
 @ProviderFor(liveOffersErrorMessage)
 const liveOffersErrorMessageProvider = LiveOffersErrorMessageProvider._();
@@ -275,4 +282,46 @@ final class LiveOffersErrorMessageProvider
 }
 
 String _$liveOffersErrorMessageHash() =>
-    r'54e548257b2c294acad2063901592e2804cae2a9';
+    r'48eb1bde82697f6dffb812cb20f6fbdcb3d7f103';
+
+@ProviderFor(hasLiveOffersError)
+const hasLiveOffersErrorProvider = HasLiveOffersErrorProvider._();
+
+final class HasLiveOffersErrorProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasLiveOffersErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasLiveOffersErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasLiveOffersErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasLiveOffersError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasLiveOffersErrorHash() =>
+    r'bf14ce39811af015834b215f9b391f71ce2771b0';

@@ -8,6 +8,7 @@ import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/rewards/presentation/providers/rewards_providers.dart';
+import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
 import 'package:magic_rewards/features/rewards/presentation/widgets/transaction_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -18,12 +19,14 @@ class TransactionsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final transactionsAsync = ref.watch(transactionsProvider);
+    final transactionsState = ref.watch(transactionsProvider);
 
     return AppScaffold(
       appBar: CustomAppBar(titleText: S.of(context).history, withBack: true),
-      body: transactionsAsync.when(
-        data: (transactions) => SmartRefresher(
+      body: transactionsState.when(
+        initial: () => const LoadingComponent(),
+        loading: () => const LoadingComponent(),
+        success: (transactions) => SmartRefresher(
           controller: refreshController,
           onRefresh: () => _refreshTransactions(ref),
           child: ListView(
@@ -38,8 +41,27 @@ class TransactionsScreen extends ConsumerWidget {
                   ],
           ),
         ),
-        loading: () => const LoadingComponent(),
-        error: (error, stackTrace) => FailureComponent(failure: error as Failure),
+        error: (errorMessage) => FailureComponent(failure: Failure(errorMessage)),
+        refreshing: (currentData) => SmartRefresher(
+          controller: refreshController,
+          onRefresh: () => _refreshTransactions(ref),
+          child: ListView(
+            children: [
+              const SizedBox(height: 10),
+              if (currentData.orders.isEmpty)
+                const EmptyComponent()
+              else
+                ...currentData.orders
+                    .map((e) => TransactionCard(transaction: e))
+                    .toList(),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              const SizedBox(height: 100),
+            ],
+          ),
+        ),
       ),
     );
   }

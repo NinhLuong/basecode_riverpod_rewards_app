@@ -9,6 +9,7 @@ import 'package:magic_rewards/features/tasks/domain/parameters/tasks_orders_para
 import 'package:magic_rewards/features/tasks/domain/parameters/add_task_order_parameters.dart';
 import 'package:magic_rewards/features/tasks/domain/parameters/reserve_comment_parameters.dart';
 import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.dart';
+import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
 
 part 'tasks_providers.g.dart';
 
@@ -22,27 +23,40 @@ TasksRepository tasksRepository(Ref ref) {
 @riverpod
 class TasksNotifier extends _$TasksNotifier {
   @override
-  FutureOr<TasksEntity> build() async {
-    return fetchTasks();
+  TasksState build() {
+    // Auto-fetch on build
+    _fetchTasks();
+    return const TasksState.initial();
   }
 
-  Future<TasksEntity> fetchTasks() async {
-    final repository = ref.read(tasksRepositoryProvider);
-    final result = await repository.getTasks(TasksParameters());
-    
-    return result.fold(
-      (failure) => throw failure,
-      (tasks) => tasks,
-    );
+  Future<void> _fetchTasks() async {
+    state = const TasksState.loading();
+
+    try {
+      final repository = ref.read(tasksRepositoryProvider);
+      final result = await repository.getTasks(TasksParameters());
+      
+      result.fold(
+        (failure) => state = TasksState.error(failure.toString()),
+        (tasks) => state = TasksState.success(tasks),
+      );
+    } catch (error) {
+      state = TasksState.error(error.toString());
+    }
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading();
+    final currentData = state.data;
+    if (currentData != null) {
+      state = TasksState.refreshing(currentData);
+    } else {
+      state = const TasksState.loading();
+    }
+
     try {
-      final result = await fetchTasks();
-      state = AsyncData(result);
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+      await _fetchTasks();
+    } catch (error) {
+      state = TasksState.error(error.toString());
     }
   }
 }
@@ -51,23 +65,35 @@ class TasksNotifier extends _$TasksNotifier {
 @riverpod
 class TaskOrdersNotifier extends _$TaskOrdersNotifier {
   @override
-  FutureOr<TasksOrdersEntity?> build() {
-    return null; // Don't auto-load, load on demand
+  TaskOrdersState build() {
+    return const TaskOrdersState.initial();
   }
 
   Future<void> fetchTaskOrders() async {
-    state = const AsyncLoading();
+    state = const TaskOrdersState.loading();
+    
     try {
       final repository = ref.read(tasksRepositoryProvider);
       final result = await repository.getTasksOrders(TasksOrdersParameters());
       
       result.fold(
-        (failure) => throw failure,
-        (orders) => state = AsyncData(orders),
+        (failure) => state = TaskOrdersState.error(failure.toString()),
+        (orders) => state = TaskOrdersState.success(orders),
       );
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+    } catch (error) {
+      state = TaskOrdersState.error(error.toString());
     }
+  }
+
+  Future<void> refresh() async {
+    final currentData = state.data;
+    if (currentData != null) {
+      state = TaskOrdersState.refreshing(currentData);
+    } else {
+      state = const TaskOrdersState.loading();
+    }
+
+    await fetchTaskOrders();
   }
 }
 
@@ -75,26 +101,31 @@ class TaskOrdersNotifier extends _$TaskOrdersNotifier {
 @riverpod
 class ReserveCommentNotifier extends _$ReserveCommentNotifier {
   @override
-  FutureOr<ReserveCommentEntity?> build() {
-    return null;
+  ReserveCommentState build() {
+    return const ReserveCommentState.initial();
   }
 
   Future<void> reserveComment({
     required String taskId,
   }) async {
-    state = const AsyncLoading();
+    state = const ReserveCommentState.loading();
+    
     try {
       final repository = ref.read(tasksRepositoryProvider);
       final params = ReserveCommentParameters(taskId: taskId);
       final result = await repository.reserveComment(params);
       
       result.fold(
-        (failure) => throw failure,
-        (reserveResult) => state = AsyncData(reserveResult),
+        (failure) => state = ReserveCommentState.error(failure.toString()),
+        (reserveResult) => state = ReserveCommentState.success(reserveResult),
       );
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+    } catch (error) {
+      state = ReserveCommentState.error(error.toString());
     }
+  }
+
+  void reset() {
+    state = const ReserveCommentState.initial();
   }
 }
 
@@ -102,8 +133,8 @@ class ReserveCommentNotifier extends _$ReserveCommentNotifier {
 @riverpod
 class AddTaskOrderNotifier extends _$AddTaskOrderNotifier {
   @override
-  FutureOr<bool?> build() {
-    return null;
+  AddTaskOrderState build() {
+    return const AddTaskOrderState.initial();
   }
 
   Future<void> addTaskOrder({
@@ -116,7 +147,8 @@ class AddTaskOrderNotifier extends _$AddTaskOrderNotifier {
     required File image,
     required DateTime timeStamp,
   }) async {
-    state = const AsyncLoading();
+    state = const AddTaskOrderState.loading();
+    
     try {
       final repository = ref.read(tasksRepositoryProvider);
       final params = AddTaskOrderParameters(
@@ -132,30 +164,106 @@ class AddTaskOrderNotifier extends _$AddTaskOrderNotifier {
       final result = await repository.addTaskOrder(params);
       
       result.fold(
-        (failure) => throw failure,
-        (_) => state = const AsyncData(true),
+        (failure) => state = AddTaskOrderState.error(failure.toString()),
+        (_) => state = const AddTaskOrderState.success(),
       );
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+    } catch (error) {
+      state = AddTaskOrderState.error(error.toString());
     }
+  }
+
+  void reset() {
+    state = const AddTaskOrderState.initial();
   }
 }
 
 // Convenience providers
 @riverpod
 List<TaskEntity> tasksList(Ref ref) {
-  final asyncValue = ref.watch(tasksProvider);
-  return asyncValue.value?.tasks ?? [];
+  final state = ref.watch(tasksProvider);
+  return state.tasks;
 }
 
 @riverpod
 bool isTasksLoading(Ref ref) {
-  final asyncValue = ref.watch(tasksProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(tasksProvider);
+  return state.isLoading;
 }
 
 @riverpod
 String? tasksErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(tasksProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(tasksProvider);
+  return state.errorMessage;
+}
+
+@riverpod
+bool hasTasksError(Ref ref) {
+  final state = ref.watch(tasksProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasTasksData(Ref ref) {
+  final state = ref.watch(tasksProvider);
+  return state.hasData;
+}
+
+@riverpod
+bool isTasksRefreshing(Ref ref) {
+  final state = ref.watch(tasksProvider);
+  return state.isRefreshing;
+}
+
+@riverpod
+bool isTaskOrdersLoading(Ref ref) {
+  final state = ref.watch(taskOrdersProvider);
+  return state.isLoading;
+}
+
+@riverpod
+String? taskOrdersErrorMessage(Ref ref) {
+  final state = ref.watch(taskOrdersProvider);
+  return state.errorMessage;
+}
+
+@riverpod
+TasksOrdersEntity? taskOrdersData(Ref ref) {
+  final state = ref.watch(taskOrdersProvider);
+  return state.data;
+}
+
+@riverpod
+bool isReserveCommentLoading(Ref ref) {
+  final state = ref.watch(reserveCommentProvider);
+  return state.isLoading;
+}
+
+@riverpod
+String? reserveCommentErrorMessage(Ref ref) {
+  final state = ref.watch(reserveCommentProvider);
+  return state.errorMessage;
+}
+
+@riverpod
+ReserveCommentEntity? reserveCommentResult(Ref ref) {
+  final state = ref.watch(reserveCommentProvider);
+  return state.result;
+}
+
+@riverpod
+bool isAddTaskOrderLoading(Ref ref) {
+  final state = ref.watch(addTaskOrderProvider);
+  return state.isLoading;
+}
+
+@riverpod
+String? addTaskOrderErrorMessage(Ref ref) {
+  final state = ref.watch(addTaskOrderProvider);
+  return state.errorMessage;
+}
+
+@riverpod
+bool addTaskOrderSuccess(Ref ref) {
+  final state = ref.watch(addTaskOrderProvider);
+  return state.isSuccess;
 }

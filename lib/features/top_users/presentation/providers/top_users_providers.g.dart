@@ -61,7 +61,7 @@ String _$getTopUsersUseCaseHash() =>
 const topUsersProvider = TopUsersNotifierProvider._();
 
 final class TopUsersNotifierProvider
-    extends $AsyncNotifierProvider<TopUsersNotifier, TopUsersEntity> {
+    extends $NotifierProvider<TopUsersNotifier, TopUsersState> {
   const TopUsersNotifierProvider._()
     : super(
         from: null,
@@ -79,22 +79,30 @@ final class TopUsersNotifierProvider
   @$internal
   @override
   TopUsersNotifier create() => TopUsersNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TopUsersState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TopUsersState>(value),
+    );
+  }
 }
 
-String _$topUsersNotifierHash() => r'a278bcfbf0fd0331336da8b45874080510e20122';
+String _$topUsersNotifierHash() => r'59f233d01f945e38f1b47825cbee0b41c09f4952';
 
-abstract class _$TopUsersNotifier extends $AsyncNotifier<TopUsersEntity> {
-  FutureOr<TopUsersEntity> build();
+abstract class _$TopUsersNotifier extends $Notifier<TopUsersState> {
+  TopUsersState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<TopUsersEntity>, TopUsersEntity>;
+    final ref = this.ref as $Ref<TopUsersState, TopUsersState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<TopUsersEntity>, TopUsersEntity>,
-              AsyncValue<TopUsersEntity>,
+              AnyNotifier<TopUsersState, TopUsersState>,
+              TopUsersState,
               Object?,
               Object?
             >;
@@ -147,7 +155,7 @@ final class TopThreeUsersProvider
   }
 }
 
-String _$topThreeUsersHash() => r'ed19173bc49e048fd72a9b34873b7cb31008f631';
+String _$topThreeUsersHash() => r'defa8ed965beb1c825f2b2f33ae9c7b08879f1b3';
 
 @ProviderFor(restUsers)
 const restUsersProvider = RestUsersProvider._();
@@ -194,7 +202,7 @@ final class RestUsersProvider
   }
 }
 
-String _$restUsersHash() => r'c923674b04aa16a564b6865e70a980fb37f2a4c8';
+String _$restUsersHash() => r'007d97335bc44bae482cbf3e76180451bf8ece95';
 
 @ProviderFor(myRank)
 const myRankProvider = MyRankProvider._();
@@ -236,7 +244,7 @@ final class MyRankProvider
   }
 }
 
-String _$myRankHash() => r'bf054a4098a5bc6c68a90be7c4d5097a44812ce5';
+String _$myRankHash() => r'bb45ea9bd577273be08e1fc522484200f5ee62c6';
 
 @ProviderFor(maxPoints)
 const maxPointsProvider = MaxPointsProvider._();
@@ -277,7 +285,7 @@ final class MaxPointsProvider
   }
 }
 
-String _$maxPointsHash() => r'ff7f04e3d7c5b3c37afc233715157555e19939e9';
+String _$maxPointsHash() => r'0f68caf6ac7932bb750ac73eb1e765706356cd16';
 
 @ProviderFor(isTopUsersLoading)
 const isTopUsersLoadingProvider = IsTopUsersLoadingProvider._();
@@ -318,7 +326,7 @@ final class IsTopUsersLoadingProvider
   }
 }
 
-String _$isTopUsersLoadingHash() => r'aca0eb0db668b26b6b7df7c5d9754e4083f9a1fe';
+String _$isTopUsersLoadingHash() => r'83ad29c4064108328a6094897ef6a49591fdd044';
 
 @ProviderFor(topUsersErrorMessage)
 const topUsersErrorMessageProvider = TopUsersErrorMessageProvider._();
@@ -360,4 +368,212 @@ final class TopUsersErrorMessageProvider
 }
 
 String _$topUsersErrorMessageHash() =>
-    r'6c918efe13d3f773865a5703b2d5ed4e7fc2d051';
+    r'7813bf45aa34b4b389ee6a5edc313b87718b5662';
+
+@ProviderFor(hasTopUsersError)
+const hasTopUsersErrorProvider = HasTopUsersErrorProvider._();
+
+final class HasTopUsersErrorProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasTopUsersErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasTopUsersErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasTopUsersErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasTopUsersError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasTopUsersErrorHash() => r'd1e6e342466b70ba165a76fb4847d050b2a60588';
+
+@ProviderFor(hasTopUsersData)
+const hasTopUsersDataProvider = HasTopUsersDataProvider._();
+
+final class HasTopUsersDataProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasTopUsersDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasTopUsersDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasTopUsersDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasTopUsersData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasTopUsersDataHash() => r'bab72f185dd2f9445934b57f6b44fa0b760e6ea1';
+
+@ProviderFor(isTopUsersRefreshing)
+const isTopUsersRefreshingProvider = IsTopUsersRefreshingProvider._();
+
+final class IsTopUsersRefreshingProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const IsTopUsersRefreshingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isTopUsersRefreshingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isTopUsersRefreshingHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return isTopUsersRefreshing(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isTopUsersRefreshingHash() =>
+    r'd78c178e8f8548103852f4dac693c94476048a2f';
+
+@ProviderFor(topUsersData)
+const topUsersDataProvider = TopUsersDataProvider._();
+
+final class TopUsersDataProvider
+    extends
+        $FunctionalProvider<TopUsersEntity?, TopUsersEntity?, TopUsersEntity?>
+    with $Provider<TopUsersEntity?> {
+  const TopUsersDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'topUsersDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$topUsersDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<TopUsersEntity?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  TopUsersEntity? create(Ref ref) {
+    return topUsersData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TopUsersEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TopUsersEntity?>(value),
+    );
+  }
+}
+
+String _$topUsersDataHash() => r'7422a110f65c01433f5bd368dd445c10d1d3caa2';
+
+@ProviderFor(currentPeriodIsHalfMonth)
+const currentPeriodIsHalfMonthProvider = CurrentPeriodIsHalfMonthProvider._();
+
+final class CurrentPeriodIsHalfMonthProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const CurrentPeriodIsHalfMonthProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentPeriodIsHalfMonthProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentPeriodIsHalfMonthHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return currentPeriodIsHalfMonth(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$currentPeriodIsHalfMonthHash() =>
+    r'10c422e079c44d3fccbb653c75cb356aeae981c9';

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/features/tasks/presentation/providers/tasks_providers.dart';
+import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
 import 'package:magic_rewards/features/tasks/presentation/widgets/task_order_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -27,21 +28,28 @@ class _TasksOrdersSectionState extends ConsumerState<TasksOrdersSection> {
 
   @override
   Widget build(BuildContext context) {
-    final taskOrdersAsync = ref.watch(taskOrdersProvider);
+    final taskOrdersState = ref.watch(taskOrdersProvider);
 
-    return taskOrdersAsync.when(
+    return taskOrdersState.when(
+      initial: () => const LoadingComponent(),
       loading: () => const LoadingComponent(),
-      error: (error, stack) => Center(
-        child: Text('Error: $error'),
+      error: (errorMessage) => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Error: $errorMessage'),
+            ElevatedButton(
+              onPressed: () => ref.read(taskOrdersProvider.notifier).fetchTaskOrders(),
+              child: const Text('Retry'),
+            ),
+          ],
+        ),
       ),
-      data: (tasksOrdersEntity) {
-        if (tasksOrdersEntity == null) {
-          return const LoadingComponent();
-        }
+      success: (tasksOrdersEntity) {
         return SmartRefresher(
           controller: refreshController,
           onRefresh: () async {
-            await ref.read(taskOrdersProvider.notifier).fetchTaskOrders();
+            await ref.read(taskOrdersProvider.notifier).refresh();
             refreshController.refreshCompleted();
           },
           child: ListView(
@@ -57,6 +65,29 @@ class _TasksOrdersSectionState extends ConsumerState<TasksOrdersSection> {
           ),
         );
       },
+      refreshing: (currentData) => SmartRefresher(
+        controller: refreshController,
+        onRefresh: () async {
+          await ref.read(taskOrdersProvider.notifier).refresh();
+          refreshController.refreshCompleted();
+        },
+        child: ListView(
+          children: [
+            const SizedBox(height: 10),
+            if (currentData.orders.isEmpty)
+              const EmptyComponent()
+            else
+              ...currentData.orders
+                  .map((e) => TaskOrderCard(order: e))
+                  .toList(),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            const SizedBox(height: 100),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 import 'package:magic_rewards/features/top_users/presentation/providers/top_users_providers.dart';
+import 'package:magic_rewards/features/top_users/presentation/state/top_users_state.dart';
 import 'package:magic_rewards/features/top_users/presentation/widgets/my_rank_card.dart';
 import 'package:magic_rewards/features/top_users/presentation/widgets/rank_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -34,14 +35,15 @@ class _TopUsersTapState extends ConsumerState<TopUsersTap> {
 
   @override
   Widget build(BuildContext context) {
-    final topUsersAsync = ref.watch(topUsersProvider);
+    final topUsersState = ref.watch(topUsersProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: topUsersAsync.when(
+      child: topUsersState.when(
+        initial: () => const LoadingComponent(),
         loading: () => const LoadingComponent(),
-        error: (error, stack) => FailureComponent(failure: error as Failure),
-        data: (topUsersEntity) => SmartRefresher(
+        error: (errorMessage) => FailureComponent(failure: Failure(errorMessage)),
+        success: (topUsersEntity) => SmartRefresher(
           controller: _refreshController,
           onRefresh: () async {
             await ref.read(topUsersProvider.notifier).refresh(halfMonth: widget.halfMonth);
@@ -70,6 +72,42 @@ class _TopUsersTapState extends ConsumerState<TopUsersTap> {
                             buildRankContainer(context, userRank: e)),
                     const SizedBox(height: 70),
                   ],
+          ),
+        ),
+        refreshing: (currentData) => SmartRefresher(
+          controller: _refreshController,
+          onRefresh: () async {
+            await ref.read(topUsersProvider.notifier).refresh(halfMonth: widget.halfMonth);
+            _refreshController.refreshCompleted();
+          },
+          child: ListView(
+            children: [
+              const SizedBox(height: 20),
+              if (currentData.topThree.isEmpty)
+                const EmptyComponent()
+              else ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: currentData.topThree
+                      .map((e) => RankBar(
+                          userRank: e,
+                          maxPoints: currentData.maxPoints))
+                      .toList()
+                      .reversed
+                      .toList(),
+                ),
+                if (currentData.myRank != null)
+                  MyRankCard(userRank: currentData.myRank!),
+                ...currentData.rest
+                    .map((e) => buildRankContainer(context, userRank: e)),
+              ],
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              const SizedBox(height: 70),
+            ],
           ),
         ),
       ),

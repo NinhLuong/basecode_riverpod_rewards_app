@@ -5,13 +5,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/widgets/components/app_text_field.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/shared/extensions/image_extensions/images_extension.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
@@ -20,6 +18,7 @@ import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/providers/tasks_providers.dart';
+import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
 
 class DoTaskScreen extends HookConsumerWidget {
   final CommentEntity comment;
@@ -38,19 +37,15 @@ class DoTaskScreen extends HookConsumerWidget {
     final picker = useMemoized(() => ImagePicker());
     final image = useState<XFile?>(null);
     
-    final addTaskOrderAsync = ref.watch(addTaskOrderProvider);
-
     // Listen to state changes
-    ref.listen<AsyncValue<bool?>>(addTaskOrderProvider, (previous, next) {
+    ref.listen(addTaskOrderProvider, (previous, next) {
       next.whenOrNull(
-        data: (success) {
-          if (success == true) {
-            showToast(message: S.of(context).success);
-            context.pop();
-          }
+        success: () {
+          showToast(message: S.of(context).success);
+          context.pop();
         },
-        error: (error, stackTrace) {
-          FailureComponent.handleFailure(context: context, failure: error as Failure);
+        error: (errorMessage) {
+          showToast(message: errorMessage);
         },
       );
     });
@@ -131,7 +126,7 @@ class DoTaskScreen extends HookConsumerWidget {
                 AppButton(
                     onPressed: () => _onPressed(context, ref, formKey, nameController, urlController, emailController, timeStamp, image),
                     type: AppButtonType.solidYellow,
-                    loading: addTaskOrderAsync.isLoading,
+                    loading: ref.watch(isAddTaskOrderLoadingProvider),
                     text: S.of(context).confirm),
                 const SizedBox(height: 40),
               ],

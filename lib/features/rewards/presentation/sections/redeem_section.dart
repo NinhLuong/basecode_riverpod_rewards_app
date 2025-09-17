@@ -5,6 +5,7 @@ import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/features/rewards/presentation/providers/rewards_providers.dart';
+import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
 import 'package:magic_rewards/features/rewards/presentation/widgets/balance_card.dart';
 import 'package:magic_rewards/features/rewards/presentation/widgets/payout_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -16,12 +17,13 @@ class RedeemSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final payoutsAsync = ref.watch(payoutsProvider);
+    final payoutsState = ref.watch(payoutsProvider);
 
-    return payoutsAsync.when(
+    return payoutsState.when(
+      initial: () => const LoadingComponent(),
       loading: () => const LoadingComponent(),
-      error: (error, stack) => FailureComponent(failure: error as Failure),
-      data: (payoutsEntity) => SmartRefresher(
+      error: (errorMessage) => FailureComponent(failure: Failure(errorMessage)),
+      success: (payoutsEntity) => SmartRefresher(
         controller: refreshController,
         onRefresh: () async {
           await ref.read(payoutsProvider.notifier).refresh();
@@ -43,6 +45,36 @@ class RedeemSection extends ConsumerWidget {
                       .toList(),
                   const SizedBox(height: 100),
                 ],
+        ),
+      ),
+      refreshing: (currentData) => SmartRefresher(
+        controller: refreshController,
+        onRefresh: () async {
+          await ref.read(payoutsProvider.notifier).refresh();
+          refreshController.refreshCompleted();
+        },
+        child: ListView(
+          children: [
+            const SizedBox(height: 10),
+            if (currentData.payouts.isEmpty)
+              const EmptyComponent()
+            else ...[
+              BalanceCard(
+                balance: currentData.balance,
+                percent: currentData.redeemPercent,
+                minPayout: currentData.minPayout,
+              ),
+              const SizedBox(height: 10),
+              ...currentData.payouts
+                  .map((e) => PayoutCard(payout: e))
+                  .toList(),
+            ],
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            const SizedBox(height: 100),
+          ],
         ),
       ),
     );

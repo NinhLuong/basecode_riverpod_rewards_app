@@ -10,14 +10,12 @@ import 'package:magic_rewards/shared/widgets/components/app_logo.dart';
 import 'package:magic_rewards/shared/widgets/components/app_rich_text.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/widgets/components/app_text_field.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
 
@@ -65,39 +63,31 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     // Listen to register state changes
-    ref.listen<AsyncValue<UserEntity?>>(registerProvider, (previous, next) {
+    ref.listen(registerProvider, (previous, next) {
       next.whenOrNull(
-        data: (user) {
-          if (user != null) {
-            ref.read(currentUserProvider.notifier).setUser(user);
-            showToast(message: S.of(context).signedUpScuccessfully);
-            context.go(MainRoute.name);
-          }
+        success: (user) {
+          ref.read(currentUserProvider.notifier).setUser(user);
+          showToast(message: S.of(context).signedUpScuccessfully);
+          context.go(MainRoute.name);
         },
-        error: (error, stackTrace) {
-          if (error is Exception) {
-            FailureComponent.handleFailure(context: context, failure: error as dynamic, ref: ref);
-          }
+        error: (errorMessage) {
+          showToast(message: errorMessage);
         },
       );
     });
 
     // Listen to email check state changes
-    ref.listen<AsyncValue<CheckEmailEntity?>>(emailCheckProvider, (previous, next) {
+    ref.listen(emailCheckProvider, (previous, next) {
       next.whenOrNull(
-        data: (checkEmailResult) {
-          if (checkEmailResult != null) {
-            if (checkEmailResult.verifyCode != null) {
-              _showVerifyEmailDialog(context, checkEmailResult.verifyCode!);
-            } else {
-              _register();
-            }
+        success: (checkEmailResult) {
+          if (checkEmailResult.verifyCode != null) {
+            _showVerifyEmailDialog(context, checkEmailResult.verifyCode!);
+          } else {
+            _register();
           }
         },
-        error: (error, stackTrace) {
-          if (error is Exception) {
-            FailureComponent.handleFailure(context: context, failure: error as dynamic, ref: ref);
-          }
+        error: (errorMessage) {
+          showToast(message: errorMessage);
         },
       );
     });

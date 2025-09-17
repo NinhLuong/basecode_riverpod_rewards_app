@@ -60,7 +60,7 @@ String _$rewardsRepositoryHash() => r'594a20428f0d902a16b55763977937abf575cf2d';
 const ordersProvider = OrdersNotifierProvider._();
 
 final class OrdersNotifierProvider
-    extends $AsyncNotifierProvider<OrdersNotifier, OrdersEntity> {
+    extends $NotifierProvider<OrdersNotifier, OrdersState> {
   const OrdersNotifierProvider._()
     : super(
         from: null,
@@ -78,22 +78,30 @@ final class OrdersNotifierProvider
   @$internal
   @override
   OrdersNotifier create() => OrdersNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OrdersState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OrdersState>(value),
+    );
+  }
 }
 
-String _$ordersNotifierHash() => r'a30de36c3b968a808704ecee3b6119de34b075a3';
+String _$ordersNotifierHash() => r'ad11a82b485d3b44a0e6d1dc2e86b28d112063a3';
 
-abstract class _$OrdersNotifier extends $AsyncNotifier<OrdersEntity> {
-  FutureOr<OrdersEntity> build();
+abstract class _$OrdersNotifier extends $Notifier<OrdersState> {
+  OrdersState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<OrdersEntity>, OrdersEntity>;
+    final ref = this.ref as $Ref<OrdersState, OrdersState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<OrdersEntity>, OrdersEntity>,
-              AsyncValue<OrdersEntity>,
+              AnyNotifier<OrdersState, OrdersState>,
+              OrdersState,
               Object?,
               Object?
             >;
@@ -105,7 +113,7 @@ abstract class _$OrdersNotifier extends $AsyncNotifier<OrdersEntity> {
 const transactionsProvider = TransactionsNotifierProvider._();
 
 final class TransactionsNotifierProvider
-    extends $AsyncNotifierProvider<TransactionsNotifier, TransactionsEntity> {
+    extends $NotifierProvider<TransactionsNotifier, TransactionsState> {
   const TransactionsNotifierProvider._()
     : super(
         from: null,
@@ -123,25 +131,31 @@ final class TransactionsNotifierProvider
   @$internal
   @override
   TransactionsNotifier create() => TransactionsNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TransactionsState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TransactionsState>(value),
+    );
+  }
 }
 
 String _$transactionsNotifierHash() =>
-    r'60f7dc2df204079eed907eb8be34b8ebc6bbfd28';
+    r'151552c0057e061712c5655fb6f20d9163e564d0';
 
-abstract class _$TransactionsNotifier
-    extends $AsyncNotifier<TransactionsEntity> {
-  FutureOr<TransactionsEntity> build();
+abstract class _$TransactionsNotifier extends $Notifier<TransactionsState> {
+  TransactionsState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref =
-        this.ref as $Ref<AsyncValue<TransactionsEntity>, TransactionsEntity>;
+    final ref = this.ref as $Ref<TransactionsState, TransactionsState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<TransactionsEntity>, TransactionsEntity>,
-              AsyncValue<TransactionsEntity>,
+              AnyNotifier<TransactionsState, TransactionsState>,
+              TransactionsState,
               Object?,
               Object?
             >;
@@ -153,7 +167,7 @@ abstract class _$TransactionsNotifier
 const payoutsProvider = PayoutsNotifierProvider._();
 
 final class PayoutsNotifierProvider
-    extends $AsyncNotifierProvider<PayoutsNotifier, PayoutsEntity> {
+    extends $NotifierProvider<PayoutsNotifier, PayoutsState> {
   const PayoutsNotifierProvider._()
     : super(
         from: null,
@@ -171,22 +185,30 @@ final class PayoutsNotifierProvider
   @$internal
   @override
   PayoutsNotifier create() => PayoutsNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PayoutsState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PayoutsState>(value),
+    );
+  }
 }
 
-String _$payoutsNotifierHash() => r'0ae47d61e216f2eed288763ee6313bcb1d5c9830';
+String _$payoutsNotifierHash() => r'cb17d1cefa7bd27a7bb7368145ce7ed52ec0d7a5';
 
-abstract class _$PayoutsNotifier extends $AsyncNotifier<PayoutsEntity> {
-  FutureOr<PayoutsEntity> build();
+abstract class _$PayoutsNotifier extends $Notifier<PayoutsState> {
+  PayoutsState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<PayoutsEntity>, PayoutsEntity>;
+    final ref = this.ref as $Ref<PayoutsState, PayoutsState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<PayoutsEntity>, PayoutsEntity>,
-              AsyncValue<PayoutsEntity>,
+              AnyNotifier<PayoutsState, PayoutsState>,
+              PayoutsState,
               Object?,
               Object?
             >;
@@ -198,7 +220,7 @@ abstract class _$PayoutsNotifier extends $AsyncNotifier<PayoutsEntity> {
 const redeemProvider = RedeemNotifierProvider._();
 
 final class RedeemNotifierProvider
-    extends $AsyncNotifierProvider<RedeemNotifier, bool?> {
+    extends $NotifierProvider<RedeemNotifier, RedeemState> {
   const RedeemNotifierProvider._()
     : super(
         from: null,
@@ -216,22 +238,30 @@ final class RedeemNotifierProvider
   @$internal
   @override
   RedeemNotifier create() => RedeemNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RedeemState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RedeemState>(value),
+    );
+  }
 }
 
-String _$redeemNotifierHash() => r'4e41fed33cec9d75d67a875b0b78f6647cd5f63d';
+String _$redeemNotifierHash() => r'1bd5a7f0e250ff2917fe61dbf98a418111ce228f';
 
-abstract class _$RedeemNotifier extends $AsyncNotifier<bool?> {
-  FutureOr<bool?> build();
+abstract class _$RedeemNotifier extends $Notifier<RedeemState> {
+  RedeemState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<bool?>, bool?>;
+    final ref = this.ref as $Ref<RedeemState, RedeemState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<bool?>, bool?>,
-              AsyncValue<bool?>,
+              AnyNotifier<RedeemState, RedeemState>,
+              RedeemState,
               Object?,
               Object?
             >;
@@ -284,7 +314,7 @@ final class OrdersListProvider
   }
 }
 
-String _$ordersListHash() => r'7a5aa196ce7d5ff1c78fdd315f1885e6f03a842a';
+String _$ordersListHash() => r'ceee8cafb328ab094b9868cff6604757f54da77b';
 
 @ProviderFor(transactionsList)
 const transactionsListProvider = TransactionsListProvider._();
@@ -331,7 +361,7 @@ final class TransactionsListProvider
   }
 }
 
-String _$transactionsListHash() => r'0d3eb15750e2dabb8eda3983079ef0b97b9328b3';
+String _$transactionsListHash() => r'bbeacf0b062d2d93bf85bb485893d462abe5679b';
 
 @ProviderFor(isOrdersLoading)
 const isOrdersLoadingProvider = IsOrdersLoadingProvider._();
@@ -372,7 +402,7 @@ final class IsOrdersLoadingProvider
   }
 }
 
-String _$isOrdersLoadingHash() => r'2037304c7f0d452b0b4fceea0990d3c4116e74f1';
+String _$isOrdersLoadingHash() => r'ba2b4009226469b1c43ec80ca3f11f207de16574';
 
 @ProviderFor(isTransactionsLoading)
 const isTransactionsLoadingProvider = IsTransactionsLoadingProvider._();
@@ -414,7 +444,48 @@ final class IsTransactionsLoadingProvider
 }
 
 String _$isTransactionsLoadingHash() =>
-    r'8b01e68bec1304e988e813ff2cb894e29c647b15';
+    r'e3f875d951df3bc90db4d85b739676031444e953';
+
+@ProviderFor(isPayoutsLoading)
+const isPayoutsLoadingProvider = IsPayoutsLoadingProvider._();
+
+final class IsPayoutsLoadingProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const IsPayoutsLoadingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isPayoutsLoadingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isPayoutsLoadingHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return isPayoutsLoading(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isPayoutsLoadingHash() => r'6229f59a64e1674f920b0c5d2f311b7a42749c19';
 
 @ProviderFor(isRedeemLoading)
 const isRedeemLoadingProvider = IsRedeemLoadingProvider._();
@@ -455,7 +526,7 @@ final class IsRedeemLoadingProvider
   }
 }
 
-String _$isRedeemLoadingHash() => r'e02997f40b6e618bc509d40b66079940882f457e';
+String _$isRedeemLoadingHash() => r'4185f36c0bea815f989666b550b94964c62cb3c8';
 
 @ProviderFor(ordersErrorMessage)
 const ordersErrorMessageProvider = OrdersErrorMessageProvider._();
@@ -497,7 +568,7 @@ final class OrdersErrorMessageProvider
 }
 
 String _$ordersErrorMessageHash() =>
-    r'f61b1d4a373250b4ed15b0363e3e4979941eccfb';
+    r'a98d0f1e61a3ae81e2074cac53d0ae9c035a9caf';
 
 @ProviderFor(transactionsErrorMessage)
 const transactionsErrorMessageProvider = TransactionsErrorMessageProvider._();
@@ -539,7 +610,49 @@ final class TransactionsErrorMessageProvider
 }
 
 String _$transactionsErrorMessageHash() =>
-    r'eb2a1d5a16b15281c5e27dc6b1a761fbf506417a';
+    r'44aff37b1f96b46f33ccb7ac2df634b0c0d1466f';
+
+@ProviderFor(payoutsErrorMessage)
+const payoutsErrorMessageProvider = PayoutsErrorMessageProvider._();
+
+final class PayoutsErrorMessageProvider
+    extends $FunctionalProvider<String?, String?, String?>
+    with $Provider<String?> {
+  const PayoutsErrorMessageProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'payoutsErrorMessageProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$payoutsErrorMessageHash();
+
+  @$internal
+  @override
+  $ProviderElement<String?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  String? create(Ref ref) {
+    return payoutsErrorMessage(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String?>(value),
+    );
+  }
+}
+
+String _$payoutsErrorMessageHash() =>
+    r'950c304a77f4cd0c375fad7b5eacb53a278b57cd';
 
 @ProviderFor(redeemErrorMessage)
 const redeemErrorMessageProvider = RedeemErrorMessageProvider._();
@@ -581,4 +694,458 @@ final class RedeemErrorMessageProvider
 }
 
 String _$redeemErrorMessageHash() =>
-    r'110d7474639ae5c3f232a35ec69ee2ffe6116b14';
+    r'9684657cd44cc143d1d083f21021d04ba070b0a5';
+
+@ProviderFor(hasOrdersError)
+const hasOrdersErrorProvider = HasOrdersErrorProvider._();
+
+final class HasOrdersErrorProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasOrdersErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasOrdersErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasOrdersErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasOrdersError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasOrdersErrorHash() => r'2aecc2c0b50a4527cd2373c346e2d7f9c801b30e';
+
+@ProviderFor(hasTransactionsError)
+const hasTransactionsErrorProvider = HasTransactionsErrorProvider._();
+
+final class HasTransactionsErrorProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasTransactionsErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasTransactionsErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasTransactionsErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasTransactionsError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasTransactionsErrorHash() =>
+    r'459957d55af143c67a8e13a87d672907dd1dab4a';
+
+@ProviderFor(hasPayoutsError)
+const hasPayoutsErrorProvider = HasPayoutsErrorProvider._();
+
+final class HasPayoutsErrorProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasPayoutsErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasPayoutsErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasPayoutsErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasPayoutsError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasPayoutsErrorHash() => r'ed21656f8ade5d27ac98c40a5c23b6ecd285a589';
+
+@ProviderFor(hasRedeemError)
+const hasRedeemErrorProvider = HasRedeemErrorProvider._();
+
+final class HasRedeemErrorProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasRedeemErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasRedeemErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasRedeemErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasRedeemError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasRedeemErrorHash() => r'00688e0d303ecdabf2e5e8ba38abf2da15034f81';
+
+@ProviderFor(hasOrdersData)
+const hasOrdersDataProvider = HasOrdersDataProvider._();
+
+final class HasOrdersDataProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasOrdersDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasOrdersDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasOrdersDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasOrdersData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasOrdersDataHash() => r'4e1e439dbe951d03fd394e693a1ab1cbfeb38589';
+
+@ProviderFor(hasTransactionsData)
+const hasTransactionsDataProvider = HasTransactionsDataProvider._();
+
+final class HasTransactionsDataProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasTransactionsDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasTransactionsDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasTransactionsDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasTransactionsData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasTransactionsDataHash() =>
+    r'7514334766d2f3a0ef6e1e7e51620d93af60e7f6';
+
+@ProviderFor(hasPayoutsData)
+const hasPayoutsDataProvider = HasPayoutsDataProvider._();
+
+final class HasPayoutsDataProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasPayoutsDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasPayoutsDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasPayoutsDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasPayoutsData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasPayoutsDataHash() => r'dee9b2affd687558ed9964b8fcf8d9eedce7b947';
+
+@ProviderFor(redeemSuccess)
+const redeemSuccessProvider = RedeemSuccessProvider._();
+
+final class RedeemSuccessProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const RedeemSuccessProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'redeemSuccessProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$redeemSuccessHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return redeemSuccess(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$redeemSuccessHash() => r'8a399d250658046bbd3a4d905aaffa8b0975ad76';
+
+@ProviderFor(ordersData)
+const ordersDataProvider = OrdersDataProvider._();
+
+final class OrdersDataProvider
+    extends $FunctionalProvider<OrdersEntity?, OrdersEntity?, OrdersEntity?>
+    with $Provider<OrdersEntity?> {
+  const OrdersDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'ordersDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$ordersDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<OrdersEntity?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  OrdersEntity? create(Ref ref) {
+    return ordersData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OrdersEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OrdersEntity?>(value),
+    );
+  }
+}
+
+String _$ordersDataHash() => r'7e56363e7329a38e7ab3ce8f5d7be93355a2f6c6';
+
+@ProviderFor(transactionsData)
+const transactionsDataProvider = TransactionsDataProvider._();
+
+final class TransactionsDataProvider
+    extends
+        $FunctionalProvider<
+          TransactionsEntity?,
+          TransactionsEntity?,
+          TransactionsEntity?
+        >
+    with $Provider<TransactionsEntity?> {
+  const TransactionsDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'transactionsDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$transactionsDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<TransactionsEntity?> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  TransactionsEntity? create(Ref ref) {
+    return transactionsData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TransactionsEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TransactionsEntity?>(value),
+    );
+  }
+}
+
+String _$transactionsDataHash() => r'd3847da8e9459defdc7d2dac6c8ec9f5519bbd4c';
+
+@ProviderFor(payoutsData)
+const payoutsDataProvider = PayoutsDataProvider._();
+
+final class PayoutsDataProvider
+    extends $FunctionalProvider<PayoutsEntity?, PayoutsEntity?, PayoutsEntity?>
+    with $Provider<PayoutsEntity?> {
+  const PayoutsDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'payoutsDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$payoutsDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<PayoutsEntity?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  PayoutsEntity? create(Ref ref) {
+    return payoutsData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PayoutsEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PayoutsEntity?>(value),
+    );
+  }
+}
+
+String _$payoutsDataHash() => r'b7fc63fca213c3a3f02e43b9ae109018d26f721a';

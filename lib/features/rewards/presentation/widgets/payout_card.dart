@@ -13,6 +13,7 @@ import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 import 'package:magic_rewards/features/rewards/presentation/providers/rewards_providers.dart';
+import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
 import 'package:magic_rewards/features/rewards/presentation/widgets/message_dialog.dart';
 
 class PayoutCard extends ConsumerWidget {
@@ -83,73 +84,65 @@ class PayoutCard extends ConsumerWidget {
       BuildContext context, WidgetRef ref, GlobalKey<FormState> formKey, TextEditingController textController) {
     return Consumer(
       builder: (context, ref, child) {
-        final redeemAsync = ref.watch(redeemProvider);
+        final redeemState = ref.watch(redeemProvider);
         
-        return redeemAsync.when(
-          data: (success) {
-            if (success == true) {
-              return MessageDialog(
-                message: S.of(context).yourRequestSuccess,
-              );
-            }
-            // Initial state - show form
-            return Dialog(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: AppGradients.dialogGradient,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(S.of(context).enterYourPayeerId, style: context.f20700),
-                    const SizedBox(height: 20),
-                    Form(
-                      key: formKey,
-                      child: AppTextField(
-                        controller: textController,
-                        fillColor: AppColors.blue.withOpacity(0.5),
-                        hintStyle: context.f12400?.copyWith(color: AppColors.grey1),
-                        style: context.f16600,
-                        validator: AppValidator(validators: [
-                          InputValidator.requiredField,
-                        ]).validate,
-                        hintText: S.of(context).payeerId,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: AppButton(
-                              text: S.of(context).cancel,
-                              onPressed: () {
-                                context.pop();
-                              }),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: AppButton(
-                              text: S.of(context).confirm,
-                              onPressed: () {
-                                if (formKey.currentState?.validate() ?? false) {
-                                  ref.read(redeemProvider.notifier).redeem(
-                                      name: payout.id,
-                                      value: textController.text);
-                                }
-                              }),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+        return redeemState.when(
+          initial: () => Dialog(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            surfaceTintColor: Colors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: AppGradients.dialogGradient,
+                borderRadius: BorderRadius.circular(20),
               ),
-            );
-          },
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(S.of(context).enterYourPayeerId, style: context.f20700),
+                  const SizedBox(height: 20),
+                  Form(
+                    key: formKey,
+                    child: AppTextField(
+                      controller: textController,
+                      fillColor: AppColors.blue.withOpacity(0.5),
+                      hintStyle: context.f12400?.copyWith(color: AppColors.grey1),
+                      style: context.f16600,
+                      validator: AppValidator(validators: [
+                        InputValidator.requiredField,
+                      ]).validate,
+                      hintText: S.of(context).payeerId,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppButton(
+                            text: S.of(context).cancel,
+                            onPressed: () {
+                              context.pop();
+                            }),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: AppButton(
+                            text: S.of(context).confirm,
+                            onPressed: () {
+                              if (formKey.currentState?.validate() ?? false) {
+                                ref.read(redeemProvider.notifier).redeem(
+                                    name: payout.id,
+                                    value: textController.text);
+                              }
+                            }),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
           loading: () => Dialog(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
@@ -168,8 +161,11 @@ class PayoutCard extends ConsumerWidget {
               ),
             ),
           ),
-          error: (error, stackTrace) => MessageDialog(
-            message: error.toString(),
+          success: () => MessageDialog(
+            message: S.of(context).yourRequestSuccess,
+          ),
+          error: (errorMessage) => MessageDialog(
+            message: errorMessage,
             happy: false,
           ),
         );

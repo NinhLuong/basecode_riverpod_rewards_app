@@ -8,6 +8,7 @@ import 'package:magic_rewards/features/rewards/domain/parameters/redeem_paramete
 import 'package:magic_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
 import 'package:magic_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
 import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
+import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
 
 part 'rewards_providers.g.dart';
 
@@ -21,27 +22,40 @@ RewardsRepository rewardsRepository(Ref ref) {
 @riverpod
 class OrdersNotifier extends _$OrdersNotifier {
   @override
-  FutureOr<OrdersEntity> build() async {
-    return fetchOrders();
+  OrdersState build() {
+    // Auto-fetch on build
+    _fetchOrders();
+    return const OrdersState.initial();
   }
 
-  Future<OrdersEntity> fetchOrders() async {
-    final repository = ref.read(rewardsRepositoryProvider);
-    final result = await repository.getOrders(OrdersParameters());
-    
-    return result.fold(
-      (failure) => throw failure,
-      (orders) => orders,
-    );
+  Future<void> _fetchOrders() async {
+    state = const OrdersState.loading();
+
+    try {
+      final repository = ref.read(rewardsRepositoryProvider);
+      final result = await repository.getOrders(OrdersParameters());
+      
+      result.fold(
+        (failure) => state = OrdersState.error(failure.toString()),
+        (orders) => state = OrdersState.success(orders),
+      );
+    } catch (error) {
+      state = OrdersState.error(error.toString());
+    }
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading();
+    final currentData = state.data;
+    if (currentData != null) {
+      state = OrdersState.refreshing(currentData);
+    } else {
+      state = const OrdersState.loading();
+    }
+
     try {
-      final result = await fetchOrders();
-      state = AsyncData(result);
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+      await _fetchOrders();
+    } catch (error) {
+      state = OrdersState.error(error.toString());
     }
   }
 }
@@ -50,27 +64,40 @@ class OrdersNotifier extends _$OrdersNotifier {
 @riverpod
 class TransactionsNotifier extends _$TransactionsNotifier {
   @override
-  FutureOr<TransactionsEntity> build() async {
-    return fetchTransactions();
+  TransactionsState build() {
+    // Auto-fetch on build
+    _fetchTransactions();
+    return const TransactionsState.initial();
   }
 
-  Future<TransactionsEntity> fetchTransactions() async {
-    final repository = ref.read(rewardsRepositoryProvider);
-    final result = await repository.getTransactions(TransactionsParameters());
-    
-    return result.fold(
-      (failure) => throw failure,
-      (transactions) => transactions,
-    );
+  Future<void> _fetchTransactions() async {
+    state = const TransactionsState.loading();
+
+    try {
+      final repository = ref.read(rewardsRepositoryProvider);
+      final result = await repository.getTransactions(TransactionsParameters());
+      
+      result.fold(
+        (failure) => state = TransactionsState.error(failure.toString()),
+        (transactions) => state = TransactionsState.success(transactions),
+      );
+    } catch (error) {
+      state = TransactionsState.error(error.toString());
+    }
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading();
+    final currentData = state.data;
+    if (currentData != null) {
+      state = TransactionsState.refreshing(currentData);
+    } else {
+      state = const TransactionsState.loading();
+    }
+
     try {
-      final result = await fetchTransactions();
-      state = AsyncData(result);
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+      await _fetchTransactions();
+    } catch (error) {
+      state = TransactionsState.error(error.toString());
     }
   }
 }
@@ -79,27 +106,40 @@ class TransactionsNotifier extends _$TransactionsNotifier {
 @riverpod
 class PayoutsNotifier extends _$PayoutsNotifier {
   @override
-  FutureOr<PayoutsEntity> build() async {
-    return fetchPayouts();
+  PayoutsState build() {
+    // Auto-fetch on build
+    _fetchPayouts();
+    return const PayoutsState.initial();
   }
 
-  Future<PayoutsEntity> fetchPayouts() async {
-    final repository = ref.read(rewardsRepositoryProvider);
-    final result = await repository.getPayouts(PayoutsParameters());
-    
-    return result.fold(
-      (failure) => throw failure,
-      (payouts) => payouts,
-    );
+  Future<void> _fetchPayouts() async {
+    state = const PayoutsState.loading();
+
+    try {
+      final repository = ref.read(rewardsRepositoryProvider);
+      final result = await repository.getPayouts(PayoutsParameters());
+      
+      result.fold(
+        (failure) => state = PayoutsState.error(failure.toString()),
+        (payouts) => state = PayoutsState.success(payouts),
+      );
+    } catch (error) {
+      state = PayoutsState.error(error.toString());
+    }
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading();
+    final currentData = state.data;
+    if (currentData != null) {
+      state = PayoutsState.refreshing(currentData);
+    } else {
+      state = const PayoutsState.loading();
+    }
+
     try {
-      final result = await fetchPayouts();
-      state = AsyncData(result);
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+      await _fetchPayouts();
+    } catch (error) {
+      state = PayoutsState.error(error.toString());
     }
   }
 }
@@ -108,15 +148,16 @@ class PayoutsNotifier extends _$PayoutsNotifier {
 @riverpod
 class RedeemNotifier extends _$RedeemNotifier {
   @override
-  FutureOr<bool?> build() {
-    return null;
+  RedeemState build() {
+    return const RedeemState.initial();
   }
 
   Future<void> redeem({
     required String name,
     required String value,
   }) async {
-    state = const AsyncLoading();
+    state = const RedeemState.loading();
+    
     try {
       final repository = ref.read(rewardsRepositoryProvider);
       final params = RedeemParameters(
@@ -126,60 +167,142 @@ class RedeemNotifier extends _$RedeemNotifier {
       final result = await repository.redeem(params);
       
       result.fold(
-        (failure) => throw failure,
-        (_) => state = const AsyncData(true),
+        (failure) => state = RedeemState.error(failure.toString()),
+        (_) => state = const RedeemState.success(),
       );
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+    } catch (error) {
+      state = RedeemState.error(error.toString());
     }
+  }
+
+  void reset() {
+    state = const RedeemState.initial();
   }
 }
 
 // Convenience providers
 @riverpod
 List<OrderEntity> ordersList(Ref ref) {
-  final asyncValue = ref.watch(ordersProvider);
-  return asyncValue.value?.orders ?? [];
+  final state = ref.watch(ordersProvider);
+  return state.orders;
 }
 
 @riverpod
 List<TransactionEntity> transactionsList(Ref ref) {
-  final asyncValue = ref.watch(transactionsProvider);
-  return asyncValue.value?.orders ?? [];
+  final state = ref.watch(transactionsProvider);
+  return state.transactions;
 }
 
 @riverpod
 bool isOrdersLoading(Ref ref) {
-  final asyncValue = ref.watch(ordersProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(ordersProvider);
+  return state.isLoading;
 }
 
 @riverpod
 bool isTransactionsLoading(Ref ref) {
-  final asyncValue = ref.watch(transactionsProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(transactionsProvider);
+  return state.isLoading;
+}
+
+@riverpod
+bool isPayoutsLoading(Ref ref) {
+  final state = ref.watch(payoutsProvider);
+  return state.isLoading;
 }
 
 @riverpod
 bool isRedeemLoading(Ref ref) {
-  final asyncValue = ref.watch(redeemProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(redeemProvider);
+  return state.isLoading;
 }
 
 @riverpod
 String? ordersErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(ordersProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(ordersProvider);
+  return state.errorMessage;
 }
 
 @riverpod
 String? transactionsErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(transactionsProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(transactionsProvider);
+  return state.errorMessage;
+}
+
+@riverpod
+String? payoutsErrorMessage(Ref ref) {
+  final state = ref.watch(payoutsProvider);
+  return state.errorMessage;
 }
 
 @riverpod
 String? redeemErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(redeemProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(redeemProvider);
+  return state.errorMessage;
+}
+
+@riverpod
+bool hasOrdersError(Ref ref) {
+  final state = ref.watch(ordersProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasTransactionsError(Ref ref) {
+  final state = ref.watch(transactionsProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasPayoutsError(Ref ref) {
+  final state = ref.watch(payoutsProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasRedeemError(Ref ref) {
+  final state = ref.watch(redeemProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasOrdersData(Ref ref) {
+  final state = ref.watch(ordersProvider);
+  return state.hasData;
+}
+
+@riverpod
+bool hasTransactionsData(Ref ref) {
+  final state = ref.watch(transactionsProvider);
+  return state.hasData;
+}
+
+@riverpod
+bool hasPayoutsData(Ref ref) {
+  final state = ref.watch(payoutsProvider);
+  return state.hasData;
+}
+
+@riverpod
+bool redeemSuccess(Ref ref) {
+  final state = ref.watch(redeemProvider);
+  return state.isSuccess;
+}
+
+@riverpod
+OrdersEntity? ordersData(Ref ref) {
+  final state = ref.watch(ordersProvider);
+  return state.data;
+}
+
+@riverpod
+TransactionsEntity? transactionsData(Ref ref) {
+  final state = ref.watch(transactionsProvider);
+  return state.data;
+}
+
+@riverpod
+PayoutsEntity? payoutsData(Ref ref) {
+  final state = ref.watch(payoutsProvider);
+  return state.data;
 }

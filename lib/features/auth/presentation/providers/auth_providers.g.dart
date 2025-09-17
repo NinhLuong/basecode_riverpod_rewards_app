@@ -191,7 +191,7 @@ String _$userLocalDataSourceHash() =>
 const loginProvider = LoginNotifierProvider._();
 
 final class LoginNotifierProvider
-    extends $AsyncNotifierProvider<LoginNotifier, UserEntity?> {
+    extends $NotifierProvider<LoginNotifier, LoginState> {
   const LoginNotifierProvider._()
     : super(
         from: null,
@@ -209,22 +209,30 @@ final class LoginNotifierProvider
   @$internal
   @override
   LoginNotifier create() => LoginNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(LoginState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LoginState>(value),
+    );
+  }
 }
 
-String _$loginNotifierHash() => r'f349da7963584ed278f0fa28b971132535c1d9d3';
+String _$loginNotifierHash() => r'f9ad1f048a12525bb68597b490be381fe09ad9ed';
 
-abstract class _$LoginNotifier extends $AsyncNotifier<UserEntity?> {
-  FutureOr<UserEntity?> build();
+abstract class _$LoginNotifier extends $Notifier<LoginState> {
+  LoginState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<UserEntity?>, UserEntity?>;
+    final ref = this.ref as $Ref<LoginState, LoginState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<UserEntity?>, UserEntity?>,
-              AsyncValue<UserEntity?>,
+              AnyNotifier<LoginState, LoginState>,
+              LoginState,
               Object?,
               Object?
             >;
@@ -236,7 +244,7 @@ abstract class _$LoginNotifier extends $AsyncNotifier<UserEntity?> {
 const registerProvider = RegisterNotifierProvider._();
 
 final class RegisterNotifierProvider
-    extends $AsyncNotifierProvider<RegisterNotifier, UserEntity?> {
+    extends $NotifierProvider<RegisterNotifier, RegisterState> {
   const RegisterNotifierProvider._()
     : super(
         from: null,
@@ -254,22 +262,30 @@ final class RegisterNotifierProvider
   @$internal
   @override
   RegisterNotifier create() => RegisterNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RegisterState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RegisterState>(value),
+    );
+  }
 }
 
-String _$registerNotifierHash() => r'161cb494d5c82cec8ac054f0b4e80c76c80c40e8';
+String _$registerNotifierHash() => r'51d9e17fb1b5015941797d0abe2b79f83705ebb7';
 
-abstract class _$RegisterNotifier extends $AsyncNotifier<UserEntity?> {
-  FutureOr<UserEntity?> build();
+abstract class _$RegisterNotifier extends $Notifier<RegisterState> {
+  RegisterState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<UserEntity?>, UserEntity?>;
+    final ref = this.ref as $Ref<RegisterState, RegisterState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<UserEntity?>, UserEntity?>,
-              AsyncValue<UserEntity?>,
+              AnyNotifier<RegisterState, RegisterState>,
+              RegisterState,
               Object?,
               Object?
             >;
@@ -281,7 +297,7 @@ abstract class _$RegisterNotifier extends $AsyncNotifier<UserEntity?> {
 const emailCheckProvider = EmailCheckNotifierProvider._();
 
 final class EmailCheckNotifierProvider
-    extends $AsyncNotifierProvider<EmailCheckNotifier, CheckEmailEntity?> {
+    extends $NotifierProvider<EmailCheckNotifier, EmailCheckState> {
   const EmailCheckNotifierProvider._()
     : super(
         from: null,
@@ -299,24 +315,31 @@ final class EmailCheckNotifierProvider
   @$internal
   @override
   EmailCheckNotifier create() => EmailCheckNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(EmailCheckState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<EmailCheckState>(value),
+    );
+  }
 }
 
 String _$emailCheckNotifierHash() =>
-    r'b869f9500c799eac6eff83b15c8e46db4542d606';
+    r'e9dbfc19ffe9040d23ec1629128ac6b1069547e1';
 
-abstract class _$EmailCheckNotifier extends $AsyncNotifier<CheckEmailEntity?> {
-  FutureOr<CheckEmailEntity?> build();
+abstract class _$EmailCheckNotifier extends $Notifier<EmailCheckState> {
+  EmailCheckState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref =
-        this.ref as $Ref<AsyncValue<CheckEmailEntity?>, CheckEmailEntity?>;
+    final ref = this.ref as $Ref<EmailCheckState, EmailCheckState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<CheckEmailEntity?>, CheckEmailEntity?>,
-              AsyncValue<CheckEmailEntity?>,
+              AnyNotifier<EmailCheckState, EmailCheckState>,
+              EmailCheckState,
               Object?,
               Object?
             >;
@@ -328,7 +351,7 @@ abstract class _$EmailCheckNotifier extends $AsyncNotifier<CheckEmailEntity?> {
 const currentUserProvider = CurrentUserNotifierProvider._();
 
 final class CurrentUserNotifierProvider
-    extends $AsyncNotifierProvider<CurrentUserNotifier, UserEntity?> {
+    extends $NotifierProvider<CurrentUserNotifier, CurrentUserState> {
   const CurrentUserNotifierProvider._()
     : super(
         from: null,
@@ -346,23 +369,31 @@ final class CurrentUserNotifierProvider
   @$internal
   @override
   CurrentUserNotifier create() => CurrentUserNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CurrentUserState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<CurrentUserState>(value),
+    );
+  }
 }
 
 String _$currentUserNotifierHash() =>
-    r'4cbe2e3bc8fac26bbfdcbfd0f5f1a272cee3f1d1';
+    r'eb0ab6760efb221231df4e335e439676f2ffac55';
 
-abstract class _$CurrentUserNotifier extends $AsyncNotifier<UserEntity?> {
-  FutureOr<UserEntity?> build();
+abstract class _$CurrentUserNotifier extends $Notifier<CurrentUserState> {
+  CurrentUserState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<UserEntity?>, UserEntity?>;
+    final ref = this.ref as $Ref<CurrentUserState, CurrentUserState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<UserEntity?>, UserEntity?>,
-              AsyncValue<UserEntity?>,
+              AnyNotifier<CurrentUserState, CurrentUserState>,
+              CurrentUserState,
               Object?,
               Object?
             >;
@@ -408,7 +439,7 @@ final class IsLoginLoadingProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$isLoginLoadingHash() => r'742abbf15829a8e0457622c3860bd55123de32f5';
+String _$isLoginLoadingHash() => r'0057235d1d692b7c4c5f2529515dcba486d00fa1';
 
 @ProviderFor(isRegisterLoading)
 const isRegisterLoadingProvider = IsRegisterLoadingProvider._();
@@ -449,7 +480,7 @@ final class IsRegisterLoadingProvider
   }
 }
 
-String _$isRegisterLoadingHash() => r'fe1ae5369eadf1062b0dea4c4c106c728b7fb5e4';
+String _$isRegisterLoadingHash() => r'04c1ac370fd3f6d58a0cf7f91937cca34b257255';
 
 @ProviderFor(isEmailCheckLoading)
 const isEmailCheckLoadingProvider = IsEmailCheckLoadingProvider._();
@@ -491,7 +522,7 @@ final class IsEmailCheckLoadingProvider
 }
 
 String _$isEmailCheckLoadingHash() =>
-    r'8524e223d9f6452dc37218820c8333cf35d671d2';
+    r'c5f51ffcb258356cdc41382a217986f675aa4777';
 
 @ProviderFor(loginErrorMessage)
 const loginErrorMessageProvider = LoginErrorMessageProvider._();
@@ -532,7 +563,7 @@ final class LoginErrorMessageProvider
   }
 }
 
-String _$loginErrorMessageHash() => r'ec1b4110e7509819882936ce29869b38aab7bbeb';
+String _$loginErrorMessageHash() => r'84b4c87c1e71381abd7c2ff6fa9e4fa69c995296';
 
 @ProviderFor(registerErrorMessage)
 const registerErrorMessageProvider = RegisterErrorMessageProvider._();
@@ -574,7 +605,7 @@ final class RegisterErrorMessageProvider
 }
 
 String _$registerErrorMessageHash() =>
-    r'01d541f5663196226111f9ca328fe3eae319c858';
+    r'068406e8f79f541badc52c2fe6c7164ff1e5b9a7';
 
 @ProviderFor(emailCheckErrorMessage)
 const emailCheckErrorMessageProvider = EmailCheckErrorMessageProvider._();
@@ -616,7 +647,7 @@ final class EmailCheckErrorMessageProvider
 }
 
 String _$emailCheckErrorMessageHash() =>
-    r'c040d0d794b4f7005835a80e6eccda661a97e1e5';
+    r'fbb29123a76a28aac3d63dc3eb0bd7e93a18a3cc';
 
 @ProviderFor(isUserAuthenticated)
 const isUserAuthenticatedProvider = IsUserAuthenticatedProvider._();
@@ -658,7 +689,7 @@ final class IsUserAuthenticatedProvider
 }
 
 String _$isUserAuthenticatedHash() =>
-    r'4cae9d3cfc6effe66f5a35093a9b457a5347571f';
+    r'1c3fd3178c466c3819cca4f2be84ddb44588b932';
 
 @ProviderFor(currentUserData)
 const currentUserDataProvider = CurrentUserDataProvider._();
@@ -699,4 +730,298 @@ final class CurrentUserDataProvider
   }
 }
 
-String _$currentUserDataHash() => r'f8ea1b03c7d8f34a1d5f9e2038c566aef01b8f9b';
+String _$currentUserDataHash() => r'441ca128e5219a8a71ffa3259cf8e8caf677ee9a';
+
+@ProviderFor(loginUserData)
+const loginUserDataProvider = LoginUserDataProvider._();
+
+final class LoginUserDataProvider
+    extends $FunctionalProvider<UserEntity?, UserEntity?, UserEntity?>
+    with $Provider<UserEntity?> {
+  const LoginUserDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'loginUserDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$loginUserDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<UserEntity?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  UserEntity? create(Ref ref) {
+    return loginUserData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UserEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UserEntity?>(value),
+    );
+  }
+}
+
+String _$loginUserDataHash() => r'592964b001ea668d4e2321f1731c433119cbfc5d';
+
+@ProviderFor(registerUserData)
+const registerUserDataProvider = RegisterUserDataProvider._();
+
+final class RegisterUserDataProvider
+    extends $FunctionalProvider<UserEntity?, UserEntity?, UserEntity?>
+    with $Provider<UserEntity?> {
+  const RegisterUserDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'registerUserDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$registerUserDataHash();
+
+  @$internal
+  @override
+  $ProviderElement<UserEntity?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  UserEntity? create(Ref ref) {
+    return registerUserData(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UserEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UserEntity?>(value),
+    );
+  }
+}
+
+String _$registerUserDataHash() => r'aac129335544afa90468fb5237d10109e591ddf8';
+
+@ProviderFor(emailCheckResult)
+const emailCheckResultProvider = EmailCheckResultProvider._();
+
+final class EmailCheckResultProvider
+    extends
+        $FunctionalProvider<
+          CheckEmailEntity?,
+          CheckEmailEntity?,
+          CheckEmailEntity?
+        >
+    with $Provider<CheckEmailEntity?> {
+  const EmailCheckResultProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'emailCheckResultProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$emailCheckResultHash();
+
+  @$internal
+  @override
+  $ProviderElement<CheckEmailEntity?> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  CheckEmailEntity? create(Ref ref) {
+    return emailCheckResult(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CheckEmailEntity? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<CheckEmailEntity?>(value),
+    );
+  }
+}
+
+String _$emailCheckResultHash() => r'171b3c2067f501b196cf22a4dd08f53f20fecca8';
+
+@ProviderFor(hasLoginError)
+const hasLoginErrorProvider = HasLoginErrorProvider._();
+
+final class HasLoginErrorProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasLoginErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasLoginErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasLoginErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasLoginError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasLoginErrorHash() => r'7d9869f78d22f2b694d97feaa7110a0a5e2e9515';
+
+@ProviderFor(hasRegisterError)
+const hasRegisterErrorProvider = HasRegisterErrorProvider._();
+
+final class HasRegisterErrorProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasRegisterErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasRegisterErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasRegisterErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasRegisterError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasRegisterErrorHash() => r'f553ec616ffd0572cd9d6055619b51aa5023b03b';
+
+@ProviderFor(hasEmailCheckError)
+const hasEmailCheckErrorProvider = HasEmailCheckErrorProvider._();
+
+final class HasEmailCheckErrorProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const HasEmailCheckErrorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hasEmailCheckErrorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hasEmailCheckErrorHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return hasEmailCheckError(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$hasEmailCheckErrorHash() =>
+    r'3ac8677c337472b0294c2e6886fda4617a1d04a0';
+
+@ProviderFor(isCurrentUserLoading)
+const isCurrentUserLoadingProvider = IsCurrentUserLoadingProvider._();
+
+final class IsCurrentUserLoadingProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  const IsCurrentUserLoadingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isCurrentUserLoadingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isCurrentUserLoadingHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return isCurrentUserLoading(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$isCurrentUserLoadingHash() =>
+    r'205abb223bd50912af097003e717281d60c0f42c';

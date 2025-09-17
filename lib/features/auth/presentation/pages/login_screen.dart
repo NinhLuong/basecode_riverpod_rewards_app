@@ -8,13 +8,12 @@ import 'package:magic_rewards/shared/widgets/components/app_logo.dart';
 import 'package:magic_rewards/shared/widgets/components/app_rich_text.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/widgets/components/app_text_field.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/register_route.dart';
 import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
 
@@ -42,21 +41,16 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     // Listen to login state changes
-    ref.listen<AsyncValue<UserEntity?>>(loginProvider, (previous, next) {
+    ref.listen(loginProvider, (previous, next) {
       next.whenOrNull(
-        data: (user) {
-          if (user != null) {
-            // Set the current user and navigate
-            ref.read(currentUserProvider.notifier).setUser(user);
-            showToast(message: S.of(context).loggedInSuccessfully);
-            context.go(MainRoute.name);
-          }
+        success: (user) {
+          // Set the current user and navigate
+          ref.read(currentUserProvider.notifier).setUser(user);
+          showToast(message: S.of(context).loggedInSuccessfully);
+          context.go(MainRoute.name);
         },
-        error: (error, stackTrace) {
-          if (error is Exception) {
-            // Convert to a generic failure - you might want to create a more specific failure type
-            FailureComponent.handleFailure(context: context, failure: error as dynamic, ref: ref);
-          }
+        error: (errorMessage) {
+          showToast(message: errorMessage);
         },
       );
     });

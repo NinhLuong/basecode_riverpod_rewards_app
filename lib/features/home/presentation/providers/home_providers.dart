@@ -1,12 +1,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_with_user_entity.dart';
 import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
 import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dart';
 import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:magic_rewards/features/home/presentation/state/home_state.dart';
 
 part 'home_providers.g.dart';
 
@@ -25,43 +25,60 @@ UserLocalDataSource homeUserLocalDataSource(Ref ref) {
 @riverpod
 class HomeNotifier extends _$HomeNotifier {
   @override
-  FutureOr<HomeWithUserEntity> build() async {
-    return fetchHomeWithUser();
+  HomeState build() {
+    // Auto-fetch on build
+    _fetchHomeWithUser();
+    return const HomeState.initial();
   }
 
-  Future<HomeWithUserEntity> fetchHomeWithUser() async {
-    final getHomeUseCase = ref.read(getHomeUseCaseProvider);
-    final userLocalDataSource = ref.read(homeUserLocalDataSourceProvider);
+  Future<void> _fetchHomeWithUser() async {
+    state = const HomeState.loading();
 
-    // Fetch both home data and user data concurrently
-    final results = await Future.wait([
-      getHomeUseCase.call(params: HomeParameters()).then((result) => result),
-      userLocalDataSource.getUserData(),
-    ]);
+    try {
+      final getHomeUseCase = ref.read(getHomeUseCaseProvider);
+      final userLocalDataSource = ref.read(homeUserLocalDataSourceProvider);
 
-    final homeResult = results[0] as dynamic;
-    final userData = results[1] as UserEntity?;
+      // Fetch both home data and user data concurrently
+      final results = await Future.wait([
+        getHomeUseCase.call(params: HomeParameters()).then((result) => result),
+        userLocalDataSource.getUserData(),
+      ]);
 
-    if (userData == null) {
-      throw const Failure('User data not found');
+      final homeResult = results[0] as dynamic;
+      final userData = results[1] as UserEntity?;
+
+      if (userData == null) {
+        state = const HomeState.error('User data not found');
+        return;
+      }
+
+      homeResult.fold(
+        (failure) => state = HomeState.error(failure.toString()),
+        (homeData) {
+          final homeWithUser = HomeWithUserEntity(
+            homeData: homeData,
+            userData: userData,
+          );
+          state = HomeState.success(homeWithUser);
+        },
+      );
+    } catch (error) {
+      state = HomeState.error(error.toString());
     }
-
-    return homeResult.fold(
-      (failure) => throw failure,
-      (homeData) => HomeWithUserEntity(
-        homeData: homeData,
-        userData: userData,
-      ),
-    );
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading();
+    final currentData = state.data;
+    if (currentData != null) {
+      state = HomeState.refreshing(currentData);
+    } else {
+      state = const HomeState.loading();
+    }
+
     try {
-      final result = await fetchHomeWithUser();
-      state = AsyncData(result);
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+      await _fetchHomeWithUser();
+    } catch (error) {
+      state = HomeState.error(error.toString());
     }
   }
 }
@@ -69,78 +86,90 @@ class HomeNotifier extends _$HomeNotifier {
 // Convenience providers for easy access to specific data
 @riverpod
 HomeEntity? homeData(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.homeData;
+  final state = ref.watch(homeProvider);
+  return state.homeData;
 }
 
 @riverpod
 UserEntity? homeUserData(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.userData;
+  final state = ref.watch(homeProvider);
+  return state.data?.userData;
 }
 
 @riverpod
 String userBalance(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.balance ?? '--';
+  final state = ref.watch(homeProvider);
+  return state.userBalance;
 }
 
 @riverpod
 List<OfferWallEntity> offerWalls(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.offerWalls ?? [];
+  final state = ref.watch(homeProvider);
+  return state.offerWalls;
 }
 
 @riverpod
 String currentUserName(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.username ?? '';
+  final state = ref.watch(homeProvider);
+  return state.currentUserName;
 }
 
 @riverpod
 String userFullName(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.fullName ?? '';
+  final state = ref.watch(homeProvider);
+  return state.userFullName;
 }
 
 @riverpod
 String userEmail(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.email ?? '';
+  final state = ref.watch(homeProvider);
+  return state.userEmail;
 }
 
 @riverpod
 String userPoints(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.points ?? '0';
+  final state = ref.watch(homeProvider);
+  return state.userPoints;
 }
 
 @riverpod
 String userRedeemedPoints(Ref ref) {
-  final homeWithUser = ref.watch(homeProvider).value;
-  return homeWithUser?.redeemedPoints ?? '0';
+  final state = ref.watch(homeProvider);
+  return state.userRedeemedPoints;
 }
 
 @riverpod
 bool isHomeLoading(Ref ref) {
-  final asyncValue = ref.watch(homeProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(homeProvider);
+  return state.isLoading;
 }
 
 @riverpod
 bool hasHomeError(Ref ref) {
-  final asyncValue = ref.watch(homeProvider);
-  return asyncValue.hasError;
+  final state = ref.watch(homeProvider);
+  return state.isError;
 }
 
 @riverpod
 String? homeErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(homeProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(homeProvider);
+  return state.errorMessage;
 }
 
 @riverpod
 bool hasHomeData(Ref ref) {
-  final asyncValue = ref.watch(homeProvider);
-  return asyncValue.hasValue && asyncValue.value != null;
+  final state = ref.watch(homeProvider);
+  return state.hasData;
+}
+
+@riverpod
+bool isHomeRefreshing(Ref ref) {
+  final state = ref.watch(homeProvider);
+  return state.isRefreshing;
+}
+
+@riverpod
+HomeWithUserEntity? homeWithUserData(Ref ref) {
+  final state = ref.watch(homeProvider);
+  return state.data;
 }

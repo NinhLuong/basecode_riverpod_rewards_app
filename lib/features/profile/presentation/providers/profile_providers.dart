@@ -3,6 +3,7 @@ import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/profile_parameters.dart';
 import 'package:magic_rewards/features/profile/domain/repository/profile_repository.dart';
+import 'package:magic_rewards/features/profile/presentation/state/profile_state.dart';
 
 part 'profile_providers.g.dart';
 
@@ -16,27 +17,40 @@ ProfileRepository profileRepository(Ref ref) {
 @riverpod
 class ProfileNotifier extends _$ProfileNotifier {
   @override
-  FutureOr<ProfileEntity> build() async {
-    return fetchProfile();
+  ProfileState build() {
+    // Auto-fetch on build
+    _fetchProfile();
+    return const ProfileState.initial();
   }
 
-  Future<ProfileEntity> fetchProfile() async {
-    final repository = ref.read(profileRepositoryProvider);
-    final result = await repository.getProfile(ProfileParameters());
-    
-    return result.fold(
-      (failure) => throw failure,
-      (profile) => profile,
-    );
+  Future<void> _fetchProfile() async {
+    state = const ProfileState.loading();
+
+    try {
+      final repository = ref.read(profileRepositoryProvider);
+      final result = await repository.getProfile(ProfileParameters());
+      
+      result.fold(
+        (failure) => state = ProfileState.error(failure.toString()),
+        (profile) => state = ProfileState.success(profile),
+      );
+    } catch (error) {
+      state = ProfileState.error(error.toString());
+    }
   }
 
   Future<void> refresh() async {
-    state = const AsyncLoading();
+    final currentData = state.data;
+    if (currentData != null) {
+      state = ProfileState.refreshing(currentData);
+    } else {
+      state = const ProfileState.loading();
+    }
+
     try {
-      final result = await fetchProfile();
-      state = AsyncData(result);
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+      await _fetchProfile();
+    } catch (error) {
+      state = ProfileState.error(error.toString());
     }
   }
 }
@@ -44,30 +58,54 @@ class ProfileNotifier extends _$ProfileNotifier {
 // Convenience providers
 @riverpod
 String userProfileBalance(Ref ref) {
-  final asyncValue = ref.watch(profileProvider);
-  return asyncValue.value?.balance ?? '--';
+  final state = ref.watch(profileProvider);
+  return state.userBalance;
 }
 
 @riverpod
 String profileRedeemedPoints(Ref ref) {
-  final asyncValue = ref.watch(profileProvider);
-  return asyncValue.value?.redeemedPoints ?? '0';
+  final state = ref.watch(profileProvider);
+  return state.redeemedPoints;
 }
 
 @riverpod
 String profileTotalPoints(Ref ref) {
-  final asyncValue = ref.watch(profileProvider);
-  return asyncValue.value?.totalPoints ?? '0';
+  final state = ref.watch(profileProvider);
+  return state.totalPoints;
 }
 
 @riverpod
 bool isProfileLoading(Ref ref) {
-  final asyncValue = ref.watch(profileProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(profileProvider);
+  return state.isLoading;
 }
 
 @riverpod
 String? profileErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(profileProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(profileProvider);
+  return state.errorMessage;
+}
+
+@riverpod
+bool hasProfileError(Ref ref) {
+  final state = ref.watch(profileProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasProfileData(Ref ref) {
+  final state = ref.watch(profileProvider);
+  return state.hasData;
+}
+
+@riverpod
+bool isProfileRefreshing(Ref ref) {
+  final state = ref.watch(profileProvider);
+  return state.isRefreshing;
+}
+
+@riverpod
+ProfileEntity? profileData(Ref ref) {
+  final state = ref.watch(profileProvider);
+  return state.data;
 }

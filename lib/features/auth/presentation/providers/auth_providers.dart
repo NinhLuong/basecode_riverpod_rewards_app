@@ -9,6 +9,7 @@ import 'package:magic_rewards/features/auth/domain/usecases/login_usecase.dart';
 import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dart';
 import 'package:magic_rewards/features/auth/domain/usecases/check_email_usecase.dart';
 import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
 
 part 'auth_providers.g.dart';
 
@@ -37,15 +38,15 @@ UserLocalDataSource userLocalDataSource(Ref ref) {
 @riverpod
 class LoginNotifier extends _$LoginNotifier {
   @override
-  FutureOr<UserEntity?> build() {
-    return null;
+  LoginState build() {
+    return const LoginState.initial();
   }
 
   Future<void> login({
     required String username,
     required String password,
   }) async {
-    state = const AsyncLoading();
+    state = const LoginState.loading();
 
     try {
       final loginUseCase = ref.read(loginUseCaseProvider);
@@ -57,16 +58,16 @@ class LoginNotifier extends _$LoginNotifier {
       final result = await loginUseCase.call(params: params);
 
       result.fold(
-        (failure) => throw failure,
-        (user) => state = AsyncData(user),
+        (failure) => state = LoginState.error(failure.toString()),
+        (user) => state = LoginState.success(user),
       );
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+    } catch (error) {
+      state = LoginState.error(error.toString());
     }
   }
 
-  void logout() {
-    state = const AsyncData(null);
+  void reset() {
+    state = const LoginState.initial();
   }
 }
 
@@ -74,8 +75,8 @@ class LoginNotifier extends _$LoginNotifier {
 @riverpod
 class RegisterNotifier extends _$RegisterNotifier {
   @override
-  FutureOr<UserEntity?> build() {
-    return null;
+  RegisterState build() {
+    return const RegisterState.initial();
   }
 
   Future<void> register({
@@ -85,7 +86,7 @@ class RegisterNotifier extends _$RegisterNotifier {
     required String userName,
     required String secondaryEmail,
   }) async {
-    state = const AsyncLoading();
+    state = const RegisterState.loading();
 
     try {
       final registerUseCase = ref.read(registerUseCaseProvider);
@@ -100,12 +101,16 @@ class RegisterNotifier extends _$RegisterNotifier {
       final result = await registerUseCase.call(params: params);
 
       result.fold(
-        (failure) => throw failure,
-        (user) => state = AsyncData(user),
+        (failure) => state = RegisterState.error(failure.toString()),
+        (user) => state = RegisterState.success(user),
       );
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+    } catch (error) {
+      state = RegisterState.error(error.toString());
     }
+  }
+
+  void reset() {
+    state = const RegisterState.initial();
   }
 }
 
@@ -113,12 +118,12 @@ class RegisterNotifier extends _$RegisterNotifier {
 @riverpod
 class EmailCheckNotifier extends _$EmailCheckNotifier {
   @override
-  FutureOr<CheckEmailEntity?> build() {
-    return null;
+  EmailCheckState build() {
+    return const EmailCheckState.initial();
   }
 
   Future<void> checkEmail(String email) async {
-    state = const AsyncLoading();
+    state = const EmailCheckState.loading();
 
     try {
       final checkEmailUseCase = ref.read(checkEmailUseCaseProvider);
@@ -127,12 +132,16 @@ class EmailCheckNotifier extends _$EmailCheckNotifier {
       final result = await checkEmailUseCase.call(params: params);
 
       result.fold(
-        (failure) => throw failure,
-        (emailResult) => state = AsyncData(emailResult),
+        (failure) => state = EmailCheckState.error(failure.toString()),
+        (emailResult) => state = EmailCheckState.success(emailResult),
       );
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
+    } catch (error) {
+      state = EmailCheckState.error(error.toString());
     }
+  }
+
+  void reset() {
+    state = const EmailCheckState.initial();
   }
 }
 
@@ -140,74 +149,131 @@ class EmailCheckNotifier extends _$EmailCheckNotifier {
 @riverpod
 class CurrentUserNotifier extends _$CurrentUserNotifier {
   @override
-  FutureOr<UserEntity?> build() async {
-    // Try to load user from local storage on app start
+  CurrentUserState build() {
+    // Auto-load user from local storage on app start
+    _loadUserFromStorage();
+    return const CurrentUserState.initial();
+  }
+
+  Future<void> _loadUserFromStorage() async {
+    state = const CurrentUserState.loading();
     try {
       final userLocalDataSource = ref.read(userLocalDataSourceProvider);
       final userData = await userLocalDataSource.getUserData();
-      return userData;
+      if (userData != null) {
+        state = CurrentUserState.authenticated(userData);
+      } else {
+        state = const CurrentUserState.unauthenticated();
+      }
     } catch (e) {
-      return null;
+      state = const CurrentUserState.unauthenticated();
     }
   }
 
   void setUser(UserEntity user) {
-    state = AsyncData(user);
+    state = CurrentUserState.authenticated(user);
   }
 
   void clearUser() {
-    state = const AsyncData(null);
+    state = const CurrentUserState.unauthenticated();
   }
 
   bool get isLoggedIn {
-    return state.value != null;
+    return state.isAuthenticated;
+  }
+
+  Future<void> refresh() async {
+    await _loadUserFromStorage();
   }
 }
 
 // Convenience providers
 @riverpod
 bool isLoginLoading(Ref ref) {
-  final asyncValue = ref.watch(loginProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(loginProvider);
+  return state.isLoading;
 }
 
 @riverpod
 bool isRegisterLoading(Ref ref) {
-  final asyncValue = ref.watch(registerProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(registerProvider);
+  return state.isLoading;
 }
 
 @riverpod
 bool isEmailCheckLoading(Ref ref) {
-  final asyncValue = ref.watch(emailCheckProvider);
-  return asyncValue.isLoading;
+  final state = ref.watch(emailCheckProvider);
+  return state.isLoading;
 }
 
 @riverpod
 String? loginErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(loginProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(loginProvider);
+  return state.errorMessage;
 }
 
 @riverpod
 String? registerErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(registerProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(registerProvider);
+  return state.errorMessage;
 }
 
 @riverpod
 String? emailCheckErrorMessage(Ref ref) {
-  final asyncValue = ref.watch(emailCheckProvider);
-  return asyncValue.hasError ? asyncValue.error.toString() : null;
+  final state = ref.watch(emailCheckProvider);
+  return state.errorMessage;
 }
 
 @riverpod
 bool isUserAuthenticated(Ref ref) {
-  final user = ref.watch(currentUserProvider).value;
-  return user != null;
+  final state = ref.watch(currentUserProvider);
+  return state.isAuthenticated;
 }
 
 @riverpod
 UserEntity? currentUserData(Ref ref) {
-  return ref.watch(currentUserProvider).value;
+  final state = ref.watch(currentUserProvider);
+  return state.user;
+}
+
+@riverpod
+UserEntity? loginUserData(Ref ref) {
+  final state = ref.watch(loginProvider);
+  return state.user;
+}
+
+@riverpod
+UserEntity? registerUserData(Ref ref) {
+  final state = ref.watch(registerProvider);
+  return state.user;
+}
+
+@riverpod
+CheckEmailEntity? emailCheckResult(Ref ref) {
+  final state = ref.watch(emailCheckProvider);
+  return state.result;
+}
+
+@riverpod
+bool hasLoginError(Ref ref) {
+  final state = ref.watch(loginProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasRegisterError(Ref ref) {
+  final state = ref.watch(registerProvider);
+  return state.isError;
+}
+
+@riverpod
+bool hasEmailCheckError(Ref ref) {
+  final state = ref.watch(emailCheckProvider);
+  return state.isError;
+}
+
+@riverpod
+bool isCurrentUserLoading(Ref ref) {
+  final state = ref.watch(currentUserProvider);
+  return state.isLoading;
 }
