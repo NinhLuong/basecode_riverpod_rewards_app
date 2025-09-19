@@ -13,9 +13,9 @@ import '../datasources/remote/auth_datasource.dart';
 import '../datasources/local/user_local_data_source.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: AuthRepository)
-class AuthRepositoryImp implements AuthRepository {
-  final AuthDataSource _authDataSource;
+@LazySingleton(as: IAuthRepository)
+class AuthRepositoryImp implements IAuthRepository {
+  final IAuthDataSource _authDataSource;
   final UserLocalDataSource _userLocalDataSource;
 
   AuthRepositoryImp(this._authDataSource, this._userLocalDataSource);

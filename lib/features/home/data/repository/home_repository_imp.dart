@@ -7,9 +7,9 @@ import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
 import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
 import 'package:magic_rewards/features/home/domain/repository/home_repository.dart';
 
-@LazySingleton(as: HomeRepository)
-class HomeRepositoryImp extends HomeRepository {
-  final HomeDataSource homeDataSource;
+@LazySingleton(as: IHomeRepository)
+class HomeRepositoryImp extends IHomeRepository {
+  final IHomeDataSource homeDataSource;
 
   HomeRepositoryImp(this.homeDataSource);
 

@@ -9,7 +9,7 @@ import 'package:magic_rewards/features/top_users/domain/repository/top_users_rep
 
 @LazySingleton(as: TopUsersRepository)
 class TopUsersRepositoryImp extends TopUsersRepository {
-  final TopUsersDataSource liveOffersDataSource;
+  final ITopUsersDataSource liveOffersDataSource;
 
   TopUsersRepositoryImp(this.liveOffersDataSource);
 

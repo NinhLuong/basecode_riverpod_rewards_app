@@ -11,11 +11,11 @@ import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dar
 import 'get_home_usecase_test.mocks.dart';
 import '../../../../../helpers/test_helper.dart';
 
-// Generate mocks for the HomeRepository
-@GenerateMocks([HomeRepository])
+// Generate mocks for the IHomeRepository
+@GenerateMocks([IHomeRepository])
 void main() {
   late GetHomeUseCase getHomeUseCase;
-  late MockHomeRepository mockHomeRepository;
+  late MockIHomeRepository mockHomeRepository;
 
   setUpAll(() async {
     // Initialize localization for tests
@@ -23,7 +23,7 @@ void main() {
   });
 
   setUp(() {
-    mockHomeRepository = MockHomeRepository();
+    mockHomeRepository = MockIHomeRepository();
     getHomeUseCase = GetHomeUseCase(mockHomeRepository);
   });
 

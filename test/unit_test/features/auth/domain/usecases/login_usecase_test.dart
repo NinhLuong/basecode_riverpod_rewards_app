@@ -11,11 +11,11 @@ import 'package:magic_rewards/features/auth/domain/usecases/login_usecase.dart';
 import 'login_usecase_test.mocks.dart';
 import '../../../../../helpers/test_helper.dart';
 
-// Generate mocks for the AuthRepository
-@GenerateMocks([AuthRepository])
+// Generate mocks for the IAuthRepository
+@GenerateMocks([IAuthRepository])
 void main() {
   late LoginUseCase loginUseCase;
-  late MockAuthRepository mockAuthRepository;
+  late MockIAuthRepository mockAuthRepository;
 
   setUpAll(() async {
     // Initialize localization for tests
@@ -23,7 +23,7 @@ void main() {
   });
 
   setUp(() {
-    mockAuthRepository = MockAuthRepository();
+    mockAuthRepository = MockIAuthRepository();
     loginUseCase = LoginUseCase(mockAuthRepository);
   });
 

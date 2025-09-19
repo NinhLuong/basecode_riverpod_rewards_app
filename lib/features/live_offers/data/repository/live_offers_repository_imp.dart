@@ -7,9 +7,9 @@ import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_en
 import 'package:magic_rewards/features/live_offers/domain/parameters/live_offers_parameters.dart';
 import 'package:magic_rewards/features/live_offers/domain/repository/live_offers_repository.dart';
 
-@LazySingleton(as: LiveOffersRepository)
-class LiveOffersRepositoryImp extends LiveOffersRepository {
-  final LiveOffersDataSource liveOffersDataSource;
+@LazySingleton(as: ILiveOffersRepository)
+class LiveOffersRepositoryImp extends ILiveOffersRepository {
+  final ILiveOffersDataSource liveOffersDataSource;
 
   LiveOffersRepositoryImp(this.liveOffersDataSource);
 

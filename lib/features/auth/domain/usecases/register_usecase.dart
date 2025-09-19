@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class RegisterUseCase extends UseCase<UserEntity, RegisterParameters> {
-  final AuthRepository _repository;
+  final IAuthRepository _repository;
 
   RegisterUseCase(this._repository);
 

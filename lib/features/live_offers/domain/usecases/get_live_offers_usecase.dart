@@ -8,7 +8,7 @@ import 'package:magic_rewards/features/live_offers/domain/repository/live_offers
 
 @lazySingleton
 class GetLiveOffersUseCase extends UseCase<LiveOffersEntity, GetLiveOffersParameters> {
-  final LiveOffersRepository liveOffersRepository;
+  final ILiveOffersRepository liveOffersRepository;
 
   GetLiveOffersUseCase(this.liveOffersRepository);
 

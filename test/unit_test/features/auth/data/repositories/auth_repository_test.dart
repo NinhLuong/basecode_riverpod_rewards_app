@@ -16,12 +16,12 @@ import '../../../../../helpers/test_helper.dart';
 
 // Generate mocks for dependencies
 @GenerateMocks([
-  AuthDataSource,
+  IAuthDataSource,
   UserLocalDataSource,
 ])
 void main() {
   late AuthRepositoryImp authRepository;
-  late MockAuthDataSource mockAuthDataSource;
+  late MockIAuthDataSource mockAuthDataSource;
   late MockUserLocalDataSource mockUserLocalDataSource;
 
   setUpAll(() async {
@@ -30,7 +30,7 @@ void main() {
   });
 
   setUp(() {
-    mockAuthDataSource = MockAuthDataSource();
+    mockAuthDataSource = MockIAuthDataSource();
     mockUserLocalDataSource = MockUserLocalDataSource();
     authRepository = AuthRepositoryImp(
       mockAuthDataSource,
@@ -38,7 +38,7 @@ void main() {
     );
   });
 
-  group('AuthRepository', () {
+  group('IAuthRepository', () {
     final testUserModel = UserModel(
       accessToken: 'test-access-token',
       accountId: 'test-account-id',

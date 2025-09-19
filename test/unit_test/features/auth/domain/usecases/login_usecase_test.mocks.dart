@@ -40,11 +40,11 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [AuthRepository].
+/// A class which mocks [IAuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
-  MockAuthRepository() {
+class MockIAuthRepository extends _i1.Mock implements _i3.IAuthRepository {
+  MockIAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
 

@@ -14,7 +14,7 @@ import 'package:magic_rewards/features/rewards/domain/repository/rewards_reposit
 
 @LazySingleton(as: RewardsRepository)
 class RewardsRepositoryImp extends RewardsRepository {
-  final RewardsDataSource rewardsDataSource;
+  final IRewardsDataSource rewardsDataSource;
 
   RewardsRepositoryImp(this.rewardsDataSource);
 

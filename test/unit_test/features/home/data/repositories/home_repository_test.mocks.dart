@@ -36,11 +36,11 @@ class _FakeHomeModel_0 extends _i1.SmartFake implements _i2.HomeModel {
       super.toString();
 }
 
-/// A class which mocks [HomeDataSource].
+/// A class which mocks [IHomeDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeDataSource extends _i1.Mock implements _i4.HomeDataSource {
-  MockHomeDataSource() {
+class MockIHomeDataSource extends _i1.Mock implements _i4.IHomeDataSource {
+  MockIHomeDataSource() {
     _i1.throwOnMissingStub(this);
   }
 

@@ -6,7 +6,7 @@ import 'package:magic_rewards/features/auth/domain/parameters/check_email_parame
 import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart';
 
-abstract class AuthRepository {
+abstract class IAuthRepository {
   Future<Either<Failure, UserEntity>> login(LoginParameters parameters);
 
   Future<Either<Failure, UserEntity>> register(RegisterParameters parameters);

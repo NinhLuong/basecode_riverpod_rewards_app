@@ -346,7 +346,7 @@ This layer answers: **What can the app do?** It is the core of your business log
 
 **Components:**
 - **Entities:** Pure Dart objects representing core business concepts (e.g., `User`)
-- **Repository Interfaces:** Abstract classes defining contracts for data access (e.g., `abstract class AuthRepository`)
+- **Repository Interfaces:** Abstract classes defining contracts for data access (e.g., `abstract class IAuthRepository`)
 - **Use Cases:** Provider-based classes encapsulating specific business actions (e.g., `loginUseCaseProvider`). In small/medium apps, UI providers may call repository methods directly instead of separate use cases
 - **Dependencies:** No dependencies on other layers or frameworks
 
@@ -415,7 +415,7 @@ This ensures a clean, maintainable architecture regardless of folder naming:
 ### Class Names
 - **StateNotifier classes**: PascalCase, suffix with `Notifier` (e.g., `LoginNotifier`, `UserProfileNotifier`)
 - **State classes**: PascalCase, suffix with `State` (e.g., `LoginState`, `UserProfileState`)
-- **Repository classes**: PascalCase, suffix with `Repository` (e.g., `AuthRepository`, `UserRepository`)
+- **Repository classes**: PascalCase, suffix with `Repository` (e.g., `IAuthRepository`, `UserRepository`)
 - **Use case classes**: PascalCase, suffix with `UseCase` (e.g., `LoginUseCase`, `GetUserUseCase`)
 
 ### Files
@@ -438,7 +438,7 @@ final loginNotifierProvider = StateNotifierProvider.autoDispose<LoginNotifier, L
   return LoginNotifier(ref.read(authRepositoryProvider));
 });
 
-final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
+final authRepositoryProvider = Provider.autoDispose<IAuthRepository>((ref) {
   return AuthRepositoryImpl(ref.read(restClientProvider));
 });
 
@@ -546,7 +546,7 @@ final configProvider = Provider<AppConfig>((ref) {
   return AppConfig();
 });
 
-final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
+final authRepositoryProvider = Provider.autoDispose<IAuthRepository>((ref) {
   return AuthRepositoryImpl(ref.read(restClientProvider));
 });
 ```
@@ -629,7 +629,7 @@ final searchQueryProvider = StateProvider.autoDispose<String>((ref) => '');
 
 ```dart
 // ✅ Good: Global services
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
+final authRepositoryProvider = Provider<IAuthRepository>((ref) {
   return AuthRepositoryImpl(ref.read(restClientProvider));
 });
 
@@ -661,7 +661,7 @@ final localStorageProvider = Provider<LocalStorage>((ref) {
 });
 
 // Repositories
-final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
+final authRepositoryProvider = Provider.autoDispose<IAuthRepository>((ref) {
   return AuthRepositoryImpl(
     restClient: ref.read(restClientProvider),
     localStorage: ref.read(localStorageProvider),
@@ -702,7 +702,7 @@ testWidgets('should work correctly', (tester) async {
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
-        authRepositoryProvider.overrideWith((ref) => MockAuthRepository()),
+        authRepositoryProvider.overrideWith((ref) => MockIAuthRepository()),
         userRepositoryProvider.overrideWith((ref) => MockUserRepository()),
       ],
       child: MyApp(),
@@ -767,7 +767,7 @@ final analyticsProvider = Provider<Analytics>((ref) {
 // feature/auth/providers/auth_providers.dart
 import 'package:shared/providers/shared_providers.dart';
 
-final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
+final authRepositoryProvider = Provider.autoDispose<IAuthRepository>((ref) {
   return AuthRepositoryImpl(
     restClient: ref.read(restClientProvider), // Shared dependency
     analytics: ref.read(analyticsProvider), // Shared dependency
@@ -1083,7 +1083,7 @@ final loginNotifierProvider = StateNotifierProvider.autoDispose<LoginNotifier, L
 });
 
 class LoginNotifier extends StateNotifier<LoginState> {
-  final AuthRepository _authRepository;
+  final IAuthRepository _authRepository;
 
   LoginNotifier(this._authRepository) : super(LoginState.initial());
 
@@ -1431,7 +1431,7 @@ final localStorageProvider = Provider<LocalStorage>((ref) {
 });
 
 // Repository providers
-final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
+final authRepositoryProvider = Provider.autoDispose<IAuthRepository>((ref) {
   return AuthRepositoryImpl(
     dio: ref.read(dioProvider),
     localStorage: ref.read(localStorageProvider),

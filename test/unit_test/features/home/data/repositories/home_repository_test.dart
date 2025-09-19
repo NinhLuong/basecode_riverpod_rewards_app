@@ -12,11 +12,11 @@ import '../../../../../helpers/test_helper.dart';
 
 // Generate mocks for dependencies
 @GenerateMocks([
-  HomeDataSource,
+  IHomeDataSource,
 ])
 void main() {
   late HomeRepositoryImp homeRepository;
-  late MockHomeDataSource mockHomeDataSource;
+  late MockIHomeDataSource mockHomeDataSource;
 
   setUpAll(() async {
     // Initialize localization for tests
@@ -24,11 +24,11 @@ void main() {
   });
 
   setUp(() {
-    mockHomeDataSource = MockHomeDataSource();
+    mockHomeDataSource = MockIHomeDataSource();
     homeRepository = HomeRepositoryImp(mockHomeDataSource);
   });
 
-  group('HomeRepository', () {
+  group('IHomeRepository', () {
     final testOfferWallModel = OfferWallModel(
       id: 'offer-1',
       title: 'Test Offer',

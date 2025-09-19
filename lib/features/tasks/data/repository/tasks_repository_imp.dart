@@ -14,7 +14,7 @@ import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.
 
 @LazySingleton(as: TasksRepository)
 class TasksRepositoryImp extends TasksRepository {
-  final TasksDataSource tasksDataSource;
+  final ITasksDataSource tasksDataSource;
 
   TasksRepositoryImp(this.tasksDataSource);
 

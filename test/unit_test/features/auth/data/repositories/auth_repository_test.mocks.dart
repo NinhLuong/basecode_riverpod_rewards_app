@@ -56,11 +56,11 @@ class _FakeCheckEmailModel_1 extends _i1.SmartFake
       super.toString();
 }
 
-/// A class which mocks [AuthDataSource].
+/// A class which mocks [IAuthDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthDataSource extends _i1.Mock implements _i5.AuthDataSource {
-  MockAuthDataSource() {
+class MockIAuthDataSource extends _i1.Mock implements _i5.IAuthDataSource {
+  MockIAuthDataSource() {
     _i1.throwOnMissingStub(this);
   }
 

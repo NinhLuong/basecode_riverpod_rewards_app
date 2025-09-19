@@ -19,22 +19,17 @@ import '../../features/auth/data/datasources/local/user_local_data_source.dart'
     as _i931;
 import '../../features/auth/data/datasources/remote/auth_datasource.dart'
     as _i195;
-import '../../features/auth/data/datasources/remote/auth_datasource_imp.dart'
-    as _i918;
 import '../../features/auth/data/repository/auth_repository_imp.dart' as _i794;
 import '../../features/auth/domain/repository/auth_repository.dart' as _i961;
 import '../../features/auth/domain/usecases/check_email_usecase.dart' as _i879;
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
 import '../../features/auth/domain/usecases/register_usecase.dart' as _i941;
 import '../../features/home/data/datasources/home_datasource.dart' as _i1055;
-import '../../features/home/data/datasources/home_datasource_imp.dart' as _i142;
 import '../../features/home/data/repository/home_repository_imp.dart' as _i342;
 import '../../features/home/domain/repository/home_repository.dart' as _i541;
 import '../../features/home/domain/usecases/get_home_usecase.dart' as _i836;
 import '../../features/live_offers/data/datasources/live_offers_datasource.dart'
     as _i476;
-import '../../features/live_offers/data/datasources/live_offers_datasource_imp.dart'
-    as _i107;
 import '../../features/live_offers/data/repository/live_offers_repository_imp.dart'
     as _i100;
 import '../../features/live_offers/domain/repository/live_offers_repository.dart'
@@ -55,8 +50,6 @@ import '../../features/profile/domain/usecases/get_profile_usecase.dart'
     as _i965;
 import '../../features/rewards/data/datasources/rewards_datasource.dart'
     as _i427;
-import '../../features/rewards/data/datasources/rewards_datasource_imp.dart'
-    as _i222;
 import '../../features/rewards/data/repository/rewards_repository_imp.dart'
     as _i544;
 import '../../features/rewards/domain/repository/rewards_repository.dart'
@@ -68,8 +61,6 @@ import '../../features/rewards/domain/usecases/get_transactions_usecase.dart'
     as _i380;
 import '../../features/rewards/domain/usecases/redeem_usecase.dart' as _i33;
 import '../../features/tasks/data/datasources/tasks_datasource.dart' as _i595;
-import '../../features/tasks/data/datasources/tasks_datasource_imp.dart'
-    as _i86;
 import '../../features/tasks/data/repository/tasks_repository_imp.dart'
     as _i436;
 import '../../features/tasks/domain/repository/tasks_repository.dart' as _i429;
@@ -82,8 +73,6 @@ import '../../features/tasks/domain/usecases/reserve_comment_usecase.dart'
     as _i568;
 import '../../features/top_users/data/datasources/top_users_datasource.dart'
     as _i989;
-import '../../features/top_users/data/datasources/top_users_datasource_imp.dart'
-    as _i729;
 import '../../features/top_users/data/repository/top_users_repository_imp.dart'
     as _i694;
 import '../../features/top_users/domain/repository/top_users_repository.dart'
@@ -102,53 +91,56 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i505.CacheStorageServices.new(),
     );
     gh.lazySingleton<_i294.ApiServices>(() => _i294.ApiServices());
-    gh.lazySingleton<_i427.RewardsDataSource>(
-      () => _i222.RewardsRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    gh.lazySingleton<_i595.ITasksDataSource>(
+      () => _i595.TasksRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
-    gh.lazySingleton<_i195.AuthDataSource>(
-      () => _i918.AuthRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    gh.lazySingleton<_i989.ITopUsersDataSource>(
+      () => _i989.TopUsersRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i476.ILiveOffersDataSource>(
+      () => _i476.LiveOffersRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i928.ILiveOffersRepository>(
+      () => _i100.LiveOffersRepositoryImp(gh<_i476.ILiveOffersDataSource>()),
+    );
+    gh.lazySingleton<_i427.IRewardsDataSource>(
+      () => _i427.RewardsRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
     gh.lazySingleton<_i553.ProfileDataSource>(
       () => _i35.ProfileRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
-    gh.lazySingleton<_i476.LiveOffersDataSource>(
-      () => _i107.LiveOffersRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    gh.lazySingleton<_i195.IAuthDataSource>(
+      () => _i195.AuthRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
-    gh.lazySingleton<_i595.TasksDataSource>(
-      () => _i86.TasksRemoteDataSourceImp(gh<_i294.ApiServices>()),
-    );
-    gh.lazySingleton<_i1055.HomeDataSource>(
-      () => _i142.HomeRemoteDataSourceImp(gh<_i294.ApiServices>()),
-    );
-    gh.lazySingleton<_i989.TopUsersDataSource>(
-      () => _i729.TopUsersRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    gh.lazySingleton<_i1055.IHomeDataSource>(
+      () => _i1055.HomeRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
     gh.lazySingleton<_i931.UserLocalDataSource>(
       () => _i931.UserLocalDataSourceImpl(gh<_i505.CacheStorageServices>()),
     );
-    gh.lazySingleton<_i928.LiveOffersRepository>(
-      () => _i100.LiveOffersRepositoryImp(gh<_i476.LiveOffersDataSource>()),
+    gh.lazySingleton<_i656.TopUsersRepository>(
+      () => _i694.TopUsersRepositoryImp(gh<_i989.ITopUsersDataSource>()),
+    );
+    gh.lazySingleton<_i435.GetTopUsersUseCase>(
+      () => _i435.GetTopUsersUseCase(gh<_i656.TopUsersRepository>()),
     );
     gh.lazySingleton<_i133.GetLiveOffersUseCase>(
-      () => _i133.GetLiveOffersUseCase(gh<_i928.LiveOffersRepository>()),
+      () => _i133.GetLiveOffersUseCase(gh<_i928.ILiveOffersRepository>()),
     );
-    gh.lazySingleton<_i541.HomeRepository>(
-      () => _i342.HomeRepositoryImp(gh<_i1055.HomeDataSource>()),
+    gh.lazySingleton<_i541.IHomeRepository>(
+      () => _i342.HomeRepositoryImp(gh<_i1055.IHomeDataSource>()),
     );
     gh.lazySingleton<_i843.RewardsRepository>(
-      () => _i544.RewardsRepositoryImp(gh<_i427.RewardsDataSource>()),
+      () => _i544.RewardsRepositoryImp(gh<_i427.IRewardsDataSource>()),
     );
     gh.lazySingleton<_i429.TasksRepository>(
-      () => _i436.TasksRepositoryImp(gh<_i595.TasksDataSource>()),
+      () => _i436.TasksRepositoryImp(gh<_i595.ITasksDataSource>()),
     );
-    gh.lazySingleton<_i961.AuthRepository>(
+    gh.lazySingleton<_i961.IAuthRepository>(
       () => _i794.AuthRepositoryImp(
-        gh<_i195.AuthDataSource>(),
+        gh<_i195.IAuthDataSource>(),
         gh<_i931.UserLocalDataSource>(),
       ),
-    );
-    gh.lazySingleton<_i836.GetHomeUseCase>(
-      () => _i836.GetHomeUseCase(gh<_i541.HomeRepository>()),
     );
     gh.lazySingleton<_i33.RedeemUseCase>(
       () => _i33.RedeemUseCase(gh<_i843.RewardsRepository>()),
@@ -171,12 +163,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1056.DeleteAccountUseCase>(
       () => _i1056.DeleteAccountUseCase(gh<_i364.ProfileRepository>()),
     );
-    gh.lazySingleton<_i941.RegisterUseCase>(
-      () => _i941.RegisterUseCase(gh<_i961.AuthRepository>()),
-    );
-    gh.lazySingleton<_i188.LoginUseCase>(
-      () => _i188.LoginUseCase(gh<_i961.AuthRepository>()),
-    );
     gh.lazySingleton<_i993.AddTaskOrderUseCase>(
       () => _i993.AddTaskOrderUseCase(gh<_i429.TasksRepository>()),
     );
@@ -189,14 +175,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i868.GetTasksOrdersUseCase>(
       () => _i868.GetTasksOrdersUseCase(gh<_i429.TasksRepository>()),
     );
-    gh.lazySingleton<_i656.TopUsersRepository>(
-      () => _i694.TopUsersRepositoryImp(gh<_i989.TopUsersDataSource>()),
+    gh.lazySingleton<_i836.GetHomeUseCase>(
+      () => _i836.GetHomeUseCase(gh<_i541.IHomeRepository>()),
+    );
+    gh.lazySingleton<_i941.RegisterUseCase>(
+      () => _i941.RegisterUseCase(gh<_i961.IAuthRepository>()),
+    );
+    gh.lazySingleton<_i188.LoginUseCase>(
+      () => _i188.LoginUseCase(gh<_i961.IAuthRepository>()),
     );
     gh.lazySingleton<_i879.CheckEmailUseCase>(
-      () => _i879.CheckEmailUseCase(gh<_i961.AuthRepository>()),
-    );
-    gh.lazySingleton<_i435.GetTopUsersUseCase>(
-      () => _i435.GetTopUsersUseCase(gh<_i656.TopUsersRepository>()),
+      () => _i879.CheckEmailUseCase(gh<_i961.IAuthRepository>()),
     );
     return this;
   }

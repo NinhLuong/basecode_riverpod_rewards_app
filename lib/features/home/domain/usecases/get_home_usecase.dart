@@ -8,7 +8,7 @@ import 'package:magic_rewards/features/home/domain/repository/home_repository.da
 
 @lazySingleton
 class GetHomeUseCase extends UseCase<HomeEntity, HomeParameters> {
-  final HomeRepository homeRepository;
+  final IHomeRepository homeRepository;
 
   GetHomeUseCase(this.homeRepository);
 

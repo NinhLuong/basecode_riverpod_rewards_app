@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class CheckEmailUseCase extends UseCase<CheckEmailEntity, CheckEmailParameters> {
-  final AuthRepository authRepository;
+  final IAuthRepository authRepository;
 
   CheckEmailUseCase(this.authRepository);
 
