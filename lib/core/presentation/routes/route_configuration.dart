@@ -37,9 +37,13 @@ class RouteConfiguration {
       initialLocation: AppRoutePaths.splash,
       observers: [ref.read(localizationRouterObserverProvider)],
       refreshListenable: RouterRefreshListenable(ref),
-      redirect: (context, state) => NavigationGuards.handleRedirect(context, state, ref),
+      redirect: (context, state) =>
+          NavigationGuards.handleRedirect(context, state, ref),
       routes: _buildRoutes(),
-      errorBuilder: (context, state) => _buildErrorScreen(state),
+      errorBuilder: (context, state) => RouteErrorScreen(
+        error: state.error,
+        routeLocation: state.uri.toString(),
+      ),
       debugLogDiagnostics: true, // Enable in debug mode
     );
     
@@ -168,19 +172,6 @@ class RouteConfiguration {
         builder: (context, state) => const TopUsersScreen(),
       ),
     ];
-  }
-
-  /// Builds error screen for invalid routes
-  static Widget _buildErrorScreen(GoRouterState state) {
-    LoggerService.error(
-      'Route error: ${state.error}',
-      state.error,
-      StackTrace.current,
-    );
-    return RouteErrorScreen(
-      error: state.error,
-      routeLocation: state.uri.toString(),
-    );
   }
 }
 
