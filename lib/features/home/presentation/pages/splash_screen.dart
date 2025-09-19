@@ -1,20 +1,101 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magic_rewards/features/home/presentation/providers/splash_providers.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 import 'package:magic_rewards/shared/constants/app_duration.dart';
 import 'package:magic_rewards/shared/widgets/components/app_logo.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
+import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends ConsumerState<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Delay provider modifications until after widget tree is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeSplash();
+    });
+  }
+
+  Future<void> _initializeSplash() async {
+    if (!mounted) return;
+    
+    LoggerService.app('🚀 Splash screen initializing...');
+    
+    try {
+      // Mark splash as started (now safe to modify provider)
+      ref.read(splashDisplayTimeProvider.notifier).startSplash();
+      
+      // Wait for minimum display time
+      await Future.delayed(AppDuration.splashDuration);
+      
+      if (!mounted) return;
+      
+      // Force load user data if needed
+      await ref.read(currentUserProvider.notifier).forceLoadUserFromStorage();
+      
+      if (!mounted) return;
+      
+      // Mark splash as complete
+      ref.read(splashDisplayTimeProvider.notifier).completeSplash();
+      
+      if (mounted) {
+        await _navigateBasedOnAuthState();
+      }
+    } catch (error, stackTrace) {
+      LoggerService.error(
+        'Splash initialization failed: $error',
+        error,
+        stackTrace,
+      );
+      
+      // Fallback navigation on error
+      if (mounted) {
+        context.goToLogin();
+      }
+    }
+  }
+
+  Future<void> _navigateBasedOnAuthState() async {
+    final userState = ref.read(currentUserProvider);
+    
+    LoggerService.app(
+      '🔄 Splash navigation decision:\n'
+      '   Auth State: ${userState.runtimeType}\n'
+      '   Is Authenticated: ${userState.isAuthenticated}'
+    );
+    
+    if (userState.isAuthenticated) {
+      context.goToMain();
+    } else {
+      context.goToLogin();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Future.delayed(AppDuration.splashDuration)
-        .then((value) => context.go(MainRoute.name));
+    // Listen for auth state changes to handle navigation
+    ref.listen(currentUserProvider, (previous, next) {
+      // Only navigate if splash is complete and state is not loading
+      final splashState = ref.read(splashDisplayTimeProvider);
+      if (splashState.isComplete && !next.isLoading && mounted) {
+        // Use Future.microtask to avoid potential build conflicts
+        Future.microtask(() => _navigateBasedOnAuthState());
+      }
+    });
+
     return AppScaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,6 +105,8 @@ class SplashScreen extends StatelessWidget {
           Text(AppConstants.applicationName.toUpperCase(),
               style: context.f20700),
           Text(AppConstants.applicationVersion, style: context.f16600),
+          SizedBox(height: 20.w),
+          const CircularProgressIndicator(),
         ],
       ),
     );

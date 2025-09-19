@@ -42,7 +42,7 @@ class RedeemSection extends ConsumerWidget {
                   const SizedBox(height: 10),
                   ...payoutsEntity.payouts
                       .map((e) => PayoutCard(payout: e))
-                      .toList(),
+                      ,
                   const SizedBox(height: 100),
                 ],
         ),
@@ -67,7 +67,7 @@ class RedeemSection extends ConsumerWidget {
               const SizedBox(height: 10),
               ...currentData.payouts
                   .map((e) => PayoutCard(payout: e))
-                  .toList(),
+                  ,
             ],
             const Padding(
               padding: EdgeInsets.all(16.0),

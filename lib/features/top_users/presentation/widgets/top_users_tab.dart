@@ -16,7 +16,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class TopUsersTap extends ConsumerStatefulWidget {
   final bool halfMonth;
 
-  TopUsersTap({super.key, this.halfMonth = false});
+  const TopUsersTap({super.key, this.halfMonth = false});
 
   @override
   ConsumerState<TopUsersTap> createState() => _TopUsersTapState();

@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
     BottomNavigationBarItem(
         icon: SvgPicture.asset(ImagesPaths.navbarIcons[0]),
         activeIcon: SvgPicture.asset(ImagesPaths.navbarIcons[0],
-            color: AppColors.primary),
+            ),
         label: S.current.home,
         backgroundColor: Colors.transparent
         // backgroundColor: AppColors.lightBlack.withOpacity(0.75)
@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
     BottomNavigationBarItem(
         icon: SvgPicture.asset(ImagesPaths.navbarIcons[1]),
         activeIcon: SvgPicture.asset(ImagesPaths.navbarIcons[1],
-            color: AppColors.primary),
+            ),
         label: S.current.topUsers,
         backgroundColor: Colors.transparent
         // backgroundColor: AppColors.lightBlack.withOpacity(0.5)
@@ -48,13 +48,13 @@ class _MainScreenState extends State<MainScreen> {
     BottomNavigationBarItem(
         icon: SvgPicture.asset(ImagesPaths.navbarIcons[2]),
         activeIcon: SvgPicture.asset(ImagesPaths.navbarIcons[2],
-            color: AppColors.primary),
+            ),
         label: S.current.tasks,
         backgroundColor: Colors.transparent),
     BottomNavigationBarItem(
         icon: SvgPicture.asset(ImagesPaths.navbarIcons[3]),
         activeIcon: SvgPicture.asset(ImagesPaths.navbarIcons[3],
-            color: AppColors.primary),
+            ),
         label: S.current.redeem,
         backgroundColor: Colors.transparent),
     BottomNavigationBarItem(

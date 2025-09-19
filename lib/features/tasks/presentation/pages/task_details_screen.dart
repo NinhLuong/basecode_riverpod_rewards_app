@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
@@ -12,7 +11,7 @@ import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/providers/tasks_providers.dart';
 import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
-import 'package:magic_rewards/features/tasks/presentation/routes/do_task_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 
 class TaskDetailsScreen extends ConsumerWidget {
   final TaskEntity task;
@@ -25,10 +24,11 @@ class TaskDetailsScreen extends ConsumerWidget {
     ref.listen(reserveCommentProvider, (previous, next) {
       next.whenOrNull(
         success: (reserveComment) {
-          context.push(DoTaskRoute.name, extra: {
-            'comment': reserveComment.commentEntity,
-            'taskUrl': task.url
-          });
+          // Use type-safe navigation with proper parameter validation
+          context.goToDoTask(
+            comment: reserveComment.commentEntity,
+            taskUrl: task.url
+          );
         },
         error: (errorMessage) {
           showToast(message: errorMessage);

@@ -14,6 +14,7 @@
 /// 5. **Structured Logging**: Easy-to-read, filterable log format
 /// 
 /// ## Usage Examples:
+library;
 
 import 'dart:developer' as developer;
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
@@ -95,7 +96,7 @@ class ErrorHandlingExample {
       );
       
       // Convert to appropriate failure type
-      throw e; // Let ErrorsHandler.handleEither handle the conversion
+      rethrow; // Let ErrorsHandler.handleEither handle the conversion
     }
   }
   
