@@ -33,6 +33,26 @@ abstract class HomeModel extends BaseModel<HomeEntity> with _$HomeModel {
   }
 }
 
+extension HomeModelExtension on HomeModel {
+  HomeModel fromEntity(HomeEntity entity) {
+    return HomeModel(
+      balance: entity.balance,
+      offerWalls: entity.offerWalls
+          .map((e) => OfferWallModel(
+                id: e.id,
+                title: e.title,
+                subtitle: e.subtitle,
+                url: e.url,
+                type: e.type,
+                thumbnail: e.thumbnail,
+                position: e.position,
+                status: e.status,
+              ))
+          .toList(),
+    );
+  }
+}
+
 @freezed
 abstract class OfferWallModel extends BaseModel<OfferWallEntity> with _$OfferWallModel {
   const OfferWallModel._();
