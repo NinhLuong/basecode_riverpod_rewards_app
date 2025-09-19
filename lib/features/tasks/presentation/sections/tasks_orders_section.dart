@@ -59,7 +59,7 @@ class _TasksOrdersSectionState extends ConsumerState<TasksOrdersSection> {
                     const SizedBox(height: 10),
                     ...tasksOrdersEntity.orders
                         .map((e) => TaskOrderCard(order: e))
-                        .toList(),
+                        ,
                     const SizedBox(height: 100),
                   ],
           ),
@@ -79,7 +79,7 @@ class _TasksOrdersSectionState extends ConsumerState<TasksOrdersSection> {
             else
               ...currentData.orders
                   .map((e) => TaskOrderCard(order: e))
-                  .toList(),
+                  ,
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Center(child: CircularProgressIndicator()),

@@ -36,7 +36,7 @@ class TransactionsScreen extends ConsumerWidget {
                     const SizedBox(height: 10),
                     ...transactions.orders
                         .map((e) => TransactionCard(transaction: e))
-                        .toList(),
+                        ,
                     const SizedBox(height: 100),
                   ],
           ),
@@ -53,7 +53,7 @@ class TransactionsScreen extends ConsumerWidget {
               else
                 ...currentData.orders
                     .map((e) => TransactionCard(transaction: e))
-                    .toList(),
+                    ,
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Center(child: CircularProgressIndicator()),

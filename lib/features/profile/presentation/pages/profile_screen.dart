@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_avatar.dart';
@@ -12,14 +11,11 @@ import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_exte
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/core/presentation/providers/app_config_providers.dart';
 import 'package:magic_rewards/features/profile/presentation/providers/profile_providers.dart';
 import 'package:magic_rewards/features/profile/presentation/state/profile_state.dart';
 import 'package:magic_rewards/features/profile/presentation/widgets/profile_tile.dart';
-import 'package:magic_rewards/features/profile/presentation/routes/contact_us_route.dart';
-import 'package:magic_rewards/features/profile/presentation/routes/terms_route.dart';
-import 'package:magic_rewards/features/rewards/presentation/routes/transactions_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../shared/widgets/components/custom_appbar.dart';
@@ -203,19 +199,19 @@ class ProfileScreen extends ConsumerWidget {
             icon: ImagesPaths.historySvg,
             title: S.of(context).history,
             onTap: () {
-              context.push(TransactionsRoute.name);
+              context.goToTransactions();
             }),
         ProfileTile(
             icon: ImagesPaths.termsSvg,
             title: S.of(context).privacyPolicy,
             onTap: () {
-              context.push(TermsRoute.name);
+              context.goToTerms();
             }),
         ProfileTile(
             icon: ImagesPaths.contactUsSvg,
             title: S.of(context).contactUs,
             onTap: () {
-              context.push(ContactUsRoute.name);
+              context.goToContactUs();
             }),
         ProfileTile(
             icon: ImagesPaths.signOutSvg,
@@ -226,7 +222,9 @@ class ProfileScreen extends ConsumerWidget {
                       confirmText: S.of(context).signOut);
               if (confirmed && context.mounted) {
                 await ref.read(appConfigProvider.notifier).logOut();
-                context.go(LoginRoute.name);
+                if (context.mounted) {
+                  context.goToLogin();
+                }
               }
             }),
         ProfileTile(
@@ -240,7 +238,9 @@ class ProfileScreen extends ConsumerWidget {
                 // Note: Delete account functionality would need a separate provider
                 // For now, just log out
                 await ref.read(appConfigProvider.notifier).logOut();
-                context.go(LoginRoute.name);
+                if (context.mounted) {
+                  context.goToLogin();
+                }
               }
             },
             red: true),

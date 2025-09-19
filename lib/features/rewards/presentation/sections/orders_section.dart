@@ -35,7 +35,7 @@ class OrdersSection extends ConsumerWidget {
                   const SizedBox(height: 10),
                   ...ordersEntity.orders
                       .map((e) => OrderCard(order: e))
-                      .toList(),
+                      ,
                   const SizedBox(height: 100),
                 ],
         ),
@@ -54,7 +54,7 @@ class OrdersSection extends ConsumerWidget {
             else
               ...currentData.orders
                   .map((e) => OrderCard(order: e))
-                  .toList(),
+                  ,
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Center(child: CircularProgressIndicator()),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/app_logo.dart';
@@ -14,8 +13,7 @@ import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
 import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
-import 'package:magic_rewards/features/auth/presentation/routes/register_route.dart';
-import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 
 class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({super.key});
@@ -47,7 +45,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
           // Set the current user and navigate
           ref.read(currentUserProvider.notifier).setUser(user);
           showToast(message: S.of(context).loggedInSuccessfully);
-          context.go(MainRoute.name);
+          context.goToMain();
         },
         error: (errorMessage) {
           showToast(message: errorMessage);
@@ -115,7 +113,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
               text: S.of(context).dontHaveAnAccount,
               buttonText: S.of(context).signUp,
               onTap: () {
-                context.go(RegisterRoute.name);
+                context.goToRegister();
               }),
         ],
       ),

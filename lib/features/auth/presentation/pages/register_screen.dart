@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/config/styles/app_gradient.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
@@ -16,8 +15,7 @@ import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
 import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
-import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
-import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -68,7 +66,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         success: (user) {
           ref.read(currentUserProvider.notifier).setUser(user);
           showToast(message: S.of(context).signedUpScuccessfully);
-          context.go(MainRoute.name);
+          context.goToMain();
         },
         error: (errorMessage) {
           showToast(message: errorMessage);
@@ -210,7 +208,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             text: S.of(context).alreadyHaveAnAccount,
             buttonText: S.of(context).signIn,
             onTap: () {
-              context.go(LoginRoute.name);
+              context.goToLogin();
             },
           ),
         ],

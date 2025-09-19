@@ -150,9 +150,15 @@ class EmailCheckNotifier extends _$EmailCheckNotifier {
 class CurrentUserNotifier extends _$CurrentUserNotifier {
   @override
   CurrentUserState build() {
-    // Auto-load user from local storage on app start
-    _loadUserFromStorage();
+    // Delay initial load to allow splash screen to display
+    _delayedLoadUserFromStorage();
     return const CurrentUserState.initial();
+  }
+
+  Future<void> _delayedLoadUserFromStorage() async {
+    // Wait a bit to ensure splash screen shows first
+    await Future.delayed(const Duration(milliseconds: 500));
+    await _loadUserFromStorage();
   }
 
   Future<void> _loadUserFromStorage() async {
@@ -168,6 +174,11 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     } catch (e) {
       state = const CurrentUserState.unauthenticated();
     }
+  }
+
+  /// Force immediate load (used when splash completes)
+  Future<void> forceLoadUserFromStorage() async {
+    await _loadUserFromStorage();
   }
 
   void setUser(UserEntity user) {

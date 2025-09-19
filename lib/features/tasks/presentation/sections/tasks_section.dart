@@ -44,7 +44,7 @@ class TasksSection extends ConsumerWidget {
                   const SizedBox(height: 10),
                   ...tasksEntity.tasks
                       .map((e) => TaskCard(task: e))
-                      .toList(),
+                      ,
                   const SizedBox(height: 100),
                 ],
         ),
@@ -63,7 +63,7 @@ class TasksSection extends ConsumerWidget {
             else
               ...currentData.tasks
                   .map((e) => TaskCard(task: e))
-                  .toList(),
+                  ,
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Center(child: CircularProgressIndicator()),
