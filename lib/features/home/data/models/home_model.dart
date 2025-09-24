@@ -28,7 +28,7 @@ abstract class HomeModel extends BaseModel<HomeEntity> with _$HomeModel {
   @override
   HomeEntity toEntity() {
     return HomeEntity(
-        offerWalls: (offerWalls?.map((e) => e.toEntity()).toList() ?? []),
+        offerWalls: offerWalls?.map<OfferWallEntity>((e) => e.toEntity()).toList() ?? <OfferWallEntity>[],
         balance: balance ?? '0');
   }
 }

@@ -64,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.transparent),
   ];
 
-  final List screens = [
+  final List<Widget> screens = [
     HomeScreen(),
     const TopUsersScreen(),
     const TasksScreen(),

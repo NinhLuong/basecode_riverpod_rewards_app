@@ -148,7 +148,7 @@ class HomeScreen extends ConsumerWidget {
                           childAspectRatio: 9 / 10,
                           physics: const NeverScrollableScrollPhysics(),
                           children: homeWithUser.offerWalls
-                                  .map((e) => OfferWallCard(
+                                  .map<Widget>((e) => OfferWallCard(
                                         offerWall: e,
                                         index: homeWithUser.offerWalls
                                             .indexOf(e),

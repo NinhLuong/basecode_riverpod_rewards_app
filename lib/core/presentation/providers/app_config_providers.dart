@@ -4,6 +4,7 @@ import 'package:magic_rewards/config/enums/app_languages.dart';
 import 'package:magic_rewards/config/enums/app_state.dart';
 import 'package:magic_rewards/config/languages/app_local.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
 
 part 'app_config_providers.g.dart';
 part 'app_config_providers.freezed.dart';
@@ -16,8 +17,8 @@ abstract class AppConfigState with _$AppConfigState {
   }) = _AppConfigState;
 }
 
-// App config state notifier
-@riverpod
+// App config state notifier - NOT auto-dispose since it manages global app state
+@Riverpod(keepAlive: true)
 class AppConfigNotifier extends _$AppConfigNotifier {
   @override
   AppConfigState build() {
@@ -43,28 +44,54 @@ class AppConfigNotifier extends _$AppConfigNotifier {
   }
 
   Future<void> logOut() async {
-    await CacheStorageServices().clearAll();
-    state = AppConfigState(
-      language: AppLocale().currentLanguage(),
-      appState: AppState.loggedOut,
-    );
+    try {
+      await CacheStorageServices().clearAll();
+      
+      // Check if the provider is still mounted after async operation
+      if (!ref.mounted) return;
+ 
+      ref.read(currentUserProvider.notifier).clearUser();
+      
+      state = AppConfigState(
+        language: AppLocale().currentLanguage(),
+        appState: AppState.loggedOut,
+      );
+    } catch (error) {
+      // Log error but don't throw to avoid breaking the logout flow
+      print('Error during logout: $error');
+      
+      // Still try to update state if mounted and clear auth state
+      if (ref.mounted) {
+        // Ensure auth state is cleared even on error
+        try {
+          ref.read(currentUserProvider.notifier).clearUser();
+        } catch (authError) {
+          print('Error clearing auth state: $authError');
+        }
+        
+        state = AppConfigState(
+          language: AppLocale().currentLanguage(),
+          appState: AppState.loggedOut,
+        );
+      }
+    }
   }
 }
 
-// Convenience providers
-@riverpod
+// Convenience providers - NOT auto-dispose since they manage global app state
+@Riverpod(keepAlive: true)
 AppLanguages currentLanguage(Ref ref) {
   final configState = ref.watch(appConfigProvider);
   return configState.language;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 AppState currentAppState(Ref ref) {
   final configState = ref.watch(appConfigProvider);
   return configState.appState;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 bool isUserLoggedIn(Ref ref) {
   final appState = ref.watch(currentAppStateProvider);
   return appState == AppState.loggedIn;

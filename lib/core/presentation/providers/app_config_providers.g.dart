@@ -20,7 +20,7 @@ final class AppConfigNotifierProvider
         argument: null,
         retry: null,
         name: r'appConfigProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class AppConfigNotifierProvider
   }
 }
 
-String _$appConfigNotifierHash() => r'366d148c7d5e5297c892c0a6ae648da5d8dd3190';
+String _$appConfigNotifierHash() => r'50604165565b9e9c5faf2513362e78e1b23a1cc0';
 
 abstract class _$AppConfigNotifier extends $Notifier<AppConfigState> {
   AppConfigState build();
@@ -74,7 +74,7 @@ final class CurrentLanguageProvider
         argument: null,
         retry: null,
         name: r'currentLanguageProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -101,7 +101,7 @@ final class CurrentLanguageProvider
   }
 }
 
-String _$currentLanguageHash() => r'bf2d882d3f50f01ea6d250483cb85a8035c47d39';
+String _$currentLanguageHash() => r'990259312568c728c3f6e105ec518f0019806d29';
 
 @ProviderFor(currentAppState)
 const currentAppStateProvider = CurrentAppStateProvider._();
@@ -115,7 +115,7 @@ final class CurrentAppStateProvider
         argument: null,
         retry: null,
         name: r'currentAppStateProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -142,7 +142,7 @@ final class CurrentAppStateProvider
   }
 }
 
-String _$currentAppStateHash() => r'd057baa2c4dd2dc1fb2ea30c3ff27a907f326395';
+String _$currentAppStateHash() => r'329b0d88dc7363ccdccce2ba7185c66077351e21';
 
 @ProviderFor(isUserLoggedIn)
 const isUserLoggedInProvider = IsUserLoggedInProvider._();
@@ -155,7 +155,7 @@ final class IsUserLoggedInProvider extends $FunctionalProvider<bool, bool, bool>
         argument: null,
         retry: null,
         name: r'isUserLoggedInProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -182,4 +182,4 @@ final class IsUserLoggedInProvider extends $FunctionalProvider<bool, bool, bool>
   }
 }
 
-String _$isUserLoggedInHash() => r'56aad8acbeca49c90a3806b6e68959005639c5b1';
+String _$isUserLoggedInHash() => r'7e5123b99ced52849bd7985e3b2f9cb10469c62b';

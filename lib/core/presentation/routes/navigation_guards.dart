@@ -55,15 +55,6 @@ class NavigationGuards {
     final isAuthRoute = AppRoutePaths.isAuthRoute(currentPath);
     final isProtectedRoute = AppRoutePaths.isProtectedRoute(currentPath);
 
-    LoggerService.app(
-      '🔍 Authentication Redirect Analysis:\n'
-      '📍 Current Path: $currentPath\n'
-      '🔐 Is Authenticated: $isAuthenticated\n'
-      '🛂 Is Auth Route: $isAuthRoute\n'
-      '🔒 Is Protected Route: $isProtectedRoute\n'
-      '⏳ Is Loading: ${userState.isLoading}',
-    );
-
     // Redirect unauthenticated users trying to access protected routes
     if (!isAuthenticated && isProtectedRoute) {
       LoggerService.app('🚫 BLOCKING: Unauthenticated user trying to access protected route, redirecting to login');
@@ -130,7 +121,6 @@ class NavigationGuards {
       '📍 Current Path: $currentPath\n'
       '🔐 Auth State: ${userState.runtimeType}\n'
       '👤 Is Authenticated: ${userState.isAuthenticated}\n'
-      '⏳ Is Loading: ${userState.isLoading}',
     );
   }
 

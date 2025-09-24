@@ -221,9 +221,21 @@ class ProfileScreen extends ConsumerWidget {
                       text: S.of(context).areYouSureToSignOut,
                       confirmText: S.of(context).signOut);
               if (confirmed && context.mounted) {
-                await ref.read(appConfigProvider.notifier).logOut();
-                if (context.mounted) {
-                  context.goToLogin();
+                try {
+                  // Show loading indicator or disable interaction while logging out
+                  await ref.read(appConfigProvider.notifier).logOut();
+                  
+                  // Check if widget is still mounted before navigation
+                  if (context.mounted) {
+                    context.goToLogin();
+                  }
+                } catch (error) {
+                  // Handle logout error gracefully
+                  if (context.mounted) {
+                    // Still navigate to login even if there was an error
+                    // since the intent is to log out the user
+                    context.goToLogin();
+                  }
                 }
               }
             }),
@@ -235,11 +247,19 @@ class ProfileScreen extends ConsumerWidget {
                       text: S.of(context).areYouSureToDeleteAccount,
                       confirmText: S.of(context).delete);
               if (confirmed && context.mounted) {
-                // Note: Delete account functionality would need a separate provider
-                // For now, just log out
-                await ref.read(appConfigProvider.notifier).logOut();
-                if (context.mounted) {
-                  context.goToLogin();
+                try {
+                  // Note: Delete account functionality would need a separate provider
+                  // For now, just log out
+                  await ref.read(appConfigProvider.notifier).logOut();
+                  
+                  if (context.mounted) {
+                    context.goToLogin();
+                  }
+                } catch (error) {
+                  // Handle error gracefully
+                  if (context.mounted) {
+                    context.goToLogin();
+                  }
                 }
               }
             },

@@ -177,44 +177,104 @@ class RouteConfiguration {
 
 /// Type-safe navigation extensions
 extension NavigationExtensions on BuildContext {
-/// Navigate to splash screen
-  void goToSplash() => go(AppRoutePaths.splash);
-  /// Navigate to login screen
-  void goToLogin() => go(AppRoutePaths.login);
+// Auth Navigation
+  void goToSplash() {
+    LoggerService.debug('🚀 Navigating to splash');
+    go(AppRoutePaths.splash);
+  }
 
-  /// Navigate to register screen
-  void goToRegister() => go(AppRoutePaths.register);
+  void goToLogin() {
+    LoggerService.debug('🔑 Navigating to login');
+    go(AppRoutePaths.login);
+  }
 
-  /// Navigate to main screen
-  void goToMain() => go(AppRoutePaths.main);
+  void goToRegister() {
+    LoggerService.debug('📝 Navigating to register');
+    go(AppRoutePaths.register);
+  }
 
-  /// Navigate to profile screen
-  void goToProfile() => go(AppRoutePaths.profile);
+  // Main App Navigation
+  void goToMain() {
+    LoggerService.debug('🏠 Navigating to main');
+    go(AppRoutePaths.main);
+  }
 
-  /// Navigate to contact us screen
-  void goToContactUs() => go(AppRoutePaths.contactUs);
+  // Profile Navigation
+  void goToProfile() {
+    LoggerService.debug('👤 Navigating to profile');
+    go(AppRoutePaths.profile);
+  }
 
-  /// Navigate to terms screen
-  void goToTerms() => go(AppRoutePaths.terms);
+  void goToContactUs() {
+    LoggerService.debug('📞 Navigating to contact us');
+    push(AppRoutePaths.contactUs);
+  }
 
-  /// Navigate to redeem screen
-  void goToRedeem() => go(AppRoutePaths.redeem);
+  void goToTerms() {
+    LoggerService.debug('📋 Navigating to terms');
+    push(AppRoutePaths.terms);
+  }
 
-  /// Navigate to transactions screen
-  void goToTransactions() => go(AppRoutePaths.transactions);
+  // Rewards Navigation
+  void goToRedeem() {
+    LoggerService.debug('🎁 Navigating to redeem');
+    go(AppRoutePaths.redeem);
+  }
 
-  /// Navigate to tasks screen
-  void goToTasks() => go(AppRoutePaths.tasks);
-  void goToTaskDetails({required TaskEntity task}) => 
-      push(AppRoutePaths.taskDetails, extra: task);
+  void goToTransactions() {
+    LoggerService.debug('💳 Navigating to transactions');
+    push(AppRoutePaths.transactions);
+  }
 
-  void goToDoTask({required CommentEntity comment, required String taskUrl}) =>
-      push(AppRoutePaths.doTask, extra: {
-        'comment': comment,
-        'taskUrl': taskUrl,
-      });
-  /// Navigate to live offers screen
-  void goToLiveOffers() => go(AppRoutePaths.liveOffers);
- /// Navigate to leaderboard screen
-  void goToLeaderboard() => go(AppRoutePaths.leaderboard);
+  // Tasks Navigation
+  void goToTasks() {
+    LoggerService.debug('📋 Navigating to tasks');
+    go(AppRoutePaths.tasks);
+  }
+
+  void goToTaskDetails({required TaskEntity task}) {
+    LoggerService.debug('📋 Navigating to task details: ${task.toString()}');
+    push(AppRoutePaths.taskDetails, extra: task);
+  }
+
+  void goToDoTask({required CommentEntity comment, required String taskUrl}) {
+    LoggerService.debug('🎯 Navigating to do task: $taskUrl');
+    push(AppRoutePaths.doTask, extra: {
+      'comment': comment,
+      'taskUrl': taskUrl,
+    });
+  }
+
+  // Live Offers Navigation
+  void goToLiveOffers() {
+    LoggerService.debug('🎯 Navigating to live offers');
+    go(AppRoutePaths.liveOffers);
+  }
+
+  // Top Users Navigation
+  void goToLeaderboard() {
+    LoggerService.debug('🏆 Navigating to leaderboard');
+    go(AppRoutePaths.leaderboard);
+  }
+
+  // Utility Navigation Methods
+  void goBack() {
+    LoggerService.debug('⬅️ Navigating back');
+    if (canPop()) {
+      pop();
+    } else {
+      // If can't pop, go to main screen
+      goToMain();
+    }
+  }
+
+  void goBackWithResult<T>(T result) {
+    LoggerService.debug('⬅️ Navigating back with result: $result');
+    if (canPop()) {
+      pop(result);
+    } else {
+      // If can't pop, go to main screen
+      goToMain();
+    }
+  }
 }
