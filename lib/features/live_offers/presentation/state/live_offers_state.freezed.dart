@@ -128,13 +128,13 @@ return loadingMore(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( LiveOffersEntity data)?  success,TResult Function( String message)?  error,TResult Function( LiveOffersEntity currentData)?  loadingMore,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( LiveOffersEntity data)?  success,TResult Function( Failure failure)?  error,TResult Function( LiveOffersEntity currentData)?  loadingMore,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Success() when success != null:
 return success(_that.data);case _Error() when error != null:
-return error(_that.message);case _LoadingMore() when loadingMore != null:
+return error(_that.failure);case _LoadingMore() when loadingMore != null:
 return loadingMore(_that.currentData);case _:
   return orElse();
 
@@ -153,13 +153,13 @@ return loadingMore(_that.currentData);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( LiveOffersEntity data)  success,required TResult Function( String message)  error,required TResult Function( LiveOffersEntity currentData)  loadingMore,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( LiveOffersEntity data)  success,required TResult Function( Failure failure)  error,required TResult Function( LiveOffersEntity currentData)  loadingMore,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Success():
 return success(_that.data);case _Error():
-return error(_that.message);case _LoadingMore():
+return error(_that.failure);case _LoadingMore():
 return loadingMore(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -174,13 +174,13 @@ return loadingMore(_that.currentData);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( LiveOffersEntity data)?  success,TResult? Function( String message)?  error,TResult? Function( LiveOffersEntity currentData)?  loadingMore,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( LiveOffersEntity data)?  success,TResult? Function( Failure failure)?  error,TResult? Function( LiveOffersEntity currentData)?  loadingMore,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Success() when success != null:
 return success(_that.data);case _Error() when error != null:
-return error(_that.message);case _LoadingMore() when loadingMore != null:
+return error(_that.failure);case _LoadingMore() when loadingMore != null:
 return loadingMore(_that.currentData);case _:
   return null;
 
@@ -323,10 +323,10 @@ as LiveOffersEntity,
 
 
 class _Error implements LiveOffersState {
-  const _Error(this.message);
+  const _Error(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of LiveOffersState
 /// with the given fields replaced by the non-null parameter values.
@@ -338,16 +338,16 @@ _$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'LiveOffersState.error(message: $message)';
+  return 'LiveOffersState.error(failure: $failure)';
 }
 
 
@@ -358,7 +358,7 @@ abstract mixin class _$ErrorCopyWith<$Res> implements $LiveOffersStateCopyWith<$
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -375,10 +375,10 @@ class __$ErrorCopyWithImpl<$Res>
 
 /// Create a copy of LiveOffersState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_Error(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 

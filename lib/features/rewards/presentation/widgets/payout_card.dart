@@ -164,8 +164,8 @@ class PayoutCard extends ConsumerWidget {
           success: () => MessageDialog(
             message: S.of(context).yourRequestSuccess,
           ),
-          error: (errorMessage) => MessageDialog(
-            message: errorMessage,
+          error: (failure) => MessageDialog(
+            message: failure.message,
             happy: false,
           ),
         );

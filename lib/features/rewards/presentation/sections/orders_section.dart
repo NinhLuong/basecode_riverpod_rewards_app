@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
@@ -21,7 +20,7 @@ class OrdersSection extends ConsumerWidget {
     return ordersState.when(
       initial: () => const LoadingComponent(),
       loading: () => const LoadingComponent(),
-      error: (errorMessage) => FailureComponent(failure: Failure(errorMessage)),
+      error: (failure) => FailureComponent(failure: failure),
       success: (ordersEntity) => SmartRefresher(
         controller: refreshController,
         onRefresh: () async {

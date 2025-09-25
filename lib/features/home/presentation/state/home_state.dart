@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_with_user_entity.dart';
 
@@ -9,7 +10,7 @@ sealed class HomeState with _$HomeState {
   const factory HomeState.initial() = _HomeInitial;
   const factory HomeState.loading() = _HomeLoading;
   const factory HomeState.success(HomeWithUserEntity data) = _HomeSuccess;
-  const factory HomeState.error(String message) = _HomeError;
+  const factory HomeState.error(Failure failure) = _HomeError;
   const factory HomeState.refreshing(HomeWithUserEntity currentData) = _HomeRefreshing;
 }
 
@@ -25,7 +26,12 @@ extension HomeStateX on HomeState {
         refreshing: (state) => state.currentData,
       );
 
-  String? get errorMessage => mapOrNull(error: (state) => state.message);
+  /// Get the failure from error state
+  Failure? get failure => whenOrNull(
+    error: (failure) => failure,
+  );
+
+  String? get errorMessage => mapOrNull(error: (state) => state.failure.message);
   bool get hasData => data != null;
 
   // Convenience getters for common data access

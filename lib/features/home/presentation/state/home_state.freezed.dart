@@ -128,13 +128,13 @@ return refreshing(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( HomeWithUserEntity data)?  success,TResult Function( String message)?  error,TResult Function( HomeWithUserEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( HomeWithUserEntity data)?  success,TResult Function( Failure failure)?  error,TResult Function( HomeWithUserEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeInitial() when initial != null:
 return initial();case _HomeLoading() when loading != null:
 return loading();case _HomeSuccess() when success != null:
 return success(_that.data);case _HomeError() when error != null:
-return error(_that.message);case _HomeRefreshing() when refreshing != null:
+return error(_that.failure);case _HomeRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return orElse();
 
@@ -153,13 +153,13 @@ return refreshing(_that.currentData);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( HomeWithUserEntity data)  success,required TResult Function( String message)  error,required TResult Function( HomeWithUserEntity currentData)  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( HomeWithUserEntity data)  success,required TResult Function( Failure failure)  error,required TResult Function( HomeWithUserEntity currentData)  refreshing,}) {final _that = this;
 switch (_that) {
 case _HomeInitial():
 return initial();case _HomeLoading():
 return loading();case _HomeSuccess():
 return success(_that.data);case _HomeError():
-return error(_that.message);case _HomeRefreshing():
+return error(_that.failure);case _HomeRefreshing():
 return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -174,13 +174,13 @@ return refreshing(_that.currentData);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( HomeWithUserEntity data)?  success,TResult? Function( String message)?  error,TResult? Function( HomeWithUserEntity currentData)?  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( HomeWithUserEntity data)?  success,TResult? Function( Failure failure)?  error,TResult? Function( HomeWithUserEntity currentData)?  refreshing,}) {final _that = this;
 switch (_that) {
 case _HomeInitial() when initial != null:
 return initial();case _HomeLoading() when loading != null:
 return loading();case _HomeSuccess() when success != null:
 return success(_that.data);case _HomeError() when error != null:
-return error(_that.message);case _HomeRefreshing() when refreshing != null:
+return error(_that.failure);case _HomeRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return null;
 
@@ -332,10 +332,10 @@ $HomeWithUserEntityCopyWith<$Res> get data {
 
 
 class _HomeError implements HomeState {
-  const _HomeError(this.message);
+  const _HomeError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -347,16 +347,16 @@ _$HomeErrorCopyWith<_HomeError> get copyWith => __$HomeErrorCopyWithImpl<_HomeEr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'HomeState.error(message: $message)';
+  return 'HomeState.error(failure: $failure)';
 }
 
 
@@ -367,7 +367,7 @@ abstract mixin class _$HomeErrorCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeErrorCopyWith(_HomeError value, $Res Function(_HomeError) _then) = __$HomeErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -384,10 +384,10 @@ class __$HomeErrorCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_HomeError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 

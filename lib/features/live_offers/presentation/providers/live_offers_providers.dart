@@ -46,7 +46,7 @@ class LiveOffersNotifier extends _$LiveOffersNotifier {
     );
 
     result.fold(
-      (failure) => state = LiveOffersState.error(failure.toString()),
+      (failure) => state = LiveOffersState.error(failure),
       (newData) {
         _page++;
         _currentEntity = LiveOffersEntity(

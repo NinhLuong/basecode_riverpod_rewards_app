@@ -88,7 +88,7 @@ final class OrdersNotifierProvider
   }
 }
 
-String _$ordersNotifierHash() => r'ad11a82b485d3b44a0e6d1dc2e86b28d112063a3';
+String _$ordersNotifierHash() => r'acac1909e605e082ff4dcbf4d80ed03258ad7ceb';
 
 abstract class _$OrdersNotifier extends $Notifier<OrdersState> {
   OrdersState build();
@@ -142,7 +142,7 @@ final class TransactionsNotifierProvider
 }
 
 String _$transactionsNotifierHash() =>
-    r'151552c0057e061712c5655fb6f20d9163e564d0';
+    r'75408df31ced5b2515262ef1310eec80163f6a02';
 
 abstract class _$TransactionsNotifier extends $Notifier<TransactionsState> {
   TransactionsState build();
@@ -195,7 +195,7 @@ final class PayoutsNotifierProvider
   }
 }
 
-String _$payoutsNotifierHash() => r'cb17d1cefa7bd27a7bb7368145ce7ed52ec0d7a5';
+String _$payoutsNotifierHash() => r'd5ad1d6db31b8d93f5446e11e1c78715b3726955';
 
 abstract class _$PayoutsNotifier extends $Notifier<PayoutsState> {
   PayoutsState build();
@@ -248,7 +248,7 @@ final class RedeemNotifierProvider
   }
 }
 
-String _$redeemNotifierHash() => r'1bd5a7f0e250ff2917fe61dbf98a418111ce228f';
+String _$redeemNotifierHash() => r'30cfc86e8b84960d18f6d97ed67eb15b0383e8ab';
 
 abstract class _$RedeemNotifier extends $Notifier<RedeemState> {
   RedeemState build();

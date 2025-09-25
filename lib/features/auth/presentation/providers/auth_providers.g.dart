@@ -219,7 +219,7 @@ final class LoginNotifierProvider
   }
 }
 
-String _$loginNotifierHash() => r'f9ad1f048a12525bb68597b490be381fe09ad9ed';
+String _$loginNotifierHash() => r'715fe6524d315051445afab92180718fed1a6207';
 
 abstract class _$LoginNotifier extends $Notifier<LoginState> {
   LoginState build();
@@ -272,7 +272,7 @@ final class RegisterNotifierProvider
   }
 }
 
-String _$registerNotifierHash() => r'51d9e17fb1b5015941797d0abe2b79f83705ebb7';
+String _$registerNotifierHash() => r'e2cfbef21ab1f4eee9990ce51dd60df3c39f5004';
 
 abstract class _$RegisterNotifier extends $Notifier<RegisterState> {
   RegisterState build();
@@ -326,7 +326,7 @@ final class EmailCheckNotifierProvider
 }
 
 String _$emailCheckNotifierHash() =>
-    r'e9dbfc19ffe9040d23ec1629128ac6b1069547e1';
+    r'7f6acebd237192f599da25cfabd798dc2cf6d80f';
 
 abstract class _$EmailCheckNotifier extends $Notifier<EmailCheckState> {
   EmailCheckState build();
@@ -380,7 +380,7 @@ final class CurrentUserNotifierProvider
 }
 
 String _$currentUserNotifierHash() =>
-    r'ff7a2e705f9e1e894da58e755ac2f5eb5033e66a';
+    r'e2aa531315c5fcd4557728db890808281f6a77c3';
 
 abstract class _$CurrentUserNotifier extends $Notifier<CurrentUserState> {
   CurrentUserState build();

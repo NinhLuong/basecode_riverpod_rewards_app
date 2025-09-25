@@ -30,8 +30,8 @@ class TaskDetailsScreen extends ConsumerWidget {
             taskUrl: task.url
           );
         },
-        error: (errorMessage) {
-          showToast(message: errorMessage);
+        error: (failure) {
+          showToast(message: failure.message);
         },
       );
     });

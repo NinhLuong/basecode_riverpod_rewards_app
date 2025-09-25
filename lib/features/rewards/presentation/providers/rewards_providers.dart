@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
+import 'package:magic_rewards/config/errors/errors_handler.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
@@ -36,11 +37,12 @@ class OrdersNotifier extends _$OrdersNotifier {
       final result = await repository.getOrders(OrdersParameters());
       
       result.fold(
-        (failure) => state = OrdersState.error(failure.toString()),
+        (failure) => state = OrdersState.error(failure),
         (orders) => state = OrdersState.success(orders),
       );
-    } catch (error) {
-      state = OrdersState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = OrdersState.error(failure);
     }
   }
 
@@ -54,8 +56,9 @@ class OrdersNotifier extends _$OrdersNotifier {
 
     try {
       await _fetchOrders();
-    } catch (error) {
-      state = OrdersState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = OrdersState.error(failure);
     }
   }
 }
@@ -78,11 +81,12 @@ class TransactionsNotifier extends _$TransactionsNotifier {
       final result = await repository.getTransactions(TransactionsParameters());
       
       result.fold(
-        (failure) => state = TransactionsState.error(failure.toString()),
+        (failure) => state = TransactionsState.error(failure),
         (transactions) => state = TransactionsState.success(transactions),
       );
-    } catch (error) {
-      state = TransactionsState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = TransactionsState.error(failure);
     }
   }
 
@@ -96,8 +100,9 @@ class TransactionsNotifier extends _$TransactionsNotifier {
 
     try {
       await _fetchTransactions();
-    } catch (error) {
-      state = TransactionsState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = TransactionsState.error(failure);
     }
   }
 }
@@ -120,11 +125,12 @@ class PayoutsNotifier extends _$PayoutsNotifier {
       final result = await repository.getPayouts(PayoutsParameters());
       
       result.fold(
-        (failure) => state = PayoutsState.error(failure.toString()),
+        (failure) => state = PayoutsState.error(failure),
         (payouts) => state = PayoutsState.success(payouts),
       );
-    } catch (error) {
-      state = PayoutsState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = PayoutsState.error(failure);
     }
   }
 
@@ -138,8 +144,9 @@ class PayoutsNotifier extends _$PayoutsNotifier {
 
     try {
       await _fetchPayouts();
-    } catch (error) {
-      state = PayoutsState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = PayoutsState.error(failure);
     }
   }
 }
@@ -167,11 +174,12 @@ class RedeemNotifier extends _$RedeemNotifier {
       final result = await repository.redeem(params);
       
       result.fold(
-        (failure) => state = RedeemState.error(failure.toString()),
+        (failure) => state = RedeemState.error(failure),
         (_) => state = const RedeemState.success(),
       );
-    } catch (error) {
-      state = RedeemState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = RedeemState.error(failure);
     }
   }
 

@@ -90,7 +90,7 @@ final class LiveOffersNotifierProvider
 }
 
 String _$liveOffersNotifierHash() =>
-    r'7c253be82e80de3f690d3497c3c21a18b0a6394a';
+    r'971665ac853730432f6e1a8fb475ee3d25832f42';
 
 abstract class _$LiveOffersNotifier extends $Notifier<LiveOffersState> {
   LiveOffersState build();

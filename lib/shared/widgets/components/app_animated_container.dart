@@ -28,6 +28,7 @@ class _AppAnimatedContainerState extends State<AppAnimatedContainer> {
 
     // Delay the animation using a Future to allow the widget to build first
     Future.delayed(const Duration(milliseconds: 500), () {
+      if (!mounted) return;
       setState(() {
         expanded = true;
       });

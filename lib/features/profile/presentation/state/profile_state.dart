@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
 
 part 'profile_state.freezed.dart';
@@ -8,7 +9,7 @@ sealed class ProfileState with _$ProfileState {
   const factory ProfileState.initial() = _ProfileInitial;
   const factory ProfileState.loading() = _ProfileLoading;
   const factory ProfileState.success(ProfileEntity data) = _ProfileSuccess;
-  const factory ProfileState.error(String message) = _ProfileError;
+  const factory ProfileState.error(Failure failure) = _ProfileError;
   const factory ProfileState.refreshing(ProfileEntity currentData) = _ProfileRefreshing;
 }
 
@@ -24,7 +25,12 @@ extension ProfileStateX on ProfileState {
         refreshing: (state) => state.currentData,
       );
 
-  String? get errorMessage => mapOrNull(error: (state) => state.message);
+  /// Get the failure from error state
+  Failure? get failure => whenOrNull(
+    error: (failure) => failure,
+  );
+
+  String? get errorMessage => failure?.message;
   bool get hasData => data != null;
 
   // Convenience getters for common profile data access

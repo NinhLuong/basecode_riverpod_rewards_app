@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
+import 'package:magic_rewards/config/errors/errors_handler.dart';
 import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/profile_parameters.dart';
 import 'package:magic_rewards/features/profile/domain/repository/profile_repository.dart';
@@ -31,11 +32,12 @@ class ProfileNotifier extends _$ProfileNotifier {
       final result = await repository.getProfile(ProfileParameters());
       
       result.fold(
-        (failure) => state = ProfileState.error(failure.toString()),
+        (failure) => state = ProfileState.error(failure),
         (profile) => state = ProfileState.success(profile),
       );
-    } catch (error) {
-      state = ProfileState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = ProfileState.error(failure);
     }
   }
 
@@ -49,8 +51,9 @@ class ProfileNotifier extends _$ProfileNotifier {
 
     try {
       await _fetchProfile();
-    } catch (error) {
-      state = ProfileState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = ProfileState.error(failure);
     }
   }
 }

@@ -47,8 +47,8 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
           showToast(message: S.of(context).loggedInSuccessfully);
           context.goToMain();
         },
-        error: (errorMessage) {
-          showToast(message: errorMessage);
+        error: (failure) {
+          showToast(message: failure.message);
         },
       );
     });

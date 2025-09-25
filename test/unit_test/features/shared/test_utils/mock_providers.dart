@@ -1,6 +1,7 @@
 /// Mock data and provider utilities for testing
 /// This file contains mock entities and basic test data
 /// For complex provider testing, use direct ProviderContainer setup in individual tests
+library;
 
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';

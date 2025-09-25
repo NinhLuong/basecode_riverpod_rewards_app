@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
+import 'package:magic_rewards/config/errors/errors_handler.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 import 'package:magic_rewards/features/top_users/domain/parameters/top_users_parameters.dart';
 import 'package:magic_rewards/features/top_users/domain/usecases/get_top_users_usecase.dart';
@@ -38,11 +39,12 @@ class TopUsersNotifier extends _$TopUsersNotifier {
       final result = await useCase.call(params: params);
       
       result.fold(
-        (failure) => state = TopUsersState.error(failure.toString()),
+        (failure) => state = TopUsersState.error(failure),
         (topUsers) => state = TopUsersState.success(topUsers),
       );
-    } catch (error) {
-      state = TopUsersState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = TopUsersState.error(failure);
     }
   }
 
@@ -56,8 +58,9 @@ class TopUsersNotifier extends _$TopUsersNotifier {
 
     try {
       await _fetchTopUsers(halfMonth: halfMonth);
-    } catch (error) {
-      state = TopUsersState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = TopUsersState.error(failure);
     }
   }
 

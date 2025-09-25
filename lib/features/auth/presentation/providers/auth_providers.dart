@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
+import 'package:magic_rewards/config/errors/errors_handler.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart';
@@ -58,11 +59,12 @@ class LoginNotifier extends _$LoginNotifier {
       final result = await loginUseCase.call(params: params);
 
       result.fold(
-        (failure) => state = LoginState.error(failure.toString()),
+        (failure) => state = LoginState.error(failure),
         (user) => state = LoginState.success(user),
       );
-    } catch (error) {
-      state = LoginState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = LoginState.error(failure);
     }
   }
 
@@ -101,11 +103,12 @@ class RegisterNotifier extends _$RegisterNotifier {
       final result = await registerUseCase.call(params: params);
 
       result.fold(
-        (failure) => state = RegisterState.error(failure.toString()),
+        (failure) => state = RegisterState.error(failure),
         (user) => state = RegisterState.success(user),
       );
-    } catch (error) {
-      state = RegisterState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = RegisterState.error(failure);
     }
   }
 
@@ -132,11 +135,12 @@ class EmailCheckNotifier extends _$EmailCheckNotifier {
       final result = await checkEmailUseCase.call(params: params);
 
       result.fold(
-        (failure) => state = EmailCheckState.error(failure.toString()),
+        (failure) => state = EmailCheckState.error(failure),
         (emailResult) => state = EmailCheckState.success(emailResult),
       );
-    } catch (error) {
-      state = EmailCheckState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = EmailCheckState.error(failure);
     }
   }
 
@@ -171,8 +175,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
       } else {
         state = const CurrentUserState.unauthenticated();
       }
-    } catch (e) {
-      state = const CurrentUserState.unauthenticated();
+    } catch (e, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(e, stackTrace);
+      state = CurrentUserState.error(failure);
     }
   }
 

@@ -125,13 +125,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  success,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginInitial() when initial != null:
 return initial();case _LoginLoading() when loading != null:
 return loading();case _LoginSuccess() when success != null:
 return success(_that.user);case _LoginError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return orElse();
 
 }
@@ -149,13 +149,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  success,required TResult Function( Failure failure)  error,}) {final _that = this;
 switch (_that) {
 case _LoginInitial():
 return initial();case _LoginLoading():
 return loading();case _LoginSuccess():
 return success(_that.user);case _LoginError():
-return error(_that.message);}
+return error(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -169,13 +169,13 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  success,TResult? Function( Failure failure)?  error,}) {final _that = this;
 switch (_that) {
 case _LoginInitial() when initial != null:
 return initial();case _LoginLoading() when loading != null:
 return loading();case _LoginSuccess() when success != null:
 return success(_that.user);case _LoginError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return null;
 
 }
@@ -326,10 +326,10 @@ $UserEntityCopyWith<$Res> get user {
 
 
 class _LoginError implements LoginState {
-  const _LoginError(this.message);
+  const _LoginError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
@@ -341,16 +341,16 @@ _$LoginErrorCopyWith<_LoginError> get copyWith => __$LoginErrorCopyWithImpl<_Log
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'LoginState.error(message: $message)';
+  return 'LoginState.error(failure: $failure)';
 }
 
 
@@ -361,7 +361,7 @@ abstract mixin class _$LoginErrorCopyWith<$Res> implements $LoginStateCopyWith<$
   factory _$LoginErrorCopyWith(_LoginError value, $Res Function(_LoginError) _then) = __$LoginErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -378,10 +378,10 @@ class __$LoginErrorCopyWithImpl<$Res>
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_LoginError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 
@@ -502,13 +502,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  success,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RegisterInitial() when initial != null:
 return initial();case _RegisterLoading() when loading != null:
 return loading();case _RegisterSuccess() when success != null:
 return success(_that.user);case _RegisterError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return orElse();
 
 }
@@ -526,13 +526,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  success,required TResult Function( Failure failure)  error,}) {final _that = this;
 switch (_that) {
 case _RegisterInitial():
 return initial();case _RegisterLoading():
 return loading();case _RegisterSuccess():
 return success(_that.user);case _RegisterError():
-return error(_that.message);}
+return error(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -546,13 +546,13 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  success,TResult? Function( Failure failure)?  error,}) {final _that = this;
 switch (_that) {
 case _RegisterInitial() when initial != null:
 return initial();case _RegisterLoading() when loading != null:
 return loading();case _RegisterSuccess() when success != null:
 return success(_that.user);case _RegisterError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return null;
 
 }
@@ -703,10 +703,10 @@ $UserEntityCopyWith<$Res> get user {
 
 
 class _RegisterError implements RegisterState {
-  const _RegisterError(this.message);
+  const _RegisterError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
@@ -718,16 +718,16 @@ _$RegisterErrorCopyWith<_RegisterError> get copyWith => __$RegisterErrorCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'RegisterState.error(message: $message)';
+  return 'RegisterState.error(failure: $failure)';
 }
 
 
@@ -738,7 +738,7 @@ abstract mixin class _$RegisterErrorCopyWith<$Res> implements $RegisterStateCopy
   factory _$RegisterErrorCopyWith(_RegisterError value, $Res Function(_RegisterError) _then) = __$RegisterErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -755,10 +755,10 @@ class __$RegisterErrorCopyWithImpl<$Res>
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_RegisterError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 
@@ -879,13 +879,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( CheckEmailEntity result)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( CheckEmailEntity result)?  success,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _EmailCheckInitial() when initial != null:
 return initial();case _EmailCheckLoading() when loading != null:
 return loading();case _EmailCheckSuccess() when success != null:
 return success(_that.result);case _EmailCheckError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return orElse();
 
 }
@@ -903,13 +903,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( CheckEmailEntity result)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( CheckEmailEntity result)  success,required TResult Function( Failure failure)  error,}) {final _that = this;
 switch (_that) {
 case _EmailCheckInitial():
 return initial();case _EmailCheckLoading():
 return loading();case _EmailCheckSuccess():
 return success(_that.result);case _EmailCheckError():
-return error(_that.message);}
+return error(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -923,13 +923,13 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( CheckEmailEntity result)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( CheckEmailEntity result)?  success,TResult? Function( Failure failure)?  error,}) {final _that = this;
 switch (_that) {
 case _EmailCheckInitial() when initial != null:
 return initial();case _EmailCheckLoading() when loading != null:
 return loading();case _EmailCheckSuccess() when success != null:
 return success(_that.result);case _EmailCheckError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return null;
 
 }
@@ -1080,10 +1080,10 @@ $CheckEmailEntityCopyWith<$Res> get result {
 
 
 class _EmailCheckError implements EmailCheckState {
-  const _EmailCheckError(this.message);
+  const _EmailCheckError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of EmailCheckState
 /// with the given fields replaced by the non-null parameter values.
@@ -1095,16 +1095,16 @@ _$EmailCheckErrorCopyWith<_EmailCheckError> get copyWith => __$EmailCheckErrorCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EmailCheckError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EmailCheckError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'EmailCheckState.error(message: $message)';
+  return 'EmailCheckState.error(failure: $failure)';
 }
 
 
@@ -1115,7 +1115,7 @@ abstract mixin class _$EmailCheckErrorCopyWith<$Res> implements $EmailCheckState
   factory _$EmailCheckErrorCopyWith(_EmailCheckError value, $Res Function(_EmailCheckError) _then) = __$EmailCheckErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -1132,10 +1132,10 @@ class __$EmailCheckErrorCopyWithImpl<$Res>
 
 /// Create a copy of EmailCheckState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_EmailCheckError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 
@@ -1259,14 +1259,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  authenticated,TResult Function()?  unauthenticated,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  authenticated,TResult Function()?  unauthenticated,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CurrentUserInitial() when initial != null:
 return initial();case _CurrentUserLoading() when loading != null:
 return loading();case _CurrentUserAuthenticated() when authenticated != null:
 return authenticated(_that.user);case _CurrentUserUnauthenticated() when unauthenticated != null:
 return unauthenticated();case _CurrentUserError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return orElse();
 
 }
@@ -1284,14 +1284,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  authenticated,required TResult Function()  unauthenticated,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  authenticated,required TResult Function()  unauthenticated,required TResult Function( Failure failure)  error,}) {final _that = this;
 switch (_that) {
 case _CurrentUserInitial():
 return initial();case _CurrentUserLoading():
 return loading();case _CurrentUserAuthenticated():
 return authenticated(_that.user);case _CurrentUserUnauthenticated():
 return unauthenticated();case _CurrentUserError():
-return error(_that.message);}
+return error(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1305,14 +1305,14 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  authenticated,TResult? Function()?  unauthenticated,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  authenticated,TResult? Function()?  unauthenticated,TResult? Function( Failure failure)?  error,}) {final _that = this;
 switch (_that) {
 case _CurrentUserInitial() when initial != null:
 return initial();case _CurrentUserLoading() when loading != null:
 return loading();case _CurrentUserAuthenticated() when authenticated != null:
 return authenticated(_that.user);case _CurrentUserUnauthenticated() when unauthenticated != null:
 return unauthenticated();case _CurrentUserError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return null;
 
 }
@@ -1495,10 +1495,10 @@ String toString() {
 
 
 class _CurrentUserError implements CurrentUserState {
-  const _CurrentUserError(this.message);
+  const _CurrentUserError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
@@ -1510,16 +1510,16 @@ _$CurrentUserErrorCopyWith<_CurrentUserError> get copyWith => __$CurrentUserErro
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentUserError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentUserError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'CurrentUserState.error(message: $message)';
+  return 'CurrentUserState.error(failure: $failure)';
 }
 
 
@@ -1530,7 +1530,7 @@ abstract mixin class _$CurrentUserErrorCopyWith<$Res> implements $CurrentUserSta
   factory _$CurrentUserErrorCopyWith(_CurrentUserError value, $Res Function(_CurrentUserError) _then) = __$CurrentUserErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -1547,10 +1547,10 @@ class __$CurrentUserErrorCopyWithImpl<$Res>
 
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_CurrentUserError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 

@@ -128,13 +128,13 @@ return refreshing(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( TopUsersEntity data)?  success,TResult Function( String message)?  error,TResult Function( TopUsersEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( TopUsersEntity data)?  success,TResult Function( Failure failure)?  error,TResult Function( TopUsersEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TopUsersInitial() when initial != null:
 return initial();case _TopUsersLoading() when loading != null:
 return loading();case _TopUsersSuccess() when success != null:
 return success(_that.data);case _TopUsersError() when error != null:
-return error(_that.message);case _TopUsersRefreshing() when refreshing != null:
+return error(_that.failure);case _TopUsersRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return orElse();
 
@@ -153,13 +153,13 @@ return refreshing(_that.currentData);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( TopUsersEntity data)  success,required TResult Function( String message)  error,required TResult Function( TopUsersEntity currentData)  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( TopUsersEntity data)  success,required TResult Function( Failure failure)  error,required TResult Function( TopUsersEntity currentData)  refreshing,}) {final _that = this;
 switch (_that) {
 case _TopUsersInitial():
 return initial();case _TopUsersLoading():
 return loading();case _TopUsersSuccess():
 return success(_that.data);case _TopUsersError():
-return error(_that.message);case _TopUsersRefreshing():
+return error(_that.failure);case _TopUsersRefreshing():
 return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -174,13 +174,13 @@ return refreshing(_that.currentData);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( TopUsersEntity data)?  success,TResult? Function( String message)?  error,TResult? Function( TopUsersEntity currentData)?  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( TopUsersEntity data)?  success,TResult? Function( Failure failure)?  error,TResult? Function( TopUsersEntity currentData)?  refreshing,}) {final _that = this;
 switch (_that) {
 case _TopUsersInitial() when initial != null:
 return initial();case _TopUsersLoading() when loading != null:
 return loading();case _TopUsersSuccess() when success != null:
 return success(_that.data);case _TopUsersError() when error != null:
-return error(_that.message);case _TopUsersRefreshing() when refreshing != null:
+return error(_that.failure);case _TopUsersRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return null;
 
@@ -332,10 +332,10 @@ $TopUsersEntityCopyWith<$Res> get data {
 
 
 class _TopUsersError implements TopUsersState {
-  const _TopUsersError(this.message);
+  const _TopUsersError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of TopUsersState
 /// with the given fields replaced by the non-null parameter values.
@@ -347,16 +347,16 @@ _$TopUsersErrorCopyWith<_TopUsersError> get copyWith => __$TopUsersErrorCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TopUsersError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TopUsersError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'TopUsersState.error(message: $message)';
+  return 'TopUsersState.error(failure: $failure)';
 }
 
 
@@ -367,7 +367,7 @@ abstract mixin class _$TopUsersErrorCopyWith<$Res> implements $TopUsersStateCopy
   factory _$TopUsersErrorCopyWith(_TopUsersError value, $Res Function(_TopUsersError) _then) = __$TopUsersErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -384,10 +384,10 @@ class __$TopUsersErrorCopyWithImpl<$Res>
 
 /// Create a copy of TopUsersState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_TopUsersError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 

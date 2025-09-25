@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/features/tasks/presentation/providers/tasks_providers.dart';
 import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
@@ -19,17 +20,9 @@ class TasksSection extends ConsumerWidget {
     return tasksState.when(
       initial: () => const LoadingComponent(),
       loading: () => const LoadingComponent(),
-      error: (errorMessage) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Error: $errorMessage'),
-            ElevatedButton(
-              onPressed: () => ref.read(tasksProvider.notifier).refresh(),
-              child: const Text('Retry'),
-            ),
-          ],
-        ),
+      error: (failure) => FailureComponent(
+        failure: failure,
+        retry: () => ref.read(tasksProvider.notifier).refresh(),
       ),
       success: (tasksEntity) => SmartRefresher(
         controller: refreshController,

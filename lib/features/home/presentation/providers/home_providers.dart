@@ -1,5 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
+import 'package:magic_rewards/config/errors/errors_handler.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_with_user_entity.dart';
 import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
@@ -48,12 +50,13 @@ class HomeNotifier extends _$HomeNotifier {
       final userData = results[1] as UserEntity?;
 
       if (userData == null) {
-        state = const HomeState.error('User data not found');
+        final failure = Failure('User data not found');
+        state = HomeState.error(failure);
         return;
       }
 
       homeResult.fold(
-        (failure) => state = HomeState.error(failure.toString()),
+        (failure) => state = HomeState.error(failure),
         (homeData) {
           final homeWithUser = HomeWithUserEntity(
             homeData: homeData,
@@ -62,8 +65,9 @@ class HomeNotifier extends _$HomeNotifier {
           state = HomeState.success(homeWithUser);
         },
       );
-    } catch (error) {
-      state = HomeState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = HomeState.error(failure);
     }
   }
 
@@ -77,8 +81,9 @@ class HomeNotifier extends _$HomeNotifier {
 
     try {
       await _fetchHomeWithUser();
-    } catch (error) {
-      state = HomeState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = HomeState.error(failure);
     }
   }
 }

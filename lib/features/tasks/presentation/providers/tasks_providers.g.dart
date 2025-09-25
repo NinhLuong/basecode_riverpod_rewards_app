@@ -83,7 +83,7 @@ final class TasksNotifierProvider
   }
 }
 
-String _$tasksNotifierHash() => r'49eaa306c06f4c5985b7026c91083eaeaf87665d';
+String _$tasksNotifierHash() => r'ef0095f7588139085220338dcba65317b8a1ba2b';
 
 abstract class _$TasksNotifier extends $Notifier<TasksState> {
   TasksState build();
@@ -137,7 +137,7 @@ final class TaskOrdersNotifierProvider
 }
 
 String _$taskOrdersNotifierHash() =>
-    r'980981eaab396550dfa25e9af69c2e7686138e49';
+    r'43d739d3f67e21f5108b1cda9b92f6c3e9c008d1';
 
 abstract class _$TaskOrdersNotifier extends $Notifier<TaskOrdersState> {
   TaskOrdersState build();
@@ -191,7 +191,7 @@ final class ReserveCommentNotifierProvider
 }
 
 String _$reserveCommentNotifierHash() =>
-    r'c702795ee55ef092559f48322bea175163f2fac6';
+    r'fe3d6ee0389fb64561500aa5e1ab3b1be576ca18';
 
 abstract class _$ReserveCommentNotifier extends $Notifier<ReserveCommentState> {
   ReserveCommentState build();
@@ -245,7 +245,7 @@ final class AddTaskOrderNotifierProvider
 }
 
 String _$addTaskOrderNotifierHash() =>
-    r'd67251cc9faf230664aa1c06622b54d52b5bcaa2';
+    r'2b052eefc7825637367ba73fc3745a3ca1dac5d1';
 
 abstract class _$AddTaskOrderNotifier extends $Notifier<AddTaskOrderState> {
   AddTaskOrderState build();

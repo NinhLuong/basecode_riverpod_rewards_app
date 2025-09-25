@@ -89,7 +89,7 @@ final class TopUsersNotifierProvider
   }
 }
 
-String _$topUsersNotifierHash() => r'59f233d01f945e38f1b47825cbee0b41c09f4952';
+String _$topUsersNotifierHash() => r'46e1713d9c64a9f285a71a21cfe90c9159d84d28';
 
 abstract class _$TopUsersNotifier extends $Notifier<TopUsersState> {
   TopUsersState build();

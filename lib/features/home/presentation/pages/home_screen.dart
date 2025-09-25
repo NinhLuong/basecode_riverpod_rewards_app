@@ -7,6 +7,7 @@ import 'package:magic_rewards/config/styles/app_gradient.dart';
 import 'package:magic_rewards/shared/widgets/components/app_avatar.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
@@ -32,20 +33,8 @@ class HomeScreen extends ConsumerWidget {
       loading: () => const Scaffold(
         body: LoadingComponent(),
       ),
-      error: (errorMessage) => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Error: $errorMessage'),
-              ElevatedButton(
-                onPressed: () => ref.read(homeProvider.notifier).refresh(),
-                child: const Text('Retry'),
-              ),
-            ],
-          ),
-        ),
-      ),
+      error: (failure) => FailureComponent(
+                failure: failure, retry: () => ref.read(homeProvider.notifier).refresh()),
       success: (homeWithUser) => _buildHomeContent(context, ref, homeWithUser),
       refreshing: (currentData) => _buildHomeContent(context, ref, currentData, isRefreshing: true),
     );

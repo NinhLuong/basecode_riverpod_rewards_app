@@ -128,13 +128,13 @@ return refreshing(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( TasksEntity data)?  success,TResult Function( String message)?  error,TResult Function( TasksEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( TasksEntity data)?  success,TResult Function( Failure failure)?  error,TResult Function( TasksEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TasksInitial() when initial != null:
 return initial();case _TasksLoading() when loading != null:
 return loading();case _TasksSuccess() when success != null:
 return success(_that.data);case _TasksError() when error != null:
-return error(_that.message);case _TasksRefreshing() when refreshing != null:
+return error(_that.failure);case _TasksRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return orElse();
 
@@ -153,13 +153,13 @@ return refreshing(_that.currentData);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( TasksEntity data)  success,required TResult Function( String message)  error,required TResult Function( TasksEntity currentData)  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( TasksEntity data)  success,required TResult Function( Failure failure)  error,required TResult Function( TasksEntity currentData)  refreshing,}) {final _that = this;
 switch (_that) {
 case _TasksInitial():
 return initial();case _TasksLoading():
 return loading();case _TasksSuccess():
 return success(_that.data);case _TasksError():
-return error(_that.message);case _TasksRefreshing():
+return error(_that.failure);case _TasksRefreshing():
 return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -174,13 +174,13 @@ return refreshing(_that.currentData);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( TasksEntity data)?  success,TResult? Function( String message)?  error,TResult? Function( TasksEntity currentData)?  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( TasksEntity data)?  success,TResult? Function( Failure failure)?  error,TResult? Function( TasksEntity currentData)?  refreshing,}) {final _that = this;
 switch (_that) {
 case _TasksInitial() when initial != null:
 return initial();case _TasksLoading() when loading != null:
 return loading();case _TasksSuccess() when success != null:
 return success(_that.data);case _TasksError() when error != null:
-return error(_that.message);case _TasksRefreshing() when refreshing != null:
+return error(_that.failure);case _TasksRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return null;
 
@@ -332,10 +332,10 @@ $TasksEntityCopyWith<$Res> get data {
 
 
 class _TasksError implements TasksState {
-  const _TasksError(this.message);
+  const _TasksError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of TasksState
 /// with the given fields replaced by the non-null parameter values.
@@ -347,16 +347,16 @@ _$TasksErrorCopyWith<_TasksError> get copyWith => __$TasksErrorCopyWithImpl<_Tas
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TasksError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TasksError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'TasksState.error(message: $message)';
+  return 'TasksState.error(failure: $failure)';
 }
 
 
@@ -367,7 +367,7 @@ abstract mixin class _$TasksErrorCopyWith<$Res> implements $TasksStateCopyWith<$
   factory _$TasksErrorCopyWith(_TasksError value, $Res Function(_TasksError) _then) = __$TasksErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -384,10 +384,10 @@ class __$TasksErrorCopyWithImpl<$Res>
 
 /// Create a copy of TasksState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_TasksError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 
@@ -586,13 +586,13 @@ return refreshing(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( TasksOrdersEntity data)?  success,TResult Function( String message)?  error,TResult Function( TasksOrdersEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( TasksOrdersEntity data)?  success,TResult Function( Failure failure)?  error,TResult Function( TasksOrdersEntity currentData)?  refreshing,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaskOrdersInitial() when initial != null:
 return initial();case _TaskOrdersLoading() when loading != null:
 return loading();case _TaskOrdersSuccess() when success != null:
 return success(_that.data);case _TaskOrdersError() when error != null:
-return error(_that.message);case _TaskOrdersRefreshing() when refreshing != null:
+return error(_that.failure);case _TaskOrdersRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return orElse();
 
@@ -611,13 +611,13 @@ return refreshing(_that.currentData);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( TasksOrdersEntity data)  success,required TResult Function( String message)  error,required TResult Function( TasksOrdersEntity currentData)  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( TasksOrdersEntity data)  success,required TResult Function( Failure failure)  error,required TResult Function( TasksOrdersEntity currentData)  refreshing,}) {final _that = this;
 switch (_that) {
 case _TaskOrdersInitial():
 return initial();case _TaskOrdersLoading():
 return loading();case _TaskOrdersSuccess():
 return success(_that.data);case _TaskOrdersError():
-return error(_that.message);case _TaskOrdersRefreshing():
+return error(_that.failure);case _TaskOrdersRefreshing():
 return refreshing(_that.currentData);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -632,13 +632,13 @@ return refreshing(_that.currentData);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( TasksOrdersEntity data)?  success,TResult? Function( String message)?  error,TResult? Function( TasksOrdersEntity currentData)?  refreshing,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( TasksOrdersEntity data)?  success,TResult? Function( Failure failure)?  error,TResult? Function( TasksOrdersEntity currentData)?  refreshing,}) {final _that = this;
 switch (_that) {
 case _TaskOrdersInitial() when initial != null:
 return initial();case _TaskOrdersLoading() when loading != null:
 return loading();case _TaskOrdersSuccess() when success != null:
 return success(_that.data);case _TaskOrdersError() when error != null:
-return error(_that.message);case _TaskOrdersRefreshing() when refreshing != null:
+return error(_that.failure);case _TaskOrdersRefreshing() when refreshing != null:
 return refreshing(_that.currentData);case _:
   return null;
 
@@ -790,10 +790,10 @@ $TasksOrdersEntityCopyWith<$Res> get data {
 
 
 class _TaskOrdersError implements TaskOrdersState {
-  const _TaskOrdersError(this.message);
+  const _TaskOrdersError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of TaskOrdersState
 /// with the given fields replaced by the non-null parameter values.
@@ -805,16 +805,16 @@ _$TaskOrdersErrorCopyWith<_TaskOrdersError> get copyWith => __$TaskOrdersErrorCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskOrdersError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskOrdersError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'TaskOrdersState.error(message: $message)';
+  return 'TaskOrdersState.error(failure: $failure)';
 }
 
 
@@ -825,7 +825,7 @@ abstract mixin class _$TaskOrdersErrorCopyWith<$Res> implements $TaskOrdersState
   factory _$TaskOrdersErrorCopyWith(_TaskOrdersError value, $Res Function(_TaskOrdersError) _then) = __$TaskOrdersErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -842,10 +842,10 @@ class __$TaskOrdersErrorCopyWithImpl<$Res>
 
 /// Create a copy of TaskOrdersState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_TaskOrdersError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 
@@ -1041,13 +1041,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( ReserveCommentEntity result)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( ReserveCommentEntity result)?  success,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReserveCommentInitial() when initial != null:
 return initial();case _ReserveCommentLoading() when loading != null:
 return loading();case _ReserveCommentSuccess() when success != null:
 return success(_that.result);case _ReserveCommentError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return orElse();
 
 }
@@ -1065,13 +1065,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( ReserveCommentEntity result)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( ReserveCommentEntity result)  success,required TResult Function( Failure failure)  error,}) {final _that = this;
 switch (_that) {
 case _ReserveCommentInitial():
 return initial();case _ReserveCommentLoading():
 return loading();case _ReserveCommentSuccess():
 return success(_that.result);case _ReserveCommentError():
-return error(_that.message);}
+return error(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1085,13 +1085,13 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( ReserveCommentEntity result)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( ReserveCommentEntity result)?  success,TResult? Function( Failure failure)?  error,}) {final _that = this;
 switch (_that) {
 case _ReserveCommentInitial() when initial != null:
 return initial();case _ReserveCommentLoading() when loading != null:
 return loading();case _ReserveCommentSuccess() when success != null:
 return success(_that.result);case _ReserveCommentError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return null;
 
 }
@@ -1242,10 +1242,10 @@ $ReserveCommentEntityCopyWith<$Res> get result {
 
 
 class _ReserveCommentError implements ReserveCommentState {
-  const _ReserveCommentError(this.message);
+  const _ReserveCommentError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of ReserveCommentState
 /// with the given fields replaced by the non-null parameter values.
@@ -1257,16 +1257,16 @@ _$ReserveCommentErrorCopyWith<_ReserveCommentError> get copyWith => __$ReserveCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReserveCommentError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReserveCommentError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'ReserveCommentState.error(message: $message)';
+  return 'ReserveCommentState.error(failure: $failure)';
 }
 
 
@@ -1277,7 +1277,7 @@ abstract mixin class _$ReserveCommentErrorCopyWith<$Res> implements $ReserveComm
   factory _$ReserveCommentErrorCopyWith(_ReserveCommentError value, $Res Function(_ReserveCommentError) _then) = __$ReserveCommentErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -1294,10 +1294,10 @@ class __$ReserveCommentErrorCopyWithImpl<$Res>
 
 /// Create a copy of ReserveCommentState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_ReserveCommentError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 
@@ -1418,13 +1418,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( Failure failure)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddTaskOrderInitial() when initial != null:
 return initial();case _AddTaskOrderLoading() when loading != null:
 return loading();case _AddTaskOrderSuccess() when success != null:
 return success();case _AddTaskOrderError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return orElse();
 
 }
@@ -1442,13 +1442,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( Failure failure)  error,}) {final _that = this;
 switch (_that) {
 case _AddTaskOrderInitial():
 return initial();case _AddTaskOrderLoading():
 return loading();case _AddTaskOrderSuccess():
 return success();case _AddTaskOrderError():
-return error(_that.message);}
+return error(_that.failure);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -1462,13 +1462,13 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( Failure failure)?  error,}) {final _that = this;
 switch (_that) {
 case _AddTaskOrderInitial() when initial != null:
 return initial();case _AddTaskOrderLoading() when loading != null:
 return loading();case _AddTaskOrderSuccess() when success != null:
 return success();case _AddTaskOrderError() when error != null:
-return error(_that.message);case _:
+return error(_that.failure);case _:
   return null;
 
 }
@@ -1576,10 +1576,10 @@ String toString() {
 
 
 class _AddTaskOrderError implements AddTaskOrderState {
-  const _AddTaskOrderError(this.message);
+  const _AddTaskOrderError(this.failure);
   
 
- final  String message;
+ final  Failure failure;
 
 /// Create a copy of AddTaskOrderState
 /// with the given fields replaced by the non-null parameter values.
@@ -1591,16 +1591,16 @@ _$AddTaskOrderErrorCopyWith<_AddTaskOrderError> get copyWith => __$AddTaskOrderE
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddTaskOrderError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddTaskOrderError&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'AddTaskOrderState.error(message: $message)';
+  return 'AddTaskOrderState.error(failure: $failure)';
 }
 
 
@@ -1611,7 +1611,7 @@ abstract mixin class _$AddTaskOrderErrorCopyWith<$Res> implements $AddTaskOrderS
   factory _$AddTaskOrderErrorCopyWith(_AddTaskOrderError value, $Res Function(_AddTaskOrderError) _then) = __$AddTaskOrderErrorCopyWithImpl;
 @useResult
 $Res call({
- String message
+ Failure failure
 });
 
 
@@ -1628,10 +1628,10 @@ class __$AddTaskOrderErrorCopyWithImpl<$Res>
 
 /// Create a copy of AddTaskOrderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(_AddTaskOrderError(
-null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as Failure,
   ));
 }
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
+import 'package:magic_rewards/config/errors/errors_handler.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
@@ -37,11 +38,12 @@ class TasksNotifier extends _$TasksNotifier {
       final result = await repository.getTasks(TasksParameters());
       
       result.fold(
-        (failure) => state = TasksState.error(failure.toString()),
+        (failure) => state = TasksState.error(failure),
         (tasks) => state = TasksState.success(tasks),
       );
-    } catch (error) {
-      state = TasksState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = TasksState.error(failure);
     }
   }
 
@@ -55,8 +57,9 @@ class TasksNotifier extends _$TasksNotifier {
 
     try {
       await _fetchTasks();
-    } catch (error) {
-      state = TasksState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = TasksState.error(failure);
     }
   }
 }
@@ -77,11 +80,12 @@ class TaskOrdersNotifier extends _$TaskOrdersNotifier {
       final result = await repository.getTasksOrders(TasksOrdersParameters());
       
       result.fold(
-        (failure) => state = TaskOrdersState.error(failure.toString()),
+        (failure) => state = TaskOrdersState.error(failure),
         (orders) => state = TaskOrdersState.success(orders),
       );
-    } catch (error) {
-      state = TaskOrdersState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = TaskOrdersState.error(failure);
     }
   }
 
@@ -116,11 +120,12 @@ class ReserveCommentNotifier extends _$ReserveCommentNotifier {
       final result = await repository.reserveComment(params);
       
       result.fold(
-        (failure) => state = ReserveCommentState.error(failure.toString()),
+        (failure) => state = ReserveCommentState.error(failure),
         (reserveResult) => state = ReserveCommentState.success(reserveResult),
       );
-    } catch (error) {
-      state = ReserveCommentState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = ReserveCommentState.error(failure);
     }
   }
 
@@ -164,11 +169,12 @@ class AddTaskOrderNotifier extends _$AddTaskOrderNotifier {
       final result = await repository.addTaskOrder(params);
       
       result.fold(
-        (failure) => state = AddTaskOrderState.error(failure.toString()),
+        (failure) => state = AddTaskOrderState.error(failure),
         (_) => state = const AddTaskOrderState.success(),
       );
-    } catch (error) {
-      state = AddTaskOrderState.error(error.toString());
+    } catch (error, stackTrace) {
+      final failure = ErrorsHandler.failureThrower(error, stackTrace);
+      state = AddTaskOrderState.error(failure);
     }
   }
 

@@ -68,8 +68,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           showToast(message: S.of(context).signedUpScuccessfully);
           context.goToMain();
         },
-        error: (errorMessage) {
-          showToast(message: errorMessage);
+        error: (failure) {
+          showToast(message: failure.message);
         },
       );
     });
@@ -84,8 +84,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             _register();
           }
         },
-        error: (errorMessage) {
-          showToast(message: errorMessage);
+        error: (failure) {
+          showToast(message: failure.message);
         },
       );
     });

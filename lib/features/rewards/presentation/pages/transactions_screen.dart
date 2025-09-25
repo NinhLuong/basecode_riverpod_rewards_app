@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
@@ -41,7 +40,7 @@ class TransactionsScreen extends ConsumerWidget {
                   ],
           ),
         ),
-        error: (errorMessage) => FailureComponent(failure: Failure(errorMessage)),
+        error: (failure) => FailureComponent(failure: failure),
         refreshing: (currentData) => SmartRefresher(
           controller: refreshController,
           onRefresh: () => _refreshTransactions(ref),

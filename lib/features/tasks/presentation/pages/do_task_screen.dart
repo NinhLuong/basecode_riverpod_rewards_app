@@ -44,8 +44,8 @@ class DoTaskScreen extends HookConsumerWidget {
           showToast(message: S.of(context).success);
           context.pop();
         },
-        error: (errorMessage) {
-          showToast(message: errorMessage);
+        error: (failure) {
+          showToast(message: failure.message);
         },
       );
     });

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 import 'package:magic_rewards/features/live_offers/presentation/state/live_offers_state.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
@@ -57,8 +56,8 @@ class LiveOffersScreen extends ConsumerWidget {
           notifier,
           ref,
         ),
-        error: (message) => FailureComponent(
-          failure: Failure(message),
+        error: (failure) => FailureComponent(
+          failure: failure,
           retry: () => notifier.refresh(),
         ),
         loadingMore: (currentData) => _buildSuccessContent(
