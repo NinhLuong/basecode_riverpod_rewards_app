@@ -2,112 +2,102 @@ import 'package:dio/dio.dart';
 import 'package:magic_rewards/config/errors/exception.dart';
 import 'package:magic_rewards/core/data/models/error_message_model.dart';
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:magic_rewards/shared/services/network/network_connectivity_service.dart';
 
-/// Error interceptor that transforms DioExceptions into custom app exceptions
-/// This interceptor provides centralized error handling for all API requests
+/// Enhanced error interceptor that provides immediate network-aware error handling
+/// This interceptor integrates with NetworkConnectivityService for better UX
 class ErrorInterceptor extends Interceptor {
+  final NetworkConnectivityService _networkService;
+  
+  ErrorInterceptor() : _networkService = NetworkConnectivityService.instance;
+
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final stackTrace = StackTrace.current;
+    
+    // Check network status immediately
+    final isNetworkConnected = _networkService.isConnected;
+    
     LoggerService.error(
-      'ErrorInterceptor: Comprehensive DioException Analysis\n'
-      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
-      '🔥 EXCEPTION TYPE: ${err.type}\n'
-      '🌐 REQUEST URL: ${err.requestOptions.uri}\n'
-      '📋 REQUEST METHOD: ${err.requestOptions.method}\n'
-      '📊 RESPONSE STATUS: ${err.response?.statusCode ?? 'N/A'}\n'
-      '💬 ERROR MESSAGE: ${err.message ?? 'No message'}\n'
-      '📄 RESPONSE DATA: ${err.response?.data ?? 'No data'}\n'
-      '🏷️  REQUEST HEADERS: ${err.requestOptions.headers}\n'
-      '📨 REQUEST DATA: ${err.requestOptions.data ?? 'No request data'}\n'
-      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      'ErrorInterceptor: ${err.type} | ${err.requestOptions.method} ${err.requestOptions.uri} | '
+      'Status: ${err.response?.statusCode} | Network: ${isNetworkConnected ? 'Connected' : 'Disconnected'}',
       err,
       stackTrace,
     );
 
     try {
-      // Handle different types of DioExceptions
+      // Handle network-related errors immediately
+      if (!isNetworkConnected || _isNetworkError(err)) {
+        _handleNetworkError(err, handler);
+        return;
+      }
+
+      // Handle specific error types
       switch (err.type) {
-        case DioExceptionType.connectionTimeout:
-        case DioExceptionType.sendTimeout:
-        case DioExceptionType.receiveTimeout:
-          LoggerService.error(
-            'ErrorInterceptor: Connection timeout occurred\n'
-            'Timeout Type: ${err.type}\n'
-            'URL: ${err.requestOptions.uri}\n'
-            'Method: ${err.requestOptions.method}',
-            err,
-            stackTrace,
-          );
-          handler.reject(
-            DioException(
-              requestOptions: err.requestOptions,
-              error: NoInternetException(),
-              type: err.type,
-              message: 'Connection timeout. Please check your internet connection.',
-            ),
-          );
-          break;
-
-        case DioExceptionType.connectionError:
-          LoggerService.error(
-            'ErrorInterceptor: Connection error occurred\n'
-            'URL: ${err.requestOptions.uri}\n'
-            'Method: ${err.requestOptions.method}\n'
-            'Error: ${err.error}',
-            err,
-            stackTrace,
-          );
-          handler.reject(
-            DioException(
-              requestOptions: err.requestOptions,
-              error: NoInternetException(),
-              type: err.type,
-              message: 'No internet connection. Please check your network settings.',
-            ),
-          );
-          break;
-
         case DioExceptionType.badResponse:
           _handleBadResponse(err, handler, stackTrace);
           break;
-
+          
         case DioExceptionType.cancel:
-          LoggerService.info('ErrorInterceptor: Request cancelled for ${err.requestOptions.uri}');
+          LoggerService.info('Request cancelled: ${err.requestOptions.uri}');
           handler.reject(err);
           break;
-
+          
         case DioExceptionType.unknown:
         default:
-          LoggerService.error(
-            'ErrorInterceptor: Unknown error occurred\n'
-            'URL: ${err.requestOptions.uri}\n'
-            'Method: ${err.requestOptions.method}\n'
-            'Error: ${err.error}\n'
-            'Message: ${err.message}',
-            err,
-            stackTrace,
-          );
-          handler.reject(
-            DioException(
-              requestOptions: err.requestOptions,
-              error: UnknownException(message: err.message ?? 'An unknown error occurred'),
-              type: err.type,
-              message: 'An unexpected error occurred. Please try again.',
-            ),
-          );
+          _handleUnknownError(err, handler, stackTrace);
           break;
       }
     } catch (e, innerStackTrace) {
       LoggerService.error(
-        'ErrorInterceptor: Critical error in error handling\n'
-        'Original Exception: $err\n'
-        'Inner Exception: $e',
+        'Critical error in ErrorInterceptor: $e',
         e,
         innerStackTrace,
       );
       handler.reject(err);
     }
+  }
+
+  /// Check if the error is network-related
+  bool _isNetworkError(DioException err) {
+    return [
+      DioExceptionType.connectionTimeout,
+      DioExceptionType.sendTimeout,
+      DioExceptionType.receiveTimeout,
+      DioExceptionType.connectionError,
+    ].contains(err.type);
+  }
+
+  /// Handle network-related errors with immediate feedback
+  void _handleNetworkError(DioException err, ErrorInterceptorHandler handler) {
+    LoggerService.warning('Network error detected: ${err.type}');
+    
+    handler.reject(
+      DioException(
+        requestOptions: err.requestOptions,
+        error: NoInternetException(),
+        type: err.type,
+        message: 'No internet connection. Please check your network settings.',
+      ),
+    );
+  }
+
+  /// Handle unknown/generic errors
+  void _handleUnknownError(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
+    LoggerService.error(
+      'Unknown error: ${err.message}',
+      err,
+      stackTrace,
+    );
+    
+    handler.reject(
+      DioException(
+        requestOptions: err.requestOptions,
+        error: UnknownException(message: err.message ?? 'An unknown error occurred'),
+        type: err.type,
+        message: 'An unexpected error occurred. Please try again.',
+      ),
+    );
   }
 
   /// Handle bad response errors with status codes

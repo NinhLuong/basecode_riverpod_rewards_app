@@ -8,13 +8,17 @@ import 'package:magic_rewards/core/presentation/routes/app_routes.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extension.dart';
+import 'package:magic_rewards/shared/widgets/network_aware_wrapper.dart';
+import 'package:magic_rewards/shared/providers/network_providers.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
- 
+    // Initialize network monitoring
+    ref.watch(networkConnectivityProvider);
+    
     return ScreenUtilInit(
       designSize: const Size(428, 926),
       builder: (_, child) {
@@ -36,7 +40,10 @@ class MyApp extends ConsumerWidget {
           darkTheme: AppTheme().lightTheme,
           routerConfig: router,
           builder: (context, child) {
-            return child ?? const SizedBox.shrink();
+            // Wrap the entire app with network awareness for immediate feedback
+            return NetworkAwareWrapper(
+              child: child ?? const SizedBox.shrink(),
+            );
           },
         );
       },

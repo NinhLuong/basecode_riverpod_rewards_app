@@ -31,7 +31,7 @@ extension HomeStateX on HomeState {
     error: (failure) => failure,
   );
 
-  String? get errorMessage => mapOrNull(error: (state) => state.failure.message);
+  String? get errorMessage => failure?.message;
   bool get hasData => data != null;
 
   // Convenience getters for common data access

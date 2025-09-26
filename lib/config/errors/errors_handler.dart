@@ -4,6 +4,7 @@ import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 import 'package:magic_rewards/core/data/models/base_model.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:magic_rewards/shared/services/network/network_connectivity_service.dart';
 
 import '../../core/data/models/error_message_model.dart';
 import 'exception.dart';
@@ -19,9 +20,19 @@ typedef RequestFunction<T> = Future<Response<T>> Function();
 /// [handleEither] handles possible errors and converting to either form.
 
 class ErrorsHandler {
-// this function to handle APIs exception this make you don't have to call any try catch in your code
+  /// Network-aware exception handler that provides immediate error feedback
+  /// Checks network connectivity before making requests to prevent infinite loading
   static Future<AppResponse> exceptionThrower(RequestFunction function) async {
+    final networkService = NetworkConnectivityService.instance;
+    
     try {
+      // Check network connectivity before making request
+      final isConnected = await networkService.checkConnectivity();
+      if (!isConnected) {
+        LoggerService.warning('Request blocked: No network connectivity');
+        throw NoInternetException();
+      }
+      
       LoggerService.network('Making API request...');
       
       /// call Future function and return [AppResponse]
@@ -30,6 +41,7 @@ class ErrorsHandler {
       
       LoggerService.network('API request completed with status: ${appResponse.statusCode}');
       
+      // Handle server-side error responses
       if (appResponse.data?["error"] ?? false) {
         final errorCode = appResponse.data?['error_code'];
         LoggerService.warning('API returned error response - Error code: $errorCode');
@@ -47,23 +59,26 @@ class ErrorsHandler {
     } on DioException catch (e) {
       LoggerService.error('DioException occurred: ${e.type}', e);
       
-      // if back end return an error response and its json format
+      // Handle server error responses with data
       if (e.response != null && e.response!.data is Map<String, dynamic>) {
         LoggerService.network('Server returned error response with data: ${e.response?.statusCode}');
         throw ServerException(ErrorMessageModel.fromJson(e.response!));
       }
 
-      // any anther throws to any anther exception types showld be here
-      // ...
+      // Handle specific DioException types that may not be caught by interceptor
+      if (_isNetworkRelatedDioException(e)) {
+        LoggerService.warning('Network-related DioException detected: ${e.type}');
+        throw NoInternetException();
+      }
 
-      // un known Exception
+      // Handle unknown exceptions with responses
       if (e.response != null) {
         LoggerService.error('Unknown DioException with response: ${e.response?.statusCode}', e);
         throw UnknownException(message: e.message);
       }
 
-      // no internet Exception
-      LoggerService.warning('No internet connection detected');
+      // Default to network error for unhandled DioExceptions
+      LoggerService.warning('Unhandled DioException, treating as network error');
       throw NoInternetException();
     } catch (e, stackTrace) {
       LoggerService.detailedError(
@@ -74,10 +89,11 @@ class ErrorsHandler {
           'API URL': 'Check the specific API endpoint in logs above',
           'Request Method': 'Check the HTTP method in logs above',
           'Exception Location': 'API Service Layer',
+          'Network Status': networkService.isConnected ? 'Connected' : 'Disconnected',
         },
       );
       
-      // in json parsing error
+      // Handle JSON parsing errors
       if (e is TypeError) {
         LoggerService.parsingError(
           'JSON parsing error occurred during API response processing',
@@ -91,6 +107,16 @@ class ErrorsHandler {
 
       rethrow;
     }
+  }
+
+  /// Check if DioException is network-related
+  static bool _isNetworkRelatedDioException(DioException e) {
+    return [
+      DioExceptionType.connectionTimeout,
+      DioExceptionType.sendTimeout,
+      DioExceptionType.receiveTimeout,
+      DioExceptionType.connectionError,
+    ].contains(e.type);
   }
 
   // this function check possible exceptions and return either (left as Failure , right as Type you generic send)
