@@ -51,7 +51,7 @@ class NetworkAwareWrapper extends HookConsumerWidget {
   // Widget _buildNetworkErrorOverlay(BuildContext context) {
   //   return Positioned.fill(
   //     child: Container(
-  //       color: overlayColor ?? Colors.black.withOpacity(0.7),
+  //       color: overlayColor ?? Colors.black.withValues(alpha: 0.7),
   //       child: Center(
   //         child: Card(
   //           margin: EdgeInsets.all(24),

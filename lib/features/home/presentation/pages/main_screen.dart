@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
         label: S.current.home,
         backgroundColor: Colors.transparent
-        // backgroundColor: AppColors.lightBlack.withOpacity(0.75)
+        // backgroundColor: AppColors.lightBlack.withValues(alpha: 0.75)
         ),
     BottomNavigationBarItem(
         icon: SvgPicture.asset(ImagesPaths.navbarIcons[1]),
@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
         label: S.current.topUsers,
         backgroundColor: Colors.transparent
-        // backgroundColor: AppColors.lightBlack.withOpacity(0.5)
+        // backgroundColor: AppColors.lightBlack.withValues(alpha: 0.5)
         ),
     BottomNavigationBarItem(
         icon: SvgPicture.asset(ImagesPaths.navbarIcons[2]),

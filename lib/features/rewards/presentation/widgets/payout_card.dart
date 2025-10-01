@@ -106,7 +106,7 @@ class PayoutCard extends ConsumerWidget {
                     key: formKey,
                     child: AppTextField(
                       controller: textController,
-                      fillColor: AppColors.blue.withOpacity(0.5),
+                      fillColor: AppColors.blue.withValues(alpha: 0.5),
                       hintStyle: context.f12400?.copyWith(color: AppColors.grey1),
                       style: context.f16600,
                       validator: AppValidator(validators: [

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:magic_rewards/config/enums/app_languages.dart';
 import 'package:magic_rewards/config/enums/app_state.dart';
@@ -58,7 +59,7 @@ class AppConfigNotifier extends _$AppConfigNotifier {
       );
     } catch (error) {
       // Log error but don't throw to avoid breaking the logout flow
-      print('Error during logout: $error');
+      LoggerService.error('Error during logout: $error');
       
       // Still try to update state if mounted and clear auth state
       if (ref.mounted) {
@@ -66,7 +67,7 @@ class AppConfigNotifier extends _$AppConfigNotifier {
         try {
           ref.read(currentUserProvider.notifier).clearUser();
         } catch (authError) {
-          print('Error clearing auth state: $authError');
+          LoggerService.error('Error clearing auth state: $authError');
         }
         
         state = AppConfigState(

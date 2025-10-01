@@ -18,7 +18,6 @@ typedef RequestFunction<T> = Future<Response<T>> Function();
 /// class [ErrorsHandler] defaine as Global Exception Handler,
 /// [exceptionThrower] handles throw cases of exception according to the application's use cases,
 /// [handleEither] handles possible errors and converting to either form.
-
 class ErrorsHandler {
   /// Network-aware exception handler that provides immediate error feedback
   /// Checks network connectivity before making requests to prevent infinite loading
