@@ -5,6 +5,7 @@ import 'package:magic_rewards/config/enums/app_languages.dart';
 import 'package:magic_rewards/config/enums/app_state.dart';
 import 'package:magic_rewards/config/languages/app_local.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:magic_rewards/core/presentation/observers/system_locale_observer.dart';
 import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
 
 part 'app_config_providers.g.dart';
@@ -23,10 +24,65 @@ abstract class AppConfigState with _$AppConfigState {
 class AppConfigNotifier extends _$AppConfigNotifier {
   @override
   AppConfigState build() {
+    // Initialize the system locale observer
+    final observer = ref.watch(systemLocaleObserverProvider);
+    
+    // Get the current system locale
+    final systemLocale = ref.watch(systemLocaleProvider);
+    
+    // Check if user has a saved locale preference
+    final cachedLocale = CacheStorageServices().locale;
+    
+    // Determine initial language:
+    // 1. Use cached locale if exists (user preference)
+    // 2. Otherwise, use system locale (auto-sync with iOS)
+    final initialLanguage = cachedLocale != null 
+        ? AppLocale().currentLanguage()
+        : systemLocale;
+    
+    LoggerService.info(
+      '🌍 App Config initialized:\n'
+      '   System Locale: ${systemLocale.name}\n'
+      '   Cached Locale: ${cachedLocale ?? "none"}\n'
+      '   Initial Language: ${initialLanguage.name}',
+    );
+    
+    // Set up listener for system locale changes
+    // This will automatically sync app language when iOS system language changes
+    observer.addListener(() {
+      _syncWithSystemLocale();
+    });
+    
     return AppConfigState(
-      language: AppLocale().currentLanguage(),
+      language: initialLanguage,
       appState: CacheStorageServices().hasToken ? AppState.loggedIn : AppState.loggedOut,
     );
+  }
+  
+  /// Synchronize app language with system locale
+  /// This is called automatically when iOS system language changes
+  void _syncWithSystemLocale() {
+    final systemLocale = ref.read(systemLocaleProvider);
+    final currentLanguage = state.language;
+    
+    // Only sync if the system locale is different from current language
+    // and user hasn't manually set a preference
+    if (systemLocale != currentLanguage) {
+      LoggerService.info(
+        '🔄 Syncing app language with system locale:\n'
+        '   From: ${currentLanguage.name}\n'
+        '   To: ${systemLocale.name}',
+      );
+      
+      // Update the app language to match system locale
+      state = AppConfigState(
+        language: systemLocale,
+        appState: state.appState,
+      );
+      
+      // Load the new locale for intl
+      AppLocale().setLocale(systemLocale);
+    }
   }
 
   Future<void> setLanguage(AppLanguages language) async {

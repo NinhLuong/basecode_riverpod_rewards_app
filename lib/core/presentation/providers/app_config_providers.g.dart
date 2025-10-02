@@ -41,7 +41,7 @@ final class AppConfigNotifierProvider
   }
 }
 
-String _$appConfigNotifierHash() => r'50604165565b9e9c5faf2513362e78e1b23a1cc0';
+String _$appConfigNotifierHash() => r'a06e8a94091b6946c487246e171b3b04ee58060f';
 
 abstract class _$AppConfigNotifier extends $Notifier<AppConfigState> {
   AppConfigState build();
