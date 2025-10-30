@@ -36,7 +36,9 @@ import 'dart:developer' as developer;
 ///
 /// Provides structured logging with different levels and context-specific
 /// methods for better debugging and monitoring capabilities.
-class LoggerService {
+abstract class IL {}
+
+class L implements IL {
   /// Default tag used for logging when no specific tag is provided.
   static const String _tag = 'Flutter';
 

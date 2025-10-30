@@ -13,7 +13,7 @@ class RouterRefreshListenable extends ChangeNotifier {
       currentUserProvider,
       (previous, next) {
         if (previous?.isAuthenticated != next.isAuthenticated) {
-          LoggerService.app(
+          L.app(
             '🔄 Auth state changed, notifying GoRouter:\n'
             '   Previous: ${previous?.runtimeType}\n'
             '   Current: ${next.runtimeType}\n'

@@ -12,14 +12,14 @@ import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 /// - Proper error handling and logging
 /// - Integration with Riverpod state management
 final routerProvider = Provider<GoRouter>((ref) {
-  LoggerService.app('🔧 Initializing GoRouter with clean architecture setup');
+  L.app('🔧 Initializing GoRouter with clean architecture setup');
   
   try {
     final router = config.RouteConfiguration.createRouter(ref);
-    LoggerService.app('✅ GoRouter successfully initialized with NavigationService');
+    L.app('✅ GoRouter successfully initialized with NavigationService');
     return router;
   } catch (error, stackTrace) {
-    LoggerService.error(
+    L.error(
       'Failed to initialize GoRouter:\n'
       'Error: $error\n'
       'This is a critical error that prevents navigation from working.',

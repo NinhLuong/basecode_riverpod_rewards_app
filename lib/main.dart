@@ -16,29 +16,29 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize logging system
-  LoggerService.app('🚀 Application starting...');
+  L.app('🚀 Application starting...');
   
   // Set up ProviderObserver for comprehensive state management logging
-  LoggerService.app('📱 ProviderObserver will be initialized');
+  L.app('📱 ProviderObserver will be initialized');
   
   // Load environment configuration FIRST
-  LoggerService.app('⚙️ Loading environment configuration...');
+  L.app('⚙️ Loading environment configuration...');
   await AppEnvConfig.loadEnv();
-  LoggerService.app('✅ Environment loaded: ${AppEnvConfig.env}');
-  LoggerService.app('🌐 API Base URL: ${AppEnvConfig.apiBaseUrl}');
+  L.app('✅ Environment loaded: ${AppEnvConfig.env}');
+  L.app('🌐 API Base URL: ${AppEnvConfig.apiBaseUrl}');
   
   // Initialize core services
-  LoggerService.app('💾 Initializing cache storage...');
+  L.app('💾 Initializing cache storage...');
   await CacheStorageServices.init();
   
-  LoggerService.app('📐 Ensuring screen size...');
+  L.app('📐 Ensuring screen size...');
   await ScreenUtil.ensureScreenSize();
   
-  LoggerService.app('🔗 Initializing dependency injection...');
+  L.app('🔗 Initializing dependency injection...');
   // DIServices().init();
   configureDependencies();
   
-  LoggerService.app('✅ Application initialization completed');
+  L.app('✅ Application initialization completed');
   
   runApp(
     ProviderScope(

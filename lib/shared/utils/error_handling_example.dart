@@ -33,7 +33,7 @@ class ErrorHandlingExample {
       
     } catch (e, stackTrace) {
       // ✅ CORRECT: Always catch both exception and stack trace
-      LoggerService.detailedError(
+      L.detailedError(
         'API call failed in basicErrorHandlingExample',
         e,
         stackTrace,
@@ -61,7 +61,7 @@ class ErrorHandlingExample {
       
     } catch (e, stackTrace) {
       // ✅ CORRECT: Use specialized parsing error logging
-      LoggerService.parsingError(
+      L.parsingError(
         'JSON parsing failed in jsonParsingExample',
         e,
         stackTrace,
@@ -83,7 +83,7 @@ class ErrorHandlingExample {
       await _simulateDataTransformation();
       
     } catch (e, stackTrace) {
-      LoggerService.detailedError(
+      L.detailedError(
         'Data transformation failed in repository layer',
         e,
         stackTrace,
@@ -165,14 +165,14 @@ $stackTrace
 ///    try {
 ///      // risky operation
 ///    } catch (e, stackTrace) {
-///      LoggerService.detailedError('Operation failed', e, stackTrace);
+///      L.detailedError('Operation failed', e, stackTrace);
 ///    }
 ///    ```
 /// 
 /// 2. **Use appropriate logging methods:**
-///    - `LoggerService.detailedError()` for comprehensive error analysis
-///    - `LoggerService.parsingError()` for JSON/parsing specific errors
-///    - `LoggerService.error()` for standard error logging
+///    - `L.detailedError()` for comprehensive error analysis
+///    - `L.parsingError()` for JSON/parsing specific errors
+///    - `L.error()` for standard error logging
 /// 
 /// 3. **Provide meaningful context:**
 ///    - Include method names, class names, operation types
@@ -199,7 +199,7 @@ $stackTrace
 /// 2. **Don't use generic error messages:**
 ///    ```dart
 ///    // ❌ WRONG
-///    LoggerService.error('Something went wrong');
+///    L.error('Something went wrong');
 ///    ```
 /// 
 /// 3. **Don't swallow exceptions without logging:**

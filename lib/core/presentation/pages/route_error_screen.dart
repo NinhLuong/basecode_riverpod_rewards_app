@@ -133,7 +133,7 @@ class RouteErrorScreen extends ConsumerWidget {
   }
 
   void _logRoutingError() {
-    LoggerService.error(
+    L.error(
       'Navigation Error Occurred:\n'
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
       '🔥 ROUTE ERROR: ${error?.toString() ?? 'Unknown routing error'}\n'

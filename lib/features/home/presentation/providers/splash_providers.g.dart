@@ -44,7 +44,7 @@ final class SplashDisplayTimeProvider
   }
 }
 
-String _$splashDisplayTimeHash() => r'fda8896488e49670691a835b4a6d16f925d8ce51';
+String _$splashDisplayTimeHash() => r'8870a75cdd1adbbc97f2d1707c7743a5e99a1adb';
 
 /// Provider to track splash screen display timing
 

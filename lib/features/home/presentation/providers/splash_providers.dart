@@ -20,12 +20,12 @@ class SplashDisplayTime extends _$SplashDisplayTime {
       startTime: DateTime.now(),
       isComplete: false,
     );
-    LoggerService.app('🚀 Splash display started');
+    L.app('🚀 Splash display started');
   }
 
   void completeSplash() {
     state = state.copyWith(isComplete: true);
-    LoggerService.app('✅ Splash display completed');
+    L.app('✅ Splash display completed');
   }
 
   void reset() {

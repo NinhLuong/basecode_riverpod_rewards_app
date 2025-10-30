@@ -40,7 +40,7 @@ class AppConfigNotifier extends _$AppConfigNotifier {
         ? AppLocale().currentLanguage()
         : systemLocale;
     
-    LoggerService.info(
+    L.info(
       '🌍 App Config initialized:\n'
       '   System Locale: ${systemLocale.name}\n'
       '   Cached Locale: ${cachedLocale ?? "none"}\n'
@@ -68,7 +68,7 @@ class AppConfigNotifier extends _$AppConfigNotifier {
     // Only sync if the system locale is different from current language
     // and user hasn't manually set a preference
     if (systemLocale != currentLanguage) {
-      LoggerService.info(
+      L.info(
         '🔄 Syncing app language with system locale:\n'
         '   From: ${currentLanguage.name}\n'
         '   To: ${systemLocale.name}',
@@ -115,7 +115,7 @@ class AppConfigNotifier extends _$AppConfigNotifier {
       );
     } catch (error) {
       // Log error but don't throw to avoid breaking the logout flow
-      LoggerService.error('Error during logout: $error');
+      L.error('Error during logout: $error');
       
       // Still try to update state if mounted and clear auth state
       if (ref.mounted) {
@@ -123,7 +123,7 @@ class AppConfigNotifier extends _$AppConfigNotifier {
         try {
           ref.read(currentUserProvider.notifier).clearUser();
         } catch (authError) {
-          LoggerService.error('Error clearing auth state: $authError');
+          L.error('Error clearing auth state: $authError');
         }
         
         state = AppConfigState(

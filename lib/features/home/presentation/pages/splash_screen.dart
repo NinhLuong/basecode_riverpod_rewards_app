@@ -32,7 +32,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> _initializeSplash() async {
     if (!mounted) return;
     
-    LoggerService.app('🚀 Splash screen initializing...');
+    L.app('🚀 Splash screen initializing...');
     
     try {
       // Mark splash as started (now safe to modify provider)
@@ -55,7 +55,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         await _navigateBasedOnAuthState();
       }
     } catch (error, stackTrace) {
-      LoggerService.error(
+      L.error(
         'Splash initialization failed: $error',
         error,
         stackTrace,
@@ -71,7 +71,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> _navigateBasedOnAuthState() async {
     final userState = ref.read(currentUserProvider);
     
-    LoggerService.app(
+    L.app(
       '🔄 Splash navigation decision:\n'
       '   Auth State: ${userState.runtimeType}\n'
       '   Is Authenticated: ${userState.isAuthenticated}'

@@ -36,19 +36,19 @@ class NetworkConnectivityService {
       // Listen for connectivity changes
       _subscription = _connectivity.onConnectivityChanged.listen(
         (List<ConnectivityResult> results) {
-          LoggerService.network('Connectivity changed: $results');
+          L.network('Connectivity changed: $results');
           _updateConnectionStatus(results);
         },
         onError: (error) {
-          LoggerService.error('Network connectivity stream error: $error');
+          L.error('Network connectivity stream error: $error');
           // Force reconnection check on error
           _forceConnectivityCheck();
         },
       );
       
-      LoggerService.info('NetworkConnectivityService initialized');
+      L.info('NetworkConnectivityService initialized');
     } catch (e) {
-      LoggerService.error('Failed to initialize NetworkConnectivityService: $e');
+      L.error('Failed to initialize NetworkConnectivityService: $e');
       // Assume connected if we can't determine status
       _updateConnectionStatus([ConnectivityResult.wifi]);
     }
@@ -59,12 +59,12 @@ class NetworkConnectivityService {
     final wasConnected = _isConnected;
     _isConnected = _isConnectedFromResults(results);
     
-    LoggerService.network('Connection status update: $results -> ${_isConnected ? 'Connected' : 'Disconnected'}');
+    L.network('Connection status update: $results -> ${_isConnected ? 'Connected' : 'Disconnected'}');
     
     // Always emit status changes
     if (wasConnected != _isConnected) {
       _networkStatusController.add(_isConnected);
-      LoggerService.network('Network status changed: ${_isConnected ? 'Connected' : 'Disconnected'}');
+      L.network('Network status changed: ${_isConnected ? 'Connected' : 'Disconnected'}');
     }
   }
 
@@ -98,10 +98,10 @@ class NetworkConnectivityService {
     try {
       await Future.delayed(Duration(milliseconds: 500)); // Small delay
       final results = await _connectivity.checkConnectivity();
-      LoggerService.network('Forced connectivity check result: $results');
+      L.network('Forced connectivity check result: $results');
       _updateConnectionStatus(results);
     } catch (e) {
-      LoggerService.error('Failed to force connectivity check: $e');
+      L.error('Failed to force connectivity check: $e');
     }
   }
 
@@ -109,18 +109,18 @@ class NetworkConnectivityService {
   Future<bool> checkConnectivity() async {
     try {
       final results = await _connectivity.checkConnectivity();
-      LoggerService.network('Manual connectivity check: $results');
+      L.network('Manual connectivity check: $results');
       _updateConnectionStatus(results);
       return _isConnected;
     } catch (e) {
-      LoggerService.error('Failed to check connectivity: $e');
+      L.error('Failed to check connectivity: $e');
       return false;
     }
   }
 
   /// Manual refresh of connectivity status - useful for retry scenarios
   Future<void> refreshConnectivity() async {
-    LoggerService.info('Manually refreshing connectivity status...');
+    L.info('Manually refreshing connectivity status...');
     await _forceConnectivityCheck();
   }
 
@@ -128,6 +128,6 @@ class NetworkConnectivityService {
   void dispose() {
     _subscription?.cancel();
     _networkStatusController.close();
-    LoggerService.info('NetworkConnectivityService disposed');
+    L.info('NetworkConnectivityService disposed');
   }
 }

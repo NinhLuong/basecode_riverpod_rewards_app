@@ -5,10 +5,10 @@ class RouteValidation {
   static T? validateExtra<T>(Object? extra, String routeName) {
     try {
       if (extra is T) return extra;
-      LoggerService.error('Invalid parameter type for $routeName route');
+      L.error('Invalid parameter type for $routeName route');
       return null;
     } catch (e) {
-      LoggerService.error('Error validating parameters for $routeName', e);
+      L.error('Error validating parameters for $routeName', e);
       return null;
     }
   }

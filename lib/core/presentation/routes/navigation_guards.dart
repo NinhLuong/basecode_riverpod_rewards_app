@@ -31,13 +31,13 @@ class NavigationGuards {
 
     // During splash screen display period, prevent any redirects
     if (currentPath == AppRoutePaths.splash && !splashDisplayTime.isComplete) {
-      LoggerService.app('🚀 Splash screen displaying, blocking redirects');
+      L.app('🚀 Splash screen displaying, blocking redirects');
       return null;
     }
 
     // Handle loading state - stay on splash screen
     if (currentUserState.isLoading && currentPath != AppRoutePaths.splash) {
-      LoggerService.app('🔄 User state loading, redirecting to splash');
+      L.app('🔄 User state loading, redirecting to splash');
       return AppRoutePaths.splash;
     }
 
@@ -57,19 +57,19 @@ class NavigationGuards {
 
     // Redirect unauthenticated users trying to access protected routes
     if (!isAuthenticated && isProtectedRoute) {
-      LoggerService.app('🚫 BLOCKING: Unauthenticated user trying to access protected route, redirecting to login');
+      L.app('🚫 BLOCKING: Unauthenticated user trying to access protected route, redirecting to login');
       return AppRoutePaths.login;
     }
 
     // Redirect authenticated users from auth routes to main
     if (isAuthenticated && isAuthRoute) {
-      LoggerService.app('✅ Authenticated user on auth route, redirecting to main');
+      L.app('✅ Authenticated user on auth route, redirecting to main');
       return AppRoutePaths.main;
     }
 
     // Redirect authenticated users from splash to main
     if (isAuthenticated && currentPath == AppRoutePaths.splash) {
-      LoggerService.app('🚫 BLOCKING: Authenticated user on splash, redirecting to main');
+      L.app('🚫 BLOCKING: Authenticated user on splash, redirecting to main');
       return AppRoutePaths.main;
     }
 
@@ -77,12 +77,12 @@ class NavigationGuards {
     if (!isAuthenticated && 
         !userState.isLoading && 
         currentPath == AppRoutePaths.splash) {
-      LoggerService.app('🚫 BLOCKING: Unauthenticated user on splash, redirecting to login');
+      L.app('🚫 BLOCKING: Unauthenticated user on splash, redirecting to login');
       return AppRoutePaths.login;
     }
 
     // No redirect needed
-    LoggerService.app('✅ ALLOWING: Navigation permitted, no redirect needed');
+    L.app('✅ ALLOWING: Navigation permitted, no redirect needed');
     return null;
   }
 
@@ -106,7 +106,7 @@ class NavigationGuards {
   /// Can be extended to validate deep link parameters,
   /// handle expired links, or perform additional checks
   static String? handleDeepLink(String path, Map<String, String> queryParams) {
-    LoggerService.app('🔗 Processing deep link: $path with params: $queryParams');
+    L.app('🔗 Processing deep link: $path with params: $queryParams');
     
     // Add any deep link validation logic here
     // For example: validate invite codes, check link expiration, etc.
@@ -116,7 +116,7 @@ class NavigationGuards {
 
   /// Logs navigation attempts for debugging
   static void _logNavigationAttempt(String currentPath, CurrentUserState userState) {
-    LoggerService.app(
+    L.app(
       'Navigation Redirect Check:\n'
       '📍 Current Path: $currentPath\n'
       '🔐 Auth State: ${userState.runtimeType}\n'

@@ -19,7 +19,7 @@ final networkConnectivityServiceProvider = Provider<NetworkConnectivityService>(
 final networkConnectivityProvider = StreamProvider<bool>((ref) {
   final service = ref.watch(networkConnectivityServiceProvider);
   
-  LoggerService.info('NetworkConnectivityProvider: Starting network monitoring');
+  L.info('NetworkConnectivityProvider: Starting network monitoring');
   
   // Initialize service if not already done
   service.initialize();
@@ -61,7 +61,7 @@ final networkRefreshProvider = Provider<Future<void> Function()>((ref) {
   final service = ref.watch(networkConnectivityServiceProvider);
   
   return () async {
-    LoggerService.info('Manual network connectivity refresh triggered');
+    L.info('Manual network connectivity refresh triggered');
     await service.refreshConnectivity();
   };
 });

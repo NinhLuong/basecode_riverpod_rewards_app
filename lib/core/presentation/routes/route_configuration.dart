@@ -47,7 +47,7 @@ class RouteConfiguration {
       debugLogDiagnostics: true, // Enable in debug mode
     );
     
-    LoggerService.app('🔧 Router configuration created');
+    L.app('🔧 Router configuration created');
     return router;
   }
 
@@ -179,66 +179,66 @@ class RouteConfiguration {
 extension NavigationExtensions on BuildContext {
 // Auth Navigation
   void goToSplash() {
-    LoggerService.debug('🚀 Navigating to splash');
+    L.debug('🚀 Navigating to splash');
     go(AppRoutePaths.splash);
   }
 
   void goToLogin() {
-    LoggerService.debug('🔑 Navigating to login');
+    L.debug('🔑 Navigating to login');
     go(AppRoutePaths.login);
   }
 
   void goToRegister() {
-    LoggerService.debug('📝 Navigating to register');
+    L.debug('📝 Navigating to register');
     go(AppRoutePaths.register);
   }
 
   // Main App Navigation
   void goToMain() {
-    LoggerService.debug('🏠 Navigating to main');
+    L.debug('🏠 Navigating to main');
     go(AppRoutePaths.main);
   }
 
   // Profile Navigation
   void goToProfile() {
-    LoggerService.debug('👤 Navigating to profile');
+    L.debug('👤 Navigating to profile');
     go(AppRoutePaths.profile);
   }
 
   void goToContactUs() {
-    LoggerService.debug('📞 Navigating to contact us');
+    L.debug('📞 Navigating to contact us');
     push(AppRoutePaths.contactUs);
   }
 
   void goToTerms() {
-    LoggerService.debug('📋 Navigating to terms');
+    L.debug('📋 Navigating to terms');
     push(AppRoutePaths.terms);
   }
 
   // Rewards Navigation
   void goToRedeem() {
-    LoggerService.debug('🎁 Navigating to redeem');
+    L.debug('🎁 Navigating to redeem');
     go(AppRoutePaths.redeem);
   }
 
   void goToTransactions() {
-    LoggerService.debug('💳 Navigating to transactions');
+    L.debug('💳 Navigating to transactions');
     push(AppRoutePaths.transactions);
   }
 
   // Tasks Navigation
   void goToTasks() {
-    LoggerService.debug('📋 Navigating to tasks');
+    L.debug('📋 Navigating to tasks');
     go(AppRoutePaths.tasks);
   }
 
   void goToTaskDetails({required TaskEntity task}) {
-    LoggerService.debug('📋 Navigating to task details: ${task.toString()}');
+    L.debug('📋 Navigating to task details: ${task.toString()}');
     push(AppRoutePaths.taskDetails, extra: task);
   }
 
   void goToDoTask({required CommentEntity comment, required String taskUrl}) {
-    LoggerService.debug('🎯 Navigating to do task: $taskUrl');
+    L.debug('🎯 Navigating to do task: $taskUrl');
     push(AppRoutePaths.doTask, extra: {
       'comment': comment,
       'taskUrl': taskUrl,
@@ -247,19 +247,19 @@ extension NavigationExtensions on BuildContext {
 
   // Live Offers Navigation
   void goToLiveOffers() {
-    LoggerService.debug('🎯 Navigating to live offers');
+    L.debug('🎯 Navigating to live offers');
     go(AppRoutePaths.liveOffers);
   }
 
   // Top Users Navigation
   void goToLeaderboard() {
-    LoggerService.debug('🏆 Navigating to leaderboard');
+    L.debug('🏆 Navigating to leaderboard');
     go(AppRoutePaths.leaderboard);
   }
 
   // Utility Navigation Methods
   void goBack() {
-    LoggerService.debug('⬅️ Navigating back');
+    L.debug('⬅️ Navigating back');
     if (canPop()) {
       pop();
     } else {
@@ -269,7 +269,7 @@ extension NavigationExtensions on BuildContext {
   }
 
   void goBackWithResult<T>(T result) {
-    LoggerService.debug('⬅️ Navigating back with result: $result');
+    L.debug('⬅️ Navigating back with result: $result');
     if (canPop()) {
       pop(result);
     } else {

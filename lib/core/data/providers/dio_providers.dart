@@ -7,7 +7,7 @@ import 'package:magic_rewards/shared/services/network/network_connectivity_servi
 
 /// Provider for the main Dio instance with enhanced error handling
 final dioProvider = Provider<Dio>((ref) {
-  LoggerService.info('Initializing Dio with network-aware configuration');
+  L.info('Initializing Dio with network-aware configuration');
   
   final dio = Dio();
   
@@ -35,7 +35,7 @@ final dioProvider = Provider<Dio>((ref) {
         requestHeader: true,
         responseHeader: false,
         error: true,
-        logPrint: (object) => LoggerService.network(object.toString()),
+        logPrint: (object) => L.network(object.toString()),
       ),
     );
   }
@@ -43,7 +43,7 @@ final dioProvider = Provider<Dio>((ref) {
   // Initialize network connectivity service
   NetworkConnectivityService.instance.initialize();
 
-  LoggerService.info('Dio configuration completed with network awareness');
+  L.info('Dio configuration completed with network awareness');
   return dio;
 });
 
@@ -78,7 +78,7 @@ final networkAwareDioProvider = Provider<Dio>((ref) {
     InterceptorsWrapper(
       onRequest: (options, handler) {
         if (!networkService.isConnected) {
-          LoggerService.warning('Blocking request due to no network connectivity: ${options.uri}');
+          L.warning('Blocking request due to no network connectivity: ${options.uri}');
           handler.reject(
             DioException(
               requestOptions: options,

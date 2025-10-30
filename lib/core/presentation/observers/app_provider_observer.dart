@@ -22,7 +22,7 @@ final class AppProviderObserver extends ProviderObserver {
     ProviderObserverContext context,
     Object? value,
   ) {
-    LoggerService.info('🆕 Provider Created: ${context.provider.name ?? context.provider.runtimeType}');
+    L.info('🆕 Provider Created: ${context.provider.name ?? context.provider.runtimeType}');
   }
 
   @override
@@ -34,7 +34,7 @@ final class AppProviderObserver extends ProviderObserver {
     final providerName = context.provider.name ?? context.provider.runtimeType;
     
     // Log all state changes at debug level
-    LoggerService.debug(
+    L.debug(
       '🔄 Provider Updated: $providerName\n'
       '   From: ${previousValue?.runtimeType}\n'
       '   To: ${newValue?.runtimeType}'
@@ -42,7 +42,7 @@ final class AppProviderObserver extends ProviderObserver {
     
     // Log important state changes at info level for easier filtering
     if (_isImportantStateChange(previousValue, newValue)) {
-      LoggerService.info('⚡ Important State Change: $providerName');
+      L.info('⚡ Important State Change: $providerName');
     }
   }
 
@@ -50,7 +50,7 @@ final class AppProviderObserver extends ProviderObserver {
   void didDisposeProvider(
     ProviderObserverContext context,
   ) {
-    LoggerService.info('🗑️ Provider Disposed: ${context.provider.name ?? context.provider.runtimeType}');
+    L.info('🗑️ Provider Disposed: ${context.provider.name ?? context.provider.runtimeType}');
   }
 
   @override
@@ -59,7 +59,7 @@ final class AppProviderObserver extends ProviderObserver {
     Object error,
     StackTrace stackTrace,
   ) {
-    LoggerService.error(
+    L.error(
       '❌ Provider Error in ${context.provider.name ?? context.provider.runtimeType}: $error',
       error,
       stackTrace,

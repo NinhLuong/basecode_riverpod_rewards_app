@@ -13,7 +13,7 @@ class SystemLocaleObserver extends WidgetsBindingObserver {
     // Register this observer with WidgetsBinding
     WidgetsBinding.instance.addObserver(this);
     _currentLocale = _getSystemLocale();
-    LoggerService.info('SystemLocaleObserver initialized with locale: ${_currentLocale.name}');
+    L.info('SystemLocaleObserver initialized with locale: ${_currentLocale.name}');
   }
 
   AppLanguages _currentLocale = AppLanguages.english;
@@ -43,7 +43,7 @@ class SystemLocaleObserver extends WidgetsBindingObserver {
   void didChangeLocales(List<ui.Locale>? locales) {
     super.didChangeLocales(locales);
     
-    LoggerService.info(
+    L.info(
       '🌍 System locale changed:\n'
       '   Locales: ${locales?.map((l) => l.toString()).join(", ")}\n'
       '   Primary locale: ${locales?.first.languageCode}',
@@ -54,7 +54,7 @@ class SystemLocaleObserver extends WidgetsBindingObserver {
       final oldLocale = _currentLocale;
       _currentLocale = newLocale;
       
-      LoggerService.info(
+      L.info(
         '🔄 App locale updated:\n'
         '   From: ${oldLocale.name}\n'
         '   To: ${_currentLocale.name}',
@@ -69,14 +69,14 @@ class SystemLocaleObserver extends WidgetsBindingObserver {
     final locales = ui.PlatformDispatcher.instance.locales;
     
     if (locales.isEmpty) {
-      LoggerService.warning('No system locales found, defaulting to English');
+      L.warning('No system locales found, defaulting to English');
       return AppLanguages.english;
     }
 
     final primaryLocale = locales.first;
     final languageCode = primaryLocale.languageCode.toLowerCase();
 
-    LoggerService.debug('Primary system locale language code: $languageCode');
+    L.debug('Primary system locale language code: $languageCode');
 
     // Map language code to AppLanguages
     switch (languageCode) {
@@ -92,7 +92,7 @@ class SystemLocaleObserver extends WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _listeners.clear();
-    LoggerService.info('SystemLocaleObserver disposed');
+    L.info('SystemLocaleObserver disposed');
   }
 }
 
