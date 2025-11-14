@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/features/home/presentation/pages/home_screen.dart';
-import 'package:magic_rewards/features/home/presentation/providers/home_providers.dart';
-import 'package:magic_rewards/features/home/presentation/state/home_state.dart';
+import 'package:riverpod_rewards/features/home/presentation/pages/home_screen.dart';
+import 'package:riverpod_rewards/features/home/presentation/providers/home_providers.dart';
+import 'package:riverpod_rewards/features/home/presentation/state/home_state.dart';
 import '../../../../shared/test_utils/widget_test_utils.dart';
 
 void main() {

@@ -1,15 +1,15 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/config/errors/errors_handler.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/orders_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/redeem_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
-import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
+import 'package:riverpod_rewards/config/di/injectable_config.dart';
+import 'package:riverpod_rewards/config/errors/errors_handler.dart';
+import 'package:riverpod_rewards/features/rewards/domain/entities/orders_entity.dart';
+import 'package:riverpod_rewards/features/rewards/domain/entities/transactions_entity.dart';
+import 'package:riverpod_rewards/features/rewards/domain/entities/payouts_entity.dart';
+import 'package:riverpod_rewards/features/rewards/domain/parameters/orders_parameters.dart';
+import 'package:riverpod_rewards/features/rewards/domain/parameters/redeem_parameters.dart';
+import 'package:riverpod_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
+import 'package:riverpod_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
+import 'package:riverpod_rewards/features/rewards/domain/repository/rewards_repository.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/state/rewards_state.dart';
 
 part 'rewards_providers.g.dart';
 

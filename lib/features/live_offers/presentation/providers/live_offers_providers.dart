@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/features/live_offers/presentation/state/live_offers_state.dart';
+import 'package:riverpod_rewards/features/live_offers/presentation/state/live_offers_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
-import 'package:magic_rewards/features/live_offers/domain/parameters/live_offers_parameters.dart';
-import 'package:magic_rewards/features/live_offers/domain/usecases/get_live_offers_usecase.dart';
+import 'package:riverpod_rewards/config/di/injectable_config.dart';
+import 'package:riverpod_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
+import 'package:riverpod_rewards/features/live_offers/domain/parameters/live_offers_parameters.dart';
+import 'package:riverpod_rewards/features/live_offers/domain/usecases/get_live_offers_usecase.dart';
 
 part 'live_offers_providers.g.dart';
 

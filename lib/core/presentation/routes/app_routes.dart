@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/core/presentation/routes/route_configuration.dart' as config;
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/core/presentation/routes/route_configuration.dart' as config;
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 /// The main router provider for the application
 /// 

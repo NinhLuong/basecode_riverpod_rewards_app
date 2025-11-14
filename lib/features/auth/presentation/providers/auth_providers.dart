@@ -1,16 +1,16 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/config/errors/errors_handler.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/usecases/login_usecase.dart';
-import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dart';
-import 'package:magic_rewards/features/auth/domain/usecases/check_email_usecase.dart';
-import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
-import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
+import 'package:riverpod_rewards/config/di/injectable_config.dart';
+import 'package:riverpod_rewards/config/errors/errors_handler.dart';
+import 'package:riverpod_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:riverpod_rewards/features/auth/domain/entities/check_email_entity.dart';
+import 'package:riverpod_rewards/features/auth/domain/parameters/login_parameters.dart';
+import 'package:riverpod_rewards/features/auth/domain/parameters/register_parameters.dart';
+import 'package:riverpod_rewards/features/auth/domain/parameters/check_email_parameters.dart';
+import 'package:riverpod_rewards/features/auth/domain/usecases/login_usecase.dart';
+import 'package:riverpod_rewards/features/auth/domain/usecases/register_usecase.dart';
+import 'package:riverpod_rewards/features/auth/domain/usecases/check_email_usecase.dart';
+import 'package:riverpod_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:riverpod_rewards/features/auth/presentation/state/auth_state.dart';
 
 part 'auth_providers.g.dart';
 

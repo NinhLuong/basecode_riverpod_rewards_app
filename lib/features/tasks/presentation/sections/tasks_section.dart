@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/features/tasks/presentation/providers/tasks_providers.dart';
-import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
-import 'package:magic_rewards/features/tasks/presentation/widgets/task_card.dart';
+import 'package:riverpod_rewards/shared/widgets/components/empty_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/failure_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/providers/tasks_providers.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/state/tasks_state.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/widgets/task_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TasksSection extends ConsumerWidget {

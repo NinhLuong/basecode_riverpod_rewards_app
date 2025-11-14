@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/themes/app_theme.dart';
-import 'package:magic_rewards/core/presentation/providers/app_config_providers.dart';
-import 'package:magic_rewards/core/presentation/routes/app_routes.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/shared/constants/app_constants.dart';
-import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extension.dart';
-import 'package:magic_rewards/shared/widgets/network_aware_wrapper.dart';
-import 'package:magic_rewards/shared/providers/network_providers.dart';
+import 'package:riverpod_rewards/config/themes/app_theme.dart';
+import 'package:riverpod_rewards/core/presentation/providers/app_config_providers.dart';
+import 'package:riverpod_rewards/core/presentation/routes/app_routes.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/shared/constants/app_constants.dart';
+import 'package:riverpod_rewards/shared/extensions/language_extensions/app_languages_extension.dart';
+import 'package:riverpod_rewards/shared/widgets/network_aware_wrapper.dart';
+import 'package:riverpod_rewards/shared/providers/network_providers.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});

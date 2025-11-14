@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
+import 'package:riverpod_rewards/config/errors/failure.dart';
+import 'package:riverpod_rewards/features/top_users/domain/entities/top_users_entity.dart';
 
 part 'top_users_state.freezed.dart';
 

@@ -1,4 +1,4 @@
-import 'package:magic_rewards/config/env/app_env_config.dart';
+import 'package:riverpod_rewards/config/env/app_env_config.dart';
 
 /// class [ApisUrls] contains all URLs to external services, services,
 /// or APIs, according to the following figure

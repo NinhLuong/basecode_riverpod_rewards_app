@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/core/presentation/routes/app_route_paths.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/shared/widgets/components/app_button.dart';
+import 'package:riverpod_rewards/config/paths/images_paths.dart';
+import 'package:riverpod_rewards/core/presentation/routes/app_route_paths.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_button.dart';
 
 /// Navigation error screen that handles routing errors gracefully
 /// This screen is shown when GoRouter encounters navigation errors

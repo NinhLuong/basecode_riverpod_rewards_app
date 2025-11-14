@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
-import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/rewards/presentation/providers/rewards_providers.dart';
-import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
-import 'package:magic_rewards/features/rewards/presentation/widgets/transaction_card.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_scaffold.dart';
+import 'package:riverpod_rewards/shared/widgets/components/custom_appbar.dart';
+import 'package:riverpod_rewards/shared/widgets/components/empty_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/failure_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/providers/rewards_providers.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/state/rewards_state.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/widgets/transaction_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TransactionsScreen extends ConsumerWidget {

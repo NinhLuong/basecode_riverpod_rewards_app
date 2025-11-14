@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 /// A comprehensive [ProviderObserver] for monitoring all Riverpod provider state changes
 /// and lifecycle events throughout the application.

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:magic_rewards/shared/providers/network_providers.dart';
+import 'package:riverpod_rewards/shared/providers/network_providers.dart';
 
 /// A wrapper widget that monitors network connectivity and provides immediate feedback
 /// when network connectivity is lost. This prevents infinite loading states and

@@ -1,5 +1,5 @@
-import 'package:magic_rewards/features/home/presentation/state/splash_state.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/features/home/presentation/state/splash_state.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'splash_providers.g.dart';

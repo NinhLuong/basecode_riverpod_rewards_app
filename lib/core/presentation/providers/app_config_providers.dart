@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/enums/app_languages.dart';
-import 'package:magic_rewards/config/enums/app_state.dart';
-import 'package:magic_rewards/config/languages/app_local.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/core/presentation/observers/system_locale_observer.dart';
-import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:riverpod_rewards/config/enums/app_languages.dart';
+import 'package:riverpod_rewards/config/enums/app_state.dart';
+import 'package:riverpod_rewards/config/languages/app_local.dart';
+import 'package:riverpod_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:riverpod_rewards/core/presentation/observers/system_locale_observer.dart';
+import 'package:riverpod_rewards/features/auth/presentation/providers/auth_providers.dart';
 
 part 'app_config_providers.g.dart';
 part 'app_config_providers.freezed.dart';

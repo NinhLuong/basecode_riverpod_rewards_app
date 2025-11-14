@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:magic_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 /// Utility class for widget testing with Riverpod providers

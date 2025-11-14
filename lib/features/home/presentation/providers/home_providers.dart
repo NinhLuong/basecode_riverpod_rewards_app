@@ -1,14 +1,14 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/config/errors/errors_handler.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_with_user_entity.dart';
-import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
-import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dart';
-import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/home/presentation/state/home_state.dart';
+import 'package:riverpod_rewards/config/di/injectable_config.dart';
+import 'package:riverpod_rewards/config/errors/errors_handler.dart';
+import 'package:riverpod_rewards/config/errors/failure.dart';
+import 'package:riverpod_rewards/features/home/domain/entities/home_entity.dart';
+import 'package:riverpod_rewards/features/home/domain/entities/home_with_user_entity.dart';
+import 'package:riverpod_rewards/features/home/domain/parameters/home_parameters.dart';
+import 'package:riverpod_rewards/features/home/domain/usecases/get_home_usecase.dart';
+import 'package:riverpod_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:riverpod_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:riverpod_rewards/features/home/presentation/state/home_state.dart';
 
 part 'home_providers.g.dart';
 

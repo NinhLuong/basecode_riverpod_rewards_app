@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
-import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:riverpod_rewards/features/auth/presentation/state/auth_state.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 /// Custom refresh listenable for GoRouter
 /// This ensures the router rebuilds when authentication state changes

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/core/presentation/routes/app_route_paths.dart';
-import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
-import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
-import 'package:magic_rewards/features/home/presentation/providers/splash_providers.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/core/presentation/routes/app_route_paths.dart';
+import 'package:riverpod_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:riverpod_rewards/features/auth/presentation/state/auth_state.dart';
+import 'package:riverpod_rewards/features/home/presentation/providers/splash_providers.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 /// Handles all routing guards and redirection logic

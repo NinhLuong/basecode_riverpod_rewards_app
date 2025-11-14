@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/config/enums/app_languages.dart';
+import 'package:riverpod_rewards/config/enums/app_languages.dart';
 
 extension AppLanguagesExtensions on AppLanguages {
   // TODO: Customize app button decoration properties here

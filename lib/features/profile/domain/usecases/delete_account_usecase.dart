@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/core/domain/usecases/base_usecase.dart';
-import 'package:magic_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
-import 'package:magic_rewards/features/profile/domain/repository/profile_repository.dart';
+import 'package:riverpod_rewards/config/errors/failure.dart';
+import 'package:riverpod_rewards/core/domain/usecases/base_usecase.dart';
+import 'package:riverpod_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
+import 'package:riverpod_rewards/features/profile/domain/repository/profile_repository.dart';
 
 @lazySingleton
 class DeleteAccountUseCase extends UseCase<void, DeleteAccountParameters> {

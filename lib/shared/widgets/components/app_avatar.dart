@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/shared/constants/app_constants.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:riverpod_rewards/shared/constants/app_constants.dart';
+import 'package:riverpod_rewards/config/paths/images_paths.dart';
+import 'package:riverpod_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 
 class AppAvatar extends StatelessWidget {
   final int? index;

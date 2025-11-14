@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
+import 'package:riverpod_rewards/config/errors/failure.dart';
+import 'package:riverpod_rewards/features/profile/domain/entities/profile_entity.dart';
 
 part 'profile_state.freezed.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 /// Service that monitors network connectivity status in real-time
 /// Provides immediate feedback when network state changes

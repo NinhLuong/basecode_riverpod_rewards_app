@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/shared/widgets/components/app_container.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
+import 'package:riverpod_rewards/config/styles/app_colors.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_container.dart';
+import 'package:riverpod_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:riverpod_rewards/config/paths/images_paths.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 
 class LiveOfferComponent extends ConsumerWidget {
   final LiveOfferEntity liveOffer;

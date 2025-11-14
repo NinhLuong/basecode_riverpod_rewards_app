@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
+import 'package:riverpod_rewards/config/errors/failure.dart';
+import 'package:riverpod_rewards/features/rewards/domain/entities/orders_entity.dart';
+import 'package:riverpod_rewards/features/rewards/domain/entities/transactions_entity.dart';
+import 'package:riverpod_rewards/features/rewards/domain/entities/payouts_entity.dart';
 
 part 'rewards_state.freezed.dart';
 

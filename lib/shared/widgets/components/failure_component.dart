@@ -5,13 +5,13 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
-import 'package:magic_rewards/shared/widgets/components/app_button.dart';
-import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/core/presentation/providers/app_config_providers.dart';
+import 'package:riverpod_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_button.dart';
+import 'package:riverpod_rewards/shared/widgets/components/show_toast.dart';
+import 'package:riverpod_rewards/config/errors/failure.dart';
+import 'package:riverpod_rewards/config/paths/images_paths.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/core/presentation/providers/app_config_providers.dart';
 
 /// The [FailureComponent] class is a generic component that takes a [Failure] object and dynamically selects the appropriate
 /// sub-component based on the runtime type of the failure. It uses a switch statement to determine the failure type and

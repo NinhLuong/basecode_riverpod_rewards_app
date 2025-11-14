@@ -17,7 +17,7 @@
 library;
 
 import 'dart:developer' as developer;
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 /// Example class demonstrating proper error handling patterns
 class ErrorHandlingExample {

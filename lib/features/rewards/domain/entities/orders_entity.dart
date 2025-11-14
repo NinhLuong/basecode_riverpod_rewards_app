@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/core/domain/entities/base_entity.dart';
-import 'package:magic_rewards/config/enums/order_status.dart';
+import 'package:riverpod_rewards/core/domain/entities/base_entity.dart';
+import 'package:riverpod_rewards/config/enums/order_status.dart';
 
 part 'orders_entity.freezed.dart';
 

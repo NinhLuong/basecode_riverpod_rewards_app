@@ -329,11 +329,11 @@ class S {
     );
   }
 
-  /// `magic_rewards`
-  String get magic_rewards {
+  /// `riverpod_rewards`
+  String get riverpod_rewards {
     return Intl.message(
-      'magic_rewards',
-      name: 'magic_rewards',
+      'riverpod_rewards',
+      name: 'riverpod_rewards',
       desc: '',
       args: [],
     );
@@ -599,10 +599,10 @@ class S {
     );
   }
 
-  /// `Donate for magic_rewards`
+  /// `Donate for riverpod_rewards`
   String get donateFormagic_rewards {
     return Intl.message(
-      'Donate for magic_rewards',
+      'Donate for riverpod_rewards',
       name: 'donateFormagic_rewards',
       desc: '',
       args: [],
@@ -1029,10 +1029,10 @@ class S {
     );
   }
 
-  /// `I have reviewed and agree to magic_rewards`
+  /// `I have reviewed and agree to riverpod_rewards`
   String get youAgreeWith {
     return Intl.message(
-      'I have reviewed and agree to magic_rewards',
+      'I have reviewed and agree to riverpod_rewards',
       name: 'youAgreeWith',
       desc: '',
       args: [],

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/config/env/app_env_config.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/config/errors/exception.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/config/env/app_env_config.dart';
+import 'package:riverpod_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:riverpod_rewards/config/errors/exception.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 /// Token interceptor that handles authentication token injection and refresh
 /// This interceptor automatically adds auth tokens to requests and handles token refresh on expiry

@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
+import 'package:riverpod_rewards/config/errors/failure.dart';
+import 'package:riverpod_rewards/features/tasks/domain/entities/tasks_entity.dart';
+import 'package:riverpod_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
+import 'package:riverpod_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
 
 part 'tasks_state.freezed.dart';
 

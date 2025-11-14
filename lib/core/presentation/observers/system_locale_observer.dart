@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/enums/app_languages.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/config/enums/app_languages.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 part 'system_locale_observer.g.dart';
 

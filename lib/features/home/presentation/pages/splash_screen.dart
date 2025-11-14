@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/features/home/presentation/providers/splash_providers.dart';
-import 'package:magic_rewards/shared/constants/app_constants.dart';
-import 'package:magic_rewards/shared/constants/app_duration.dart';
-import 'package:magic_rewards/shared/widgets/components/app_logo.dart';
-import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
-import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
-import 'package:magic_rewards/features/auth/presentation/state/auth_state.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/features/home/presentation/providers/splash_providers.dart';
+import 'package:riverpod_rewards/shared/constants/app_constants.dart';
+import 'package:riverpod_rewards/shared/constants/app_duration.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_logo.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_scaffold.dart';
+import 'package:riverpod_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:riverpod_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:riverpod_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:riverpod_rewards/features/auth/presentation/state/auth_state.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});

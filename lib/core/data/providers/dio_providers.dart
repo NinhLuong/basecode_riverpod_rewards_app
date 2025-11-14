@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/config/env/app_env_config.dart';
-import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/error_interceptor.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/shared/services/network/network_connectivity_service.dart';
+import 'package:riverpod_rewards/config/env/app_env_config.dart';
+import 'package:riverpod_rewards/core/data/datasources/remote/dio_interceptors/error_interceptor.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/shared/services/network/network_connectivity_service.dart';
 
 /// Provider for the main Dio instance with enhanced error handling
 final dioProvider = Provider<Dio>((ref) {

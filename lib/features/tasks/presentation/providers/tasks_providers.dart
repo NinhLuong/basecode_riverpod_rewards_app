@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/config/errors/errors_handler.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
-import 'package:magic_rewards/features/tasks/domain/parameters/tasks_parameters.dart';
-import 'package:magic_rewards/features/tasks/domain/parameters/tasks_orders_parameters.dart';
-import 'package:magic_rewards/features/tasks/domain/parameters/add_task_order_parameters.dart';
-import 'package:magic_rewards/features/tasks/domain/parameters/reserve_comment_parameters.dart';
-import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.dart';
-import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
+import 'package:riverpod_rewards/config/di/injectable_config.dart';
+import 'package:riverpod_rewards/config/errors/errors_handler.dart';
+import 'package:riverpod_rewards/features/tasks/domain/entities/tasks_entity.dart';
+import 'package:riverpod_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
+import 'package:riverpod_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
+import 'package:riverpod_rewards/features/tasks/domain/parameters/tasks_parameters.dart';
+import 'package:riverpod_rewards/features/tasks/domain/parameters/tasks_orders_parameters.dart';
+import 'package:riverpod_rewards/features/tasks/domain/parameters/add_task_order_parameters.dart';
+import 'package:riverpod_rewards/features/tasks/domain/parameters/reserve_comment_parameters.dart';
+import 'package:riverpod_rewards/features/tasks/domain/repository/tasks_repository.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/state/tasks_state.dart';
 
 part 'tasks_providers.g.dart';
 

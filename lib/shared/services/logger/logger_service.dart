@@ -126,7 +126,7 @@ class L implements IL {
     // Parse stack trace to extract meaningful information
     final stackLines = stackTraceString.split('\n');
     final relevantFrames = stackLines.take(10).where((line) => 
-      line.contains('package:magic_rewards') || 
+      line.contains('package:riverpod_rewards') || 
       line.contains('lib/') || 
       line.contains('dart:')
     ).toList();

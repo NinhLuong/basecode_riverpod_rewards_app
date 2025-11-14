@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/config/styles/app_gradient.dart';
-import 'package:magic_rewards/config/styles/app_shadow.dart';
-import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/home/presentation/pages/home_screen.dart';
-import 'package:magic_rewards/features/profile/presentation/pages/profile_screen.dart';
-import 'package:magic_rewards/features/rewards/presentation/pages/redeem_screen.dart';
-import 'package:magic_rewards/features/tasks/presentation/pages/tasks_screen.dart';
-import 'package:magic_rewards/features/top_users/presentation/pages/top_users_screen.dart';
+import 'package:riverpod_rewards/config/styles/app_colors.dart';
+import 'package:riverpod_rewards/config/styles/app_gradient.dart';
+import 'package:riverpod_rewards/config/styles/app_shadow.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_scaffold.dart';
+import 'package:riverpod_rewards/config/paths/images_paths.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/features/home/presentation/pages/home_screen.dart';
+import 'package:riverpod_rewards/features/profile/presentation/pages/profile_screen.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/pages/redeem_screen.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/pages/tasks_screen.dart';
+import 'package:riverpod_rewards/features/top_users/presentation/pages/top_users_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

@@ -3,10 +3,10 @@
 /// For complex provider testing, use direct ProviderContainer setup in individual tests
 library;
 
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_with_user_entity.dart';
+import 'package:riverpod_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:riverpod_rewards/features/auth/domain/entities/check_email_entity.dart';
+import 'package:riverpod_rewards/features/home/domain/entities/home_entity.dart';
+import 'package:riverpod_rewards/features/home/domain/entities/home_with_user_entity.dart';
 
 /// Mock data utilities for testing
 class MockProviders {

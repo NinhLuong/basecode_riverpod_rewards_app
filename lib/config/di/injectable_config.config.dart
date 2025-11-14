@@ -91,8 +91,17 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i505.CacheStorageServices.new(),
     );
     gh.lazySingleton<_i294.ApiServices>(() => _i294.ApiServices());
+    gh.lazySingleton<_i931.UserLocalDataSource>(
+      () => _i931.UserLocalDataSourceImpl(gh<_i505.CacheStorageServices>()),
+    );
     gh.lazySingleton<_i595.ITasksDataSource>(
       () => _i595.TasksRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i1055.IHomeDataSource>(
+      () => _i1055.HomeRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i427.IRewardsDataSource>(
+      () => _i427.RewardsRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
     gh.lazySingleton<_i989.ITopUsersDataSource>(
       () => _i989.TopUsersRemoteDataSourceImp(gh<_i294.ApiServices>()),
@@ -103,20 +112,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i928.ILiveOffersRepository>(
       () => _i100.LiveOffersRepositoryImp(gh<_i476.ILiveOffersDataSource>()),
     );
-    gh.lazySingleton<_i427.IRewardsDataSource>(
-      () => _i427.RewardsRemoteDataSourceImp(gh<_i294.ApiServices>()),
-    );
-    gh.lazySingleton<_i553.ProfileDataSource>(
-      () => _i35.ProfileRemoteDataSourceImp(gh<_i294.ApiServices>()),
-    );
     gh.lazySingleton<_i195.IAuthDataSource>(
       () => _i195.AuthRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
-    gh.lazySingleton<_i1055.IHomeDataSource>(
-      () => _i1055.HomeRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    gh.lazySingleton<_i429.TasksRepository>(
+      () => _i436.TasksRepositoryImp(gh<_i595.ITasksDataSource>()),
     );
-    gh.lazySingleton<_i931.UserLocalDataSource>(
-      () => _i931.UserLocalDataSourceImpl(gh<_i505.CacheStorageServices>()),
+    gh.lazySingleton<_i553.ProfileDataSource>(
+      () => _i35.ProfileRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
     gh.lazySingleton<_i656.TopUsersRepository>(
       () => _i694.TopUsersRepositoryImp(gh<_i989.ITopUsersDataSource>()),
@@ -124,23 +127,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i435.GetTopUsersUseCase>(
       () => _i435.GetTopUsersUseCase(gh<_i656.TopUsersRepository>()),
     );
-    gh.lazySingleton<_i133.GetLiveOffersUseCase>(
-      () => _i133.GetLiveOffersUseCase(gh<_i928.ILiveOffersRepository>()),
-    );
     gh.lazySingleton<_i541.IHomeRepository>(
       () => _i342.HomeRepositoryImp(gh<_i1055.IHomeDataSource>()),
     );
     gh.lazySingleton<_i843.RewardsRepository>(
       () => _i544.RewardsRepositoryImp(gh<_i427.IRewardsDataSource>()),
     );
-    gh.lazySingleton<_i429.TasksRepository>(
-      () => _i436.TasksRepositoryImp(gh<_i595.ITasksDataSource>()),
+    gh.lazySingleton<_i993.AddTaskOrderUseCase>(
+      () => _i993.AddTaskOrderUseCase(gh<_i429.TasksRepository>()),
     );
-    gh.lazySingleton<_i961.IAuthRepository>(
-      () => _i794.AuthRepositoryImp(
-        gh<_i195.IAuthDataSource>(),
-        gh<_i931.UserLocalDataSource>(),
-      ),
+    gh.lazySingleton<_i568.ReserveCommentUseCase>(
+      () => _i568.ReserveCommentUseCase(gh<_i429.TasksRepository>()),
+    );
+    gh.lazySingleton<_i48.GetTasksUseCase>(
+      () => _i48.GetTasksUseCase(gh<_i429.TasksRepository>()),
+    );
+    gh.lazySingleton<_i868.GetTasksOrdersUseCase>(
+      () => _i868.GetTasksOrdersUseCase(gh<_i429.TasksRepository>()),
+    );
+    gh.lazySingleton<_i133.GetLiveOffersUseCase>(
+      () => _i133.GetLiveOffersUseCase(gh<_i928.ILiveOffersRepository>()),
+    );
+    gh.lazySingleton<_i836.GetHomeUseCase>(
+      () => _i836.GetHomeUseCase(gh<_i541.IHomeRepository>()),
     );
     gh.lazySingleton<_i33.RedeemUseCase>(
       () => _i33.RedeemUseCase(gh<_i843.RewardsRepository>()),
@@ -157,32 +166,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i364.ProfileRepository>(
       () => _i335.ProfileRepositoryImp(gh<_i553.ProfileDataSource>()),
     );
-    gh.lazySingleton<_i965.GetProfileUseCase>(
-      () => _i965.GetProfileUseCase(gh<_i364.ProfileRepository>()),
-    );
-    gh.lazySingleton<_i1056.DeleteAccountUseCase>(
-      () => _i1056.DeleteAccountUseCase(gh<_i364.ProfileRepository>()),
-    );
-    gh.lazySingleton<_i993.AddTaskOrderUseCase>(
-      () => _i993.AddTaskOrderUseCase(gh<_i429.TasksRepository>()),
-    );
-    gh.lazySingleton<_i568.ReserveCommentUseCase>(
-      () => _i568.ReserveCommentUseCase(gh<_i429.TasksRepository>()),
-    );
-    gh.lazySingleton<_i48.GetTasksUseCase>(
-      () => _i48.GetTasksUseCase(gh<_i429.TasksRepository>()),
-    );
-    gh.lazySingleton<_i868.GetTasksOrdersUseCase>(
-      () => _i868.GetTasksOrdersUseCase(gh<_i429.TasksRepository>()),
-    );
-    gh.lazySingleton<_i836.GetHomeUseCase>(
-      () => _i836.GetHomeUseCase(gh<_i541.IHomeRepository>()),
+    gh.lazySingleton<_i961.IAuthRepository>(
+      () => _i794.AuthRepositoryImp(
+        gh<_i195.IAuthDataSource>(),
+        gh<_i931.UserLocalDataSource>(),
+      ),
     );
     gh.lazySingleton<_i941.RegisterUseCase>(
       () => _i941.RegisterUseCase(gh<_i961.IAuthRepository>()),
     );
     gh.lazySingleton<_i188.LoginUseCase>(
       () => _i188.LoginUseCase(gh<_i961.IAuthRepository>()),
+    );
+    gh.lazySingleton<_i965.GetProfileUseCase>(
+      () => _i965.GetProfileUseCase(gh<_i364.ProfileRepository>()),
+    );
+    gh.lazySingleton<_i1056.DeleteAccountUseCase>(
+      () => _i1056.DeleteAccountUseCase(gh<_i364.ProfileRepository>()),
     );
     gh.lazySingleton<_i879.CheckEmailUseCase>(
       () => _i879.CheckEmailUseCase(gh<_i961.IAuthRepository>()),

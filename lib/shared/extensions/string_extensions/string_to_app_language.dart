@@ -1,4 +1,4 @@
-import 'package:magic_rewards/config/enums/app_languages.dart';
+import 'package:riverpod_rewards/config/enums/app_languages.dart';
 
 extension StringToAppLanguage on String {
   // TODO: Customize app button decoration properties here

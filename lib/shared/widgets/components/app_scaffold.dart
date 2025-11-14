@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
+import 'package:riverpod_rewards/config/paths/images_paths.dart';
 
 class AppScaffold extends Scaffold {
   AppScaffold({

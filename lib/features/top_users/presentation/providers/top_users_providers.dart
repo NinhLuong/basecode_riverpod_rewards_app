@@ -1,10 +1,10 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/config/errors/errors_handler.dart';
-import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
-import 'package:magic_rewards/features/top_users/domain/parameters/top_users_parameters.dart';
-import 'package:magic_rewards/features/top_users/domain/usecases/get_top_users_usecase.dart';
-import 'package:magic_rewards/features/top_users/presentation/state/top_users_state.dart';
+import 'package:riverpod_rewards/config/di/injectable_config.dart';
+import 'package:riverpod_rewards/config/errors/errors_handler.dart';
+import 'package:riverpod_rewards/features/top_users/domain/entities/top_users_entity.dart';
+import 'package:riverpod_rewards/features/top_users/domain/parameters/top_users_parameters.dart';
+import 'package:riverpod_rewards/features/top_users/domain/usecases/get_top_users_usecase.dart';
+import 'package:riverpod_rewards/features/top_users/presentation/state/top_users_state.dart';
 
 part 'top_users_providers.g.dart';
 

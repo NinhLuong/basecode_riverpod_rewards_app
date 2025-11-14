@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/config/errors/exception.dart';
-import 'package:magic_rewards/core/data/models/error_message_model.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/shared/services/network/network_connectivity_service.dart';
+import 'package:riverpod_rewards/config/errors/exception.dart';
+import 'package:riverpod_rewards/core/data/models/error_message_model.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/shared/services/network/network_connectivity_service.dart';
 
 /// Enhanced error interceptor that provides immediate network-aware error handling
 /// This interceptor integrates with NetworkConnectivityService for better UX

@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/core/presentation/observers/app_provider_observer.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/config/env/app_env_config.dart';
+import 'package:riverpod_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:riverpod_rewards/config/di/injectable_config.dart';
+import 'package:riverpod_rewards/core/presentation/observers/app_provider_observer.dart';
+import 'package:riverpod_rewards/shared/services/logger/logger_service.dart';
+import 'package:riverpod_rewards/config/env/app_env_config.dart';
 
 import 'app.dart';
 

@@ -1,4 +1,4 @@
-import 'package:magic_rewards/config/enums/order_status.dart';
+import 'package:riverpod_rewards/config/enums/order_status.dart';
 
 extension StringToOrderStatus on String {
   OrderStatus get toOrderStatus {

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
-import 'package:magic_rewards/shared/constants/app_constants.dart';
+import 'package:riverpod_rewards/shared/constants/app_constants.dart';
 
 part 'register_parameters.g.dart';
 

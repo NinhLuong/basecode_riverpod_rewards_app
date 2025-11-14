@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extension.dart';
-import 'package:magic_rewards/shared/extensions/string_extensions/string_to_app_language.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/shared/extensions/language_extensions/app_languages_extension.dart';
+import 'package:riverpod_rewards/shared/extensions/string_extensions/string_to_app_language.dart';
+import 'package:riverpod_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
 
 import '../enums/app_languages.dart';
 

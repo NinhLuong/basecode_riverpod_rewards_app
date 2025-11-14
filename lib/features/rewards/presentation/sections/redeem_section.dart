@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/features/rewards/presentation/providers/rewards_providers.dart';
-import 'package:magic_rewards/features/rewards/presentation/state/rewards_state.dart';
-import 'package:magic_rewards/features/rewards/presentation/widgets/balance_card.dart';
-import 'package:magic_rewards/features/rewards/presentation/widgets/payout_card.dart';
+import 'package:riverpod_rewards/shared/widgets/components/empty_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/failure_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/providers/rewards_providers.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/state/rewards_state.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/widgets/balance_card.dart';
+import 'package:riverpod_rewards/features/rewards/presentation/widgets/payout_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RedeemSection extends ConsumerWidget {

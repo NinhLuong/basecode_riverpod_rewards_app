@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
-import 'package:magic_rewards/features/live_offers/presentation/state/live_offers_state.dart';
-import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/live_offers/presentation/providers/live_offers_providers.dart';
-import 'package:magic_rewards/features/live_offers/presentation/widgets/live_offer_component.dart';
+import 'package:riverpod_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
+import 'package:riverpod_rewards/features/live_offers/presentation/state/live_offers_state.dart';
+import 'package:riverpod_rewards/shared/widgets/components/custom_appbar.dart';
+import 'package:riverpod_rewards/shared/widgets/components/empty_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/failure_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/features/live_offers/presentation/providers/live_offers_providers.dart';
+import 'package:riverpod_rewards/features/live_offers/presentation/widgets/live_offer_component.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class LiveOffersScreen extends ConsumerWidget {

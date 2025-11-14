@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:magic_rewards/features/home/presentation/widgets/offer_wall_card.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
+import 'package:riverpod_rewards/features/home/presentation/widgets/offer_wall_card.dart';
+import 'package:riverpod_rewards/features/home/domain/entities/home_entity.dart';
 import '../../../shared/test_utils/widget_test_utils.dart';
 
 void main() {

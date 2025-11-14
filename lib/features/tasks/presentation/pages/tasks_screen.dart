@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
-import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/tasks/presentation/sections/tasks_orders_section.dart';
-import 'package:magic_rewards/features/tasks/presentation/sections/tasks_section.dart';
+import 'package:riverpod_rewards/config/styles/app_colors.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_scaffold.dart';
+import 'package:riverpod_rewards/shared/widgets/components/custom_appbar.dart';
+import 'package:riverpod_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/sections/tasks_orders_section.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/sections/tasks_section.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});

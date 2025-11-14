@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/shared/widgets/components/app_button.dart';
-import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
-import 'package:magic_rewards/features/tasks/presentation/providers/tasks_providers.dart';
-import 'package:magic_rewards/features/tasks/presentation/state/tasks_state.dart';
-import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:riverpod_rewards/config/styles/app_colors.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_button.dart';
+import 'package:riverpod_rewards/shared/widgets/components/custom_appbar.dart';
+import 'package:riverpod_rewards/shared/widgets/components/show_toast.dart';
+import 'package:riverpod_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:riverpod_rewards/generated/l10n.dart';
+import 'package:riverpod_rewards/features/tasks/domain/entities/tasks_entity.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/providers/tasks_providers.dart';
+import 'package:riverpod_rewards/features/tasks/presentation/state/tasks_state.dart';
+import 'package:riverpod_rewards/core/presentation/routes/route_configuration.dart';
 
 class TaskDetailsScreen extends ConsumerWidget {
   final TaskEntity task;

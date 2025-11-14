@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/shared/constants/app_constants.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
+import 'package:riverpod_rewards/shared/constants/app_constants.dart';
+import 'package:riverpod_rewards/config/paths/images_paths.dart';
 
 class AppLogo extends StatelessWidget {
   final double? width;

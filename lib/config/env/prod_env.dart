@@ -1,5 +1,6 @@
 import 'package:envied/envied.dart';
-import 'package:magic_rewards/config/env/app_env.dart';
+import 'package:riverpod_rewards/config/env/app_env.dart';
+
 
 part 'prod_env.g.dart';
 

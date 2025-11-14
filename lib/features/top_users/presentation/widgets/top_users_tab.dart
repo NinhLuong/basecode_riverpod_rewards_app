@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/shared/widgets/components/app_container.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
-import 'package:magic_rewards/features/top_users/presentation/providers/top_users_providers.dart';
-import 'package:magic_rewards/features/top_users/presentation/state/top_users_state.dart';
-import 'package:magic_rewards/features/top_users/presentation/widgets/my_rank_card.dart';
-import 'package:magic_rewards/features/top_users/presentation/widgets/rank_bar.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_container.dart';
+import 'package:riverpod_rewards/shared/widgets/components/empty_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/failure_component.dart';
+import 'package:riverpod_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:riverpod_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:riverpod_rewards/features/top_users/domain/entities/top_users_entity.dart';
+import 'package:riverpod_rewards/features/top_users/presentation/providers/top_users_providers.dart';
+import 'package:riverpod_rewards/features/top_users/presentation/state/top_users_state.dart';
+import 'package:riverpod_rewards/features/top_users/presentation/widgets/my_rank_card.dart';
+import 'package:riverpod_rewards/features/top_users/presentation/widgets/rank_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TopUsersTap extends ConsumerStatefulWidget {

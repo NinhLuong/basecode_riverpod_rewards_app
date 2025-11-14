@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_rewards/features/auth/presentation/pages/login_screen.dart';
-import 'package:magic_rewards/features/auth/presentation/providers/auth_providers.dart';
-import 'package:magic_rewards/shared/widgets/components/app_button.dart';
-import 'package:magic_rewards/shared/widgets/components/app_text_field.dart';
+import 'package:riverpod_rewards/features/auth/presentation/pages/login_screen.dart';
+import 'package:riverpod_rewards/features/auth/presentation/providers/auth_providers.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_button.dart';
+import 'package:riverpod_rewards/shared/widgets/components/app_text_field.dart';
 import '../../../../shared/test_utils/widget_test_utils.dart';
 
 void main() {
