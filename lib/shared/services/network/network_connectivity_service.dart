@@ -90,6 +90,7 @@ class NetworkConnectivityService {
         return true;
       case ConnectivityResult.none:
         return false;
+        
     }
   }
 
