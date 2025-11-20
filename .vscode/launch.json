@@ -7,7 +7,13 @@
         {
             "name": "Magic-Rewards(dev mode)",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--web-renderer",
+                "html"
+            ],
+            "runtimeExecutable": "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"
         },
         {
             "name": "Magic-Rewards(profile mode)",
