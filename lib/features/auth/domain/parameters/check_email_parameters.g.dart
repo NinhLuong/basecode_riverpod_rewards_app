@@ -6,12 +6,6 @@ part of 'check_email_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CheckEmailParameters _$CheckEmailParametersFromJson(
-  Map<String, dynamic> json,
-) => CheckEmailParameters(
-  email: json['email'] as String,
-  clientId: (json['clientId'] as num?)?.toInt(),
-);
 
 Map<String, dynamic> _$CheckEmailParametersToJson(
   CheckEmailParameters instance,
