@@ -50,53 +50,53 @@ final class GetHomeUseCaseProvider
 
 String _$getHomeUseCaseHash() => r'315198e350056d3e2ae4786a9afc06fa964c416a';
 
-@ProviderFor(homeUserLocalDataSource)
-const homeUserLocalDataSourceProvider = HomeUserLocalDataSourceProvider._();
+@ProviderFor(homeGetUserLocalUseCase)
+const homeGetUserLocalUseCaseProvider = HomeGetUserLocalUseCaseProvider._();
 
-final class HomeUserLocalDataSourceProvider
+final class HomeGetUserLocalUseCaseProvider
     extends
         $FunctionalProvider<
-          UserLocalDataSource,
-          UserLocalDataSource,
-          UserLocalDataSource
+          GetUserLocalUseCase,
+          GetUserLocalUseCase,
+          GetUserLocalUseCase
         >
-    with $Provider<UserLocalDataSource> {
-  const HomeUserLocalDataSourceProvider._()
+    with $Provider<GetUserLocalUseCase> {
+  const HomeGetUserLocalUseCaseProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'homeUserLocalDataSourceProvider',
+        name: r'homeGetUserLocalUseCaseProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$homeUserLocalDataSourceHash();
+  String debugGetCreateSourceHash() => _$homeGetUserLocalUseCaseHash();
 
   @$internal
   @override
-  $ProviderElement<UserLocalDataSource> $createElement(
+  $ProviderElement<GetUserLocalUseCase> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  UserLocalDataSource create(Ref ref) {
-    return homeUserLocalDataSource(ref);
+  GetUserLocalUseCase create(Ref ref) {
+    return homeGetUserLocalUseCase(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(UserLocalDataSource value) {
+  Override overrideWithValue(GetUserLocalUseCase value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<UserLocalDataSource>(value),
+      providerOverride: $SyncValueProvider<GetUserLocalUseCase>(value),
     );
   }
 }
 
-String _$homeUserLocalDataSourceHash() =>
-    r'e5565ade7ba0f46cfcf8d1634b9af7b52c090366';
+String _$homeGetUserLocalUseCaseHash() =>
+    r'403cc9769d2741af0ba625fd04701865ed80b8ce';
 
 @ProviderFor(HomeNotifier)
 const homeProvider = HomeNotifierProvider._();
@@ -130,7 +130,7 @@ final class HomeNotifierProvider
   }
 }
 
-String _$homeNotifierHash() => r'fb4f43f0999d57179cdb5fcfb29f7bfe24028079';
+String _$homeNotifierHash() => r'5a65b4abcb219279a6135f355272666f35c43ba3';
 
 abstract class _$HomeNotifier extends $Notifier<HomeState> {
   HomeState build();

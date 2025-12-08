@@ -96,4 +96,33 @@ class MockIAuthRepository extends _i1.Mock implements _i3.IAuthRepository {
                 ),
           )
           as _i4.Future<_i2.Either<_i5.Failure, _i9.CheckEmailEntity>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity?>> getUserLocal() =>
+      (super.noSuchMethod(
+            Invocation.method(#getUserLocal, []),
+            returnValue:
+                _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity?>>.value(
+                  _FakeEither_0<_i5.Failure, _i6.UserEntity?>(
+                    this,
+                    Invocation.method(#getUserLocal, []),
+                  ),
+                ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity?>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, void>> saveUserLocal(
+    _i6.UserEntity? user,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveUserLocal, [user]),
+            returnValue: _i4.Future<_i2.Either<_i5.Failure, void>>.value(
+              _FakeEither_0<_i5.Failure, void>(
+                this,
+                Invocation.method(#saveUserLocal, [user]),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failure, void>>);
 }

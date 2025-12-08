@@ -13,4 +13,8 @@ abstract class IAuthRepository {
 
   Future<Either<Failure, CheckEmailEntity>> checkEmail(
       CheckEmailParameters parameters);
+
+  Future<Either<Failure, UserEntity?>> getUserLocal();
+
+  Future<Either<Failure, void>> saveUserLocal(UserEntity user);
 }

@@ -51,4 +51,24 @@ class AuthRepositoryImp implements IAuthRepository {
     return ErrorsHandler.handleEither(
         () => _authDataSource.checkEmail(parameters));
   }
+
+  @override
+  Future<Either<Failure, UserEntity?>> getUserLocal() async {
+    try {
+      final user = await _userLocalDataSource.getUserData();
+      return Right(user);
+    } catch (e) {
+      return Left(ErrorsHandler.failureThrower(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> saveUserLocal(UserEntity user) async {
+    try {
+      await _userLocalDataSource.saveUserData(user);
+      return const Right(null);
+    } catch (e) {
+      return Left(ErrorsHandler.failureThrower(e));
+    }
+  }
 }

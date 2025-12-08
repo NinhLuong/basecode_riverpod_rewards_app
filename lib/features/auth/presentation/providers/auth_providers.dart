@@ -9,7 +9,9 @@ import 'package:riverpod_rewards/features/auth/domain/parameters/check_email_par
 import 'package:riverpod_rewards/features/auth/domain/usecases/login_usecase.dart';
 import 'package:riverpod_rewards/features/auth/domain/usecases/register_usecase.dart';
 import 'package:riverpod_rewards/features/auth/domain/usecases/check_email_usecase.dart';
-import 'package:riverpod_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:riverpod_rewards/core/domain/usecases/base_usecase.dart';
+import 'package:riverpod_rewards/features/auth/domain/usecases/get_user_local_usecase.dart';
+import 'package:riverpod_rewards/features/auth/domain/usecases/save_user_local_usecase.dart';
 import 'package:riverpod_rewards/features/auth/presentation/state/auth_state.dart';
 
 part 'auth_providers.g.dart';
@@ -31,8 +33,13 @@ CheckEmailUseCase checkEmailUseCase(Ref ref) {
 }
 
 @riverpod
-UserLocalDataSource userLocalDataSource(Ref ref) {
-  return getIt<UserLocalDataSource>();
+GetUserLocalUseCase getUserLocalUseCase(Ref ref) {
+  return getIt<GetUserLocalUseCase>();
+}
+
+@riverpod
+SaveUserLocalUseCase saveUserLocalUseCase(Ref ref) {
+  return getIt<SaveUserLocalUseCase>();
 }
 
 // Login state management
@@ -168,13 +175,19 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   Future<void> _loadUserFromStorage() async {
     state = const CurrentUserState.loading();
     try {
-      final userLocalDataSource = ref.read(userLocalDataSourceProvider);
-      final userData = await userLocalDataSource.getUserData();
-      if (userData != null) {
-        state = CurrentUserState.authenticated(userData);
-      } else {
-        state = const CurrentUserState.unauthenticated();
-      }
+      final getUserLocalUseCase = ref.read(getUserLocalUseCaseProvider);
+      final result = await getUserLocalUseCase.call(params: NoParams());
+
+      result.fold(
+        (failure) => state = CurrentUserState.error(failure),
+        (userData) {
+          if (userData != null) {
+            state = CurrentUserState.authenticated(userData);
+          } else {
+            state = const CurrentUserState.unauthenticated();
+          }
+        },
+      );
     } catch (e, stackTrace) {
       final failure = ErrorsHandler.failureThrower(e, stackTrace);
       state = CurrentUserState.error(failure);

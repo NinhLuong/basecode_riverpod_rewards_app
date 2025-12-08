@@ -6,8 +6,10 @@ import 'package:riverpod_rewards/features/home/domain/entities/home_entity.dart'
 import 'package:riverpod_rewards/features/home/domain/entities/home_with_user_entity.dart';
 import 'package:riverpod_rewards/features/home/domain/parameters/home_parameters.dart';
 import 'package:riverpod_rewards/features/home/domain/usecases/get_home_usecase.dart';
-import 'package:riverpod_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:dartz/dartz.dart';
+import 'package:riverpod_rewards/core/domain/usecases/base_usecase.dart';
 import 'package:riverpod_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:riverpod_rewards/features/auth/domain/usecases/get_user_local_usecase.dart';
 import 'package:riverpod_rewards/features/home/presentation/state/home_state.dart';
 
 part 'home_providers.g.dart';
@@ -19,8 +21,8 @@ GetHomeUseCase getHomeUseCase(Ref ref) {
 }
 
 @riverpod
-UserLocalDataSource homeUserLocalDataSource(Ref ref) {
-  return getIt<UserLocalDataSource>();
+GetUserLocalUseCase homeGetUserLocalUseCase(Ref ref) {
+  return getIt<GetUserLocalUseCase>();
 }
 
 // Main home notifier
@@ -38,16 +40,29 @@ class HomeNotifier extends _$HomeNotifier {
 
     try {
       final getHomeUseCase = ref.read(getHomeUseCaseProvider);
-      final userLocalDataSource = ref.read(homeUserLocalDataSourceProvider);
+      final getUserLocalUseCase = ref.read(homeGetUserLocalUseCaseProvider);
 
       // Fetch both home data and user data concurrently
-      final results = await Future.wait([
-        getHomeUseCase.call(params: HomeParameters()).then((result) => result),
-        userLocalDataSource.getUserData(),
+      final results = await Future.wait<dynamic>([
+        getHomeUseCase.call(params: HomeParameters()),
+        getUserLocalUseCase.call(params: NoParams()),
       ]);
 
-      final homeResult = results[0] as dynamic;
-      final userData = results[1] as UserEntity?;
+      final homeResult = results[0] as Either<Failure, HomeEntity>;
+      final userResult = results[1] as Either<Failure, UserEntity?>;
+
+      UserEntity? userData;
+      Failure? userFailure;
+
+      userResult.fold(
+        (failure) => userFailure = failure,
+        (data) => userData = data,
+      );
+
+      if (userFailure != null) {
+        state = HomeState.error(userFailure!);
+        return;
+      }
 
       if (userData == null) {
         final failure = Failure('User data not found');
@@ -60,7 +75,7 @@ class HomeNotifier extends _$HomeNotifier {
         (homeData) {
           final homeWithUser = HomeWithUserEntity(
             homeData: homeData,
-            userData: userData,
+            userData: userData!,
           );
           state = HomeState.success(homeWithUser);
         },

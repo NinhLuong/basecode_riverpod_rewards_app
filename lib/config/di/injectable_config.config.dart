@@ -22,8 +22,12 @@ import '../../features/auth/data/datasources/remote/auth_datasource.dart'
 import '../../features/auth/data/repository/auth_repository_imp.dart' as _i794;
 import '../../features/auth/domain/repository/auth_repository.dart' as _i961;
 import '../../features/auth/domain/usecases/check_email_usecase.dart' as _i879;
+import '../../features/auth/domain/usecases/get_user_local_usecase.dart'
+    as _i507;
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
 import '../../features/auth/domain/usecases/register_usecase.dart' as _i941;
+import '../../features/auth/domain/usecases/save_user_local_usecase.dart'
+    as _i887;
 import '../../features/home/data/datasources/home_datasource.dart' as _i1055;
 import '../../features/home/data/repository/home_repository_imp.dart' as _i342;
 import '../../features/home/domain/repository/home_repository.dart' as _i541;
@@ -170,11 +174,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i931.UserLocalDataSource>(),
       ),
     );
+    gh.lazySingleton<_i507.GetUserLocalUseCase>(
+      () => _i507.GetUserLocalUseCase(gh<_i961.IAuthRepository>()),
+    );
     gh.lazySingleton<_i188.LoginUseCase>(
       () => _i188.LoginUseCase(gh<_i961.IAuthRepository>()),
     );
     gh.lazySingleton<_i941.RegisterUseCase>(
       () => _i941.RegisterUseCase(gh<_i961.IAuthRepository>()),
+    );
+    gh.lazySingleton<_i887.SaveUserLocalUseCase>(
+      () => _i887.SaveUserLocalUseCase(gh<_i961.IAuthRepository>()),
     );
     gh.lazySingleton<_i1056.DeleteAccountUseCase>(
       () => _i1056.DeleteAccountUseCase(gh<_i364.ProfileRepository>()),

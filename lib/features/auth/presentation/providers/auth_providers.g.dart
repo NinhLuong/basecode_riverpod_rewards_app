@@ -139,53 +139,101 @@ final class CheckEmailUseCaseProvider
 
 String _$checkEmailUseCaseHash() => r'12f7ded7ddb282df4cde36387be06bb0efa97a77';
 
-@ProviderFor(userLocalDataSource)
-const userLocalDataSourceProvider = UserLocalDataSourceProvider._();
+@ProviderFor(getUserLocalUseCase)
+const getUserLocalUseCaseProvider = GetUserLocalUseCaseProvider._();
 
-final class UserLocalDataSourceProvider
+final class GetUserLocalUseCaseProvider
     extends
         $FunctionalProvider<
-          UserLocalDataSource,
-          UserLocalDataSource,
-          UserLocalDataSource
+          GetUserLocalUseCase,
+          GetUserLocalUseCase,
+          GetUserLocalUseCase
         >
-    with $Provider<UserLocalDataSource> {
-  const UserLocalDataSourceProvider._()
+    with $Provider<GetUserLocalUseCase> {
+  const GetUserLocalUseCaseProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'userLocalDataSourceProvider',
+        name: r'getUserLocalUseCaseProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$userLocalDataSourceHash();
+  String debugGetCreateSourceHash() => _$getUserLocalUseCaseHash();
 
   @$internal
   @override
-  $ProviderElement<UserLocalDataSource> $createElement(
+  $ProviderElement<GetUserLocalUseCase> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  UserLocalDataSource create(Ref ref) {
-    return userLocalDataSource(ref);
+  GetUserLocalUseCase create(Ref ref) {
+    return getUserLocalUseCase(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(UserLocalDataSource value) {
+  Override overrideWithValue(GetUserLocalUseCase value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<UserLocalDataSource>(value),
+      providerOverride: $SyncValueProvider<GetUserLocalUseCase>(value),
     );
   }
 }
 
-String _$userLocalDataSourceHash() =>
-    r'ba8f510c34b578a7e20399ed4b81fd9cb03379bb';
+String _$getUserLocalUseCaseHash() =>
+    r'0e23159b34326c6a5d0cb251a3f793f6282a2afc';
+
+@ProviderFor(saveUserLocalUseCase)
+const saveUserLocalUseCaseProvider = SaveUserLocalUseCaseProvider._();
+
+final class SaveUserLocalUseCaseProvider
+    extends
+        $FunctionalProvider<
+          SaveUserLocalUseCase,
+          SaveUserLocalUseCase,
+          SaveUserLocalUseCase
+        >
+    with $Provider<SaveUserLocalUseCase> {
+  const SaveUserLocalUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'saveUserLocalUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$saveUserLocalUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<SaveUserLocalUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  SaveUserLocalUseCase create(Ref ref) {
+    return saveUserLocalUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SaveUserLocalUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SaveUserLocalUseCase>(value),
+    );
+  }
+}
+
+String _$saveUserLocalUseCaseHash() =>
+    r'ef26450fe3c2fc20300ecf4324971bcd8879e2bd';
 
 @ProviderFor(LoginNotifier)
 const loginProvider = LoginNotifierProvider._();
@@ -380,7 +428,7 @@ final class CurrentUserNotifierProvider
 }
 
 String _$currentUserNotifierHash() =>
-    r'e2aa531315c5fcd4557728db890808281f6a77c3';
+    r'3be8a2a5714eb495fccde695c45e55bdffa645ae';
 
 abstract class _$CurrentUserNotifier extends $Notifier<CurrentUserState> {
   CurrentUserState build();
