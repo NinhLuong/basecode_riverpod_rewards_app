@@ -27,7 +27,7 @@ class ProfileParameters extends Equatable {
     String? username,
     int? clientId,
   })
-      : accessToken = accessToken ?? CacheStorageServices().token,
+      : accessToken = accessToken ?? CacheStorageServices().accessToken,
         accountId = accountId ?? CacheStorageServices().accountId,
         username = username ?? CacheStorageServices().username,
         clientId = clientId ?? AppConstants.clientId;

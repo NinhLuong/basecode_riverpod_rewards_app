@@ -45,7 +45,7 @@ class RedeemParameters extends Equatable {
     String? devMan,
   }) : clientId = clientId ?? AppConstants.clientId,
        accountId = accountId ?? CacheStorageServices().accountId,
-       accessToken = accessToken ?? CacheStorageServices().token,
+       accessToken = accessToken ?? CacheStorageServices().accessToken,
        username = username ?? CacheStorageServices().username,
        devName = devName ?? Platform.operatingSystem,
        devMan = devMan ?? AppConstants.devMan;

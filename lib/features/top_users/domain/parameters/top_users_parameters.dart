@@ -31,7 +31,7 @@ class TopUsersParameters extends Equatable {
     int? clientId,
     bool halfMonth = false,
   })
-      : accessToken = accessToken ?? CacheStorageServices().token,
+      : accessToken = accessToken ?? CacheStorageServices().accessToken,
         accountId = accountId ?? CacheStorageServices().accountId,
         username = username ?? CacheStorageServices().username,
         clientId = clientId ?? AppConstants.clientId,

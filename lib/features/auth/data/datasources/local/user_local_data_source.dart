@@ -22,7 +22,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   @override
   Future<void> saveUserData(UserEntity user) async {
     if (user.accessToken != null) {
-      await _cacheStorageServices.setToken(user.accessToken!);
+      await _cacheStorageServices.setAccessToken(user.accessToken!);
     }
     await _cacheStorageServices.setUserName(user.userName);
     await _cacheStorageServices.setFullName(user.fullName);
@@ -39,8 +39,8 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
     // Construct UserEntity from cached data
     return UserEntity(
-      accessToken: _cacheStorageServices.token != 'no token' 
-          ? _cacheStorageServices.token 
+      accessToken: _cacheStorageServices.accessToken != 'no accessToken' 
+          ? _cacheStorageServices.accessToken 
           : null,
       accountId: _cacheStorageServices.accountId,
       userName: _cacheStorageServices.username,

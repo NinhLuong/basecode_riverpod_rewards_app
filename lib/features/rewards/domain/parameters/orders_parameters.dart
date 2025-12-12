@@ -28,7 +28,7 @@ class OrdersParameters extends Equatable {
     String? username,
   }) : clientId = clientId ?? AppConstants.clientId,
        accountId = accountId ?? CacheStorageServices().accountId,
-       accessToken = accessToken ?? CacheStorageServices().token,
+       accessToken = accessToken ?? CacheStorageServices().accessToken,
        username = username ?? CacheStorageServices().username;
 
   factory OrdersParameters.fromJson(Map<String, dynamic> json) => 

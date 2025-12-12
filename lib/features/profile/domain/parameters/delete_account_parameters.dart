@@ -23,7 +23,7 @@ class DeleteAccountParameters extends Equatable {
     String? accountId,
     int? clientId,
   })
-      : accessToken = accessToken ?? CacheStorageServices().token,
+      : accessToken = accessToken ?? CacheStorageServices().accessToken,
         accountId = accountId ?? CacheStorageServices().accountId,
         clientId = clientId ?? AppConstants.clientId;
 

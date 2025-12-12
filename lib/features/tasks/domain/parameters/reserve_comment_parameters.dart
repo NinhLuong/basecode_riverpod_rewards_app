@@ -3,7 +3,7 @@ import 'package:riverpod_rewards/shared/constants/app_constants.dart';
 import 'package:riverpod_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 
 class ReserveCommentParameters extends Equatable {
-  final String accessToken = CacheStorageServices().token;
+  final String accessToken = CacheStorageServices().accessToken;
   final String accountId = CacheStorageServices().accountId;
   final String username = CacheStorageServices().username;
   final String taskId;

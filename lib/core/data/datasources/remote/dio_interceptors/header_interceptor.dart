@@ -20,7 +20,7 @@ class ApiHeaders {
 // TODO : customize your Header
   Map<String, String> get baseHeaders => {
         if (CacheStorageServices().hasToken)
-          "Authorization": "Bearer ${CacheStorageServices().token}",
+          "Authorization": "Bearer ${CacheStorageServices().accessToken}",
         "Content-Type": "multipart/form-data",
         //  "language": "en",
         // "app": "android",

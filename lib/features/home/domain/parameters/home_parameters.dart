@@ -26,7 +26,7 @@ class HomeParameters extends Equatable {
     String? username,
   }) : clientId = clientId ?? AppConstants.clientId,
        accountId = accountId ?? CacheStorageServices().accountId,
-       accessToken = accessToken ?? CacheStorageServices().token,
+       accessToken = accessToken ?? CacheStorageServices().accessToken,
        username = username ?? CacheStorageServices().username;
 
   factory HomeParameters.fromJson(Map<String, dynamic> json) => 
