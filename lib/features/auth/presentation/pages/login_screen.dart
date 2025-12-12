@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:riverpod_rewards/shared/widgets/components/app_button.dart';
 import 'package:riverpod_rewards/shared/widgets/components/app_container.dart';
@@ -15,29 +16,16 @@ import 'package:riverpod_rewards/features/auth/presentation/providers/auth_provi
 import 'package:riverpod_rewards/features/auth/presentation/state/auth_state.dart';
 import 'package:riverpod_rewards/core/presentation/routes/route_configuration.dart';
 
-class LogInScreen extends ConsumerStatefulWidget {
+class LogInScreen extends HookConsumerWidget {
   const LogInScreen({super.key});
 
   @override
-  ConsumerState<LogInScreen> createState() => _LogInScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Localized variables created with hooks
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final usernameController = useTextEditingController();
+    final passwordController = useTextEditingController();
 
-class _LogInScreenState extends ConsumerState<LogInScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  void _logInTapped() {
-    if (_formKey.currentState?.validate() ?? false) {
-      ref.read(loginProvider.notifier).login(
-            username: _usernameController.text,
-            password: _passwordController.text,
-          );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     // Listen to login state changes
     ref.listen(loginProvider, (previous, next) {
       next.whenOrNull(
@@ -53,68 +41,71 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
       );
     });
 
+    // Local function that triggers login action
+    void logInTapped() {
+      if (formKey.currentState?.validate() ?? false) {
+        ref.read(loginProvider.notifier).login(
+              username: usernameController.text,
+              password: passwordController.text,
+            );
+      }
+    }
+
+    final isLoading = ref.watch(isLoginLoadingProvider);
+
     return AppScaffold(
       body: ListView(
         children: [
           SizedBox(height: 120.h),
           AppContainer(
-            child: _buildForm(context),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  AppLogo(width: 50.w),
+                  const SizedBox(height: 10),
+                  Text(S.of(context).signIn, style: context.f16600),
+                  const SizedBox(height: 30),
+                  AppTextField(
+                    labelText: S.of(context).username,
+                    hintText: S.of(context).usernameHint,
+                    controller: usernameController,
+                    validator: AppValidator(validators: [
+                      InputValidator.requiredField,
+                      InputValidator.noSpaces
+                    ]).validate,
+                  ),
+                  AppTextField(
+                    labelText: S.of(context).password,
+                    hintText: S.of(context).passwordHint,
+                    controller: passwordController,
+                    password: true,
+                    validator: AppValidator(minLength: 6, validators: [
+                      InputValidator.requiredField,
+                      InputValidator.noSpaces,
+                      InputValidator.minLength,
+                    ]).validate,
+                  ),
+                  const SizedBox(height: 20),
+                  AppButton(
+                    text: S.of(context).signIn,
+                    loading: isLoading,
+                    type: AppButtonType.gradientBlue,
+                    onPressed: () => logInTapped(),
+                  ),
+                  const SizedBox(height: 30),
+                  AppRichText(
+                    text: S.of(context).dontHaveAnAccount,
+                    buttonText: S.of(context).signUp,
+                    onTap: () {
+                      context.goToRegister();
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
           SizedBox(height: 50.h),
-        ],
-      ),
-    );
-  }
-
-  Form _buildForm(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          AppLogo(width: 50.w),
-          const SizedBox(height: 10),
-          Text(S.of(context).signIn, style: context.f16600),
-          const SizedBox(height: 30),
-          AppTextField(
-            labelText: S.of(context).username,
-            hintText: S.of(context).usernameHint,
-            controller: _usernameController,
-            validator: AppValidator(validators: [
-              InputValidator.requiredField,
-              InputValidator.noSpaces
-            ]).validate,
-          ),
-          AppTextField(
-            labelText: S.of(context).password,
-            hintText: S.of(context).passwordHint,
-            controller: _passwordController,
-            password: true,
-            validator: AppValidator(minLength: 6, validators: [
-              InputValidator.requiredField,
-              InputValidator.noSpaces,
-              InputValidator.minLength,
-            ]).validate,
-          ),
-          const SizedBox(height: 20),
-          Consumer(
-            builder: (context, ref, child) {
-              final isLoading = ref.watch(isLoginLoadingProvider);
-              
-              return AppButton(
-                text: S.of(context).signIn,
-                loading: isLoading,
-                type: AppButtonType.gradientBlue,
-                onPressed: () => _logInTapped(),
-              );
-            },
-          ),
-          const SizedBox(height: 30),
-          AppRichText(
-              text: S.of(context).dontHaveAnAccount,
-              buttonText: S.of(context).signUp,
-              onTap: () {
-                context.goToRegister();
-              }),
         ],
       ),
     );
