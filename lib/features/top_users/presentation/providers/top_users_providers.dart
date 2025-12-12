@@ -38,11 +38,17 @@ class TopUsersNotifier extends _$TopUsersNotifier {
       final params = TopUsersParameters(halfMonth: _isHalfMonth);
       final result = await useCase.call(params: params);
       
+      // Check if provider is still mounted after async gap
+      if (!ref.mounted) return;
+      
       result.fold(
         (failure) => state = TopUsersState.error(failure),
         (topUsers) => state = TopUsersState.success(topUsers),
       );
     } catch (error, stackTrace) {
+      // Check if provider is still mounted before handling error
+      if (!ref.mounted) return;
+      
       final failure = ErrorsHandler.failureThrower(error, stackTrace);
       state = TopUsersState.error(failure);
     }
@@ -59,6 +65,9 @@ class TopUsersNotifier extends _$TopUsersNotifier {
     try {
       await _fetchTopUsers(halfMonth: halfMonth);
     } catch (error, stackTrace) {
+      // Check if provider is still mounted before handling error
+      if (!ref.mounted) return;
+      
       final failure = ErrorsHandler.failureThrower(error, stackTrace);
       state = TopUsersState.error(failure);
     }
