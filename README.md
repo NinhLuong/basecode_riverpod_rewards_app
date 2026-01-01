@@ -1,4 +1,4 @@
-# Base Code Flutter Clean Architecture Template with Riverpod
+# CodeBase Flutter Clean Architecture Template with Riverpod
 
 A Flutter application designed as a robust starting point for new projects, showcasing clean architecture and a feature-rich UI. This rewards-based application provides a clear, scalable, and maintainable codebase for building modern mobile apps with Flutter, utilizing Riverpod for state management.
 

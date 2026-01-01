@@ -27,7 +27,7 @@ class CacheStorageServices {
 
   CacheStorageServices._();
 
-  factory CacheStorageServices({FlutterSecureStorage? secureStorage}) {
+  factory CacheStorageServices({@factoryParam FlutterSecureStorage? secureStorage}) {
     _secureStorage ??= secureStorage ?? const FlutterSecureStorage();
     return _instance ??= CacheStorageServices._();
   }

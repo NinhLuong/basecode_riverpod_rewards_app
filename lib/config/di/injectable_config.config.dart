@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -83,6 +84,7 @@ import '../../features/top_users/domain/repository/top_users_repository.dart'
     as _i656;
 import '../../features/top_users/domain/usecases/get_top_users_usecase.dart'
     as _i435;
+import 'secure_storage_module.dart' as _i897;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -91,11 +93,11 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i505.CacheStorageServices>(() => _i505.CacheStorageServices());
-    gh.lazySingleton<_i294.ApiServices>(() => _i294.ApiServices());
-    gh.lazySingleton<_i931.UserLocalDataSource>(
-      () => _i931.UserLocalDataSourceImpl(gh<_i505.CacheStorageServices>()),
+    final secureStorageModule = _$SecureStorageModule();
+    gh.lazySingleton<_i558.FlutterSecureStorage>(
+      () => secureStorageModule.secureStorage,
     );
+    gh.lazySingleton<_i294.ApiServices>(() => _i294.ApiServices());
     gh.lazySingleton<_i595.ITasksDataSource>(
       () => _i595.TasksRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
@@ -114,6 +116,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i928.ILiveOffersRepository>(
       () => _i100.LiveOffersRepositoryImp(gh<_i476.ILiveOffersDataSource>()),
     );
+    gh.factoryParam<
+      _i505.CacheStorageServices,
+      _i558.FlutterSecureStorage?,
+      dynamic
+    >(
+      (secureStorage, _) =>
+          _i505.CacheStorageServices(secureStorage: secureStorage),
+    );
     gh.lazySingleton<_i195.IAuthDataSource>(
       () => _i195.AuthRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
@@ -128,6 +138,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i435.GetTopUsersUseCase>(
       () => _i435.GetTopUsersUseCase(gh<_i656.TopUsersRepository>()),
+    );
+    gh.lazySingleton<_i931.UserLocalDataSource>(
+      () => _i931.UserLocalDataSourceImpl(gh<_i505.CacheStorageServices>()),
     );
     gh.lazySingleton<_i541.IHomeRepository>(
       () => _i342.HomeRepositoryImp(gh<_i1055.IHomeDataSource>()),
@@ -198,3 +211,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$SecureStorageModule extends _i897.SecureStorageModule {}
