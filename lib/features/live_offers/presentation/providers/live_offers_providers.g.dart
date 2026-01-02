@@ -10,7 +10,7 @@ part of 'live_offers_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(getLiveOffersUseCase)
-const getLiveOffersUseCaseProvider = GetLiveOffersUseCaseProvider._();
+final getLiveOffersUseCaseProvider = GetLiveOffersUseCaseProvider._();
 
 final class GetLiveOffersUseCaseProvider
     extends
@@ -20,7 +20,7 @@ final class GetLiveOffersUseCaseProvider
           GetLiveOffersUseCase
         >
     with $Provider<GetLiveOffersUseCase> {
-  const GetLiveOffersUseCaseProvider._()
+  GetLiveOffersUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -58,11 +58,11 @@ String _$getLiveOffersUseCaseHash() =>
     r'aa3b7f4364844630eb4bfec61400260440253eac';
 
 @ProviderFor(LiveOffersNotifier)
-const liveOffersProvider = LiveOffersNotifierProvider._();
+final liveOffersProvider = LiveOffersNotifierProvider._();
 
 final class LiveOffersNotifierProvider
     extends $NotifierProvider<LiveOffersNotifier, LiveOffersState> {
-  const LiveOffersNotifierProvider._()
+  LiveOffersNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -97,7 +97,6 @@ abstract class _$LiveOffersNotifier extends $Notifier<LiveOffersState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<LiveOffersState, LiveOffersState>;
     final element =
         ref.element
@@ -107,12 +106,12 @@ abstract class _$LiveOffersNotifier extends $Notifier<LiveOffersState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(liveOffersData)
-const liveOffersDataProvider = LiveOffersDataProvider._();
+final liveOffersDataProvider = LiveOffersDataProvider._();
 
 final class LiveOffersDataProvider
     extends
@@ -122,7 +121,7 @@ final class LiveOffersDataProvider
           List<LiveOfferEntity>
         >
     with $Provider<List<LiveOfferEntity>> {
-  const LiveOffersDataProvider._()
+  LiveOffersDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -159,12 +158,12 @@ final class LiveOffersDataProvider
 String _$liveOffersDataHash() => r'5551e80f7bf530508625a99930eecbd10e3f30e0';
 
 @ProviderFor(isLoadingLiveOffers)
-const isLoadingLiveOffersProvider = IsLoadingLiveOffersProvider._();
+final isLoadingLiveOffersProvider = IsLoadingLiveOffersProvider._();
 
 final class IsLoadingLiveOffersProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsLoadingLiveOffersProvider._()
+  IsLoadingLiveOffersProvider._()
     : super(
         from: null,
         argument: null,
@@ -201,12 +200,12 @@ String _$isLoadingLiveOffersHash() =>
     r'665e1496d076b5b6e9135e14fb1b00a4f5a59eda';
 
 @ProviderFor(isLoadingMoreLiveOffers)
-const isLoadingMoreLiveOffersProvider = IsLoadingMoreLiveOffersProvider._();
+final isLoadingMoreLiveOffersProvider = IsLoadingMoreLiveOffersProvider._();
 
 final class IsLoadingMoreLiveOffersProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsLoadingMoreLiveOffersProvider._()
+  IsLoadingMoreLiveOffersProvider._()
     : super(
         from: null,
         argument: null,
@@ -243,12 +242,12 @@ String _$isLoadingMoreLiveOffersHash() =>
     r'90c73f799e14d67abb9bcd99f8ed81a1ddff538f';
 
 @ProviderFor(liveOffersErrorMessage)
-const liveOffersErrorMessageProvider = LiveOffersErrorMessageProvider._();
+final liveOffersErrorMessageProvider = LiveOffersErrorMessageProvider._();
 
 final class LiveOffersErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const LiveOffersErrorMessageProvider._()
+  LiveOffersErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -285,12 +284,12 @@ String _$liveOffersErrorMessageHash() =>
     r'48eb1bde82697f6dffb812cb20f6fbdcb3d7f103';
 
 @ProviderFor(hasLiveOffersError)
-const hasLiveOffersErrorProvider = HasLiveOffersErrorProvider._();
+final hasLiveOffersErrorProvider = HasLiveOffersErrorProvider._();
 
 final class HasLiveOffersErrorProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasLiveOffersErrorProvider._()
+  HasLiveOffersErrorProvider._()
     : super(
         from: null,
         argument: null,

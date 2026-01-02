@@ -10,7 +10,7 @@ part of 'top_users_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(getTopUsersUseCase)
-const getTopUsersUseCaseProvider = GetTopUsersUseCaseProvider._();
+final getTopUsersUseCaseProvider = GetTopUsersUseCaseProvider._();
 
 final class GetTopUsersUseCaseProvider
     extends
@@ -20,7 +20,7 @@ final class GetTopUsersUseCaseProvider
           GetTopUsersUseCase
         >
     with $Provider<GetTopUsersUseCase> {
-  const GetTopUsersUseCaseProvider._()
+  GetTopUsersUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -58,11 +58,11 @@ String _$getTopUsersUseCaseHash() =>
     r'fd31f5951396f6734af4717f2dc684fa90736733';
 
 @ProviderFor(TopUsersNotifier)
-const topUsersProvider = TopUsersNotifierProvider._();
+final topUsersProvider = TopUsersNotifierProvider._();
 
 final class TopUsersNotifierProvider
     extends $NotifierProvider<TopUsersNotifier, TopUsersState> {
-  const TopUsersNotifierProvider._()
+  TopUsersNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -96,7 +96,6 @@ abstract class _$TopUsersNotifier extends $Notifier<TopUsersState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<TopUsersState, TopUsersState>;
     final element =
         ref.element
@@ -106,12 +105,12 @@ abstract class _$TopUsersNotifier extends $Notifier<TopUsersState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(topThreeUsers)
-const topThreeUsersProvider = TopThreeUsersProvider._();
+final topThreeUsersProvider = TopThreeUsersProvider._();
 
 final class TopThreeUsersProvider
     extends
@@ -121,7 +120,7 @@ final class TopThreeUsersProvider
           List<UserRankEntity>
         >
     with $Provider<List<UserRankEntity>> {
-  const TopThreeUsersProvider._()
+  TopThreeUsersProvider._()
     : super(
         from: null,
         argument: null,
@@ -158,7 +157,7 @@ final class TopThreeUsersProvider
 String _$topThreeUsersHash() => r'defa8ed965beb1c825f2b2f33ae9c7b08879f1b3';
 
 @ProviderFor(restUsers)
-const restUsersProvider = RestUsersProvider._();
+final restUsersProvider = RestUsersProvider._();
 
 final class RestUsersProvider
     extends
@@ -168,7 +167,7 @@ final class RestUsersProvider
           List<UserRankEntity>
         >
     with $Provider<List<UserRankEntity>> {
-  const RestUsersProvider._()
+  RestUsersProvider._()
     : super(
         from: null,
         argument: null,
@@ -205,13 +204,13 @@ final class RestUsersProvider
 String _$restUsersHash() => r'007d97335bc44bae482cbf3e76180451bf8ece95';
 
 @ProviderFor(myRank)
-const myRankProvider = MyRankProvider._();
+final myRankProvider = MyRankProvider._();
 
 final class MyRankProvider
     extends
         $FunctionalProvider<UserRankEntity?, UserRankEntity?, UserRankEntity?>
     with $Provider<UserRankEntity?> {
-  const MyRankProvider._()
+  MyRankProvider._()
     : super(
         from: null,
         argument: null,
@@ -247,12 +246,12 @@ final class MyRankProvider
 String _$myRankHash() => r'bb45ea9bd577273be08e1fc522484200f5ee62c6';
 
 @ProviderFor(maxPoints)
-const maxPointsProvider = MaxPointsProvider._();
+final maxPointsProvider = MaxPointsProvider._();
 
 final class MaxPointsProvider
     extends $FunctionalProvider<double, double, double>
     with $Provider<double> {
-  const MaxPointsProvider._()
+  MaxPointsProvider._()
     : super(
         from: null,
         argument: null,
@@ -288,12 +287,12 @@ final class MaxPointsProvider
 String _$maxPointsHash() => r'0f68caf6ac7932bb750ac73eb1e765706356cd16';
 
 @ProviderFor(isTopUsersLoading)
-const isTopUsersLoadingProvider = IsTopUsersLoadingProvider._();
+final isTopUsersLoadingProvider = IsTopUsersLoadingProvider._();
 
 final class IsTopUsersLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsTopUsersLoadingProvider._()
+  IsTopUsersLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -329,12 +328,12 @@ final class IsTopUsersLoadingProvider
 String _$isTopUsersLoadingHash() => r'83ad29c4064108328a6094897ef6a49591fdd044';
 
 @ProviderFor(topUsersErrorMessage)
-const topUsersErrorMessageProvider = TopUsersErrorMessageProvider._();
+final topUsersErrorMessageProvider = TopUsersErrorMessageProvider._();
 
 final class TopUsersErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const TopUsersErrorMessageProvider._()
+  TopUsersErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -371,12 +370,12 @@ String _$topUsersErrorMessageHash() =>
     r'7813bf45aa34b4b389ee6a5edc313b87718b5662';
 
 @ProviderFor(hasTopUsersError)
-const hasTopUsersErrorProvider = HasTopUsersErrorProvider._();
+final hasTopUsersErrorProvider = HasTopUsersErrorProvider._();
 
 final class HasTopUsersErrorProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasTopUsersErrorProvider._()
+  HasTopUsersErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -412,12 +411,12 @@ final class HasTopUsersErrorProvider
 String _$hasTopUsersErrorHash() => r'd1e6e342466b70ba165a76fb4847d050b2a60588';
 
 @ProviderFor(hasTopUsersData)
-const hasTopUsersDataProvider = HasTopUsersDataProvider._();
+final hasTopUsersDataProvider = HasTopUsersDataProvider._();
 
 final class HasTopUsersDataProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasTopUsersDataProvider._()
+  HasTopUsersDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -453,12 +452,12 @@ final class HasTopUsersDataProvider
 String _$hasTopUsersDataHash() => r'bab72f185dd2f9445934b57f6b44fa0b760e6ea1';
 
 @ProviderFor(isTopUsersRefreshing)
-const isTopUsersRefreshingProvider = IsTopUsersRefreshingProvider._();
+final isTopUsersRefreshingProvider = IsTopUsersRefreshingProvider._();
 
 final class IsTopUsersRefreshingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsTopUsersRefreshingProvider._()
+  IsTopUsersRefreshingProvider._()
     : super(
         from: null,
         argument: null,
@@ -495,13 +494,13 @@ String _$isTopUsersRefreshingHash() =>
     r'd78c178e8f8548103852f4dac693c94476048a2f';
 
 @ProviderFor(topUsersData)
-const topUsersDataProvider = TopUsersDataProvider._();
+final topUsersDataProvider = TopUsersDataProvider._();
 
 final class TopUsersDataProvider
     extends
         $FunctionalProvider<TopUsersEntity?, TopUsersEntity?, TopUsersEntity?>
     with $Provider<TopUsersEntity?> {
-  const TopUsersDataProvider._()
+  TopUsersDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -537,12 +536,12 @@ final class TopUsersDataProvider
 String _$topUsersDataHash() => r'7422a110f65c01433f5bd368dd445c10d1d3caa2';
 
 @ProviderFor(currentPeriodIsHalfMonth)
-const currentPeriodIsHalfMonthProvider = CurrentPeriodIsHalfMonthProvider._();
+final currentPeriodIsHalfMonthProvider = CurrentPeriodIsHalfMonthProvider._();
 
 final class CurrentPeriodIsHalfMonthProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const CurrentPeriodIsHalfMonthProvider._()
+  CurrentPeriodIsHalfMonthProvider._()
     : super(
         from: null,
         argument: null,

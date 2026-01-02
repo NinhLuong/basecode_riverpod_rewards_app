@@ -10,11 +10,11 @@ part of 'app_config_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(AppConfigNotifier)
-const appConfigProvider = AppConfigNotifierProvider._();
+final appConfigProvider = AppConfigNotifierProvider._();
 
 final class AppConfigNotifierProvider
     extends $NotifierProvider<AppConfigNotifier, AppConfigState> {
-  const AppConfigNotifierProvider._()
+  AppConfigNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$AppConfigNotifier extends $Notifier<AppConfigState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<AppConfigState, AppConfigState>;
     final element =
         ref.element
@@ -58,17 +57,17 @@ abstract class _$AppConfigNotifier extends $Notifier<AppConfigState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(currentLanguage)
-const currentLanguageProvider = CurrentLanguageProvider._();
+final currentLanguageProvider = CurrentLanguageProvider._();
 
 final class CurrentLanguageProvider
     extends $FunctionalProvider<AppLanguages, AppLanguages, AppLanguages>
     with $Provider<AppLanguages> {
-  const CurrentLanguageProvider._()
+  CurrentLanguageProvider._()
     : super(
         from: null,
         argument: null,
@@ -104,12 +103,12 @@ final class CurrentLanguageProvider
 String _$currentLanguageHash() => r'990259312568c728c3f6e105ec518f0019806d29';
 
 @ProviderFor(currentAppState)
-const currentAppStateProvider = CurrentAppStateProvider._();
+final currentAppStateProvider = CurrentAppStateProvider._();
 
 final class CurrentAppStateProvider
     extends $FunctionalProvider<AppState, AppState, AppState>
     with $Provider<AppState> {
-  const CurrentAppStateProvider._()
+  CurrentAppStateProvider._()
     : super(
         from: null,
         argument: null,
@@ -145,11 +144,11 @@ final class CurrentAppStateProvider
 String _$currentAppStateHash() => r'329b0d88dc7363ccdccce2ba7185c66077351e21';
 
 @ProviderFor(isUserLoggedIn)
-const isUserLoggedInProvider = IsUserLoggedInProvider._();
+final isUserLoggedInProvider = IsUserLoggedInProvider._();
 
 final class IsUserLoggedInProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsUserLoggedInProvider._()
+  IsUserLoggedInProvider._()
     : super(
         from: null,
         argument: null,

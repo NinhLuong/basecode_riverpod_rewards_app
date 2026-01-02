@@ -84,7 +84,6 @@ import '../../features/top_users/domain/repository/top_users_repository.dart'
     as _i656;
 import '../../features/top_users/domain/usecases/get_top_users_usecase.dart'
     as _i435;
-import 'secure_storage_module.dart' as _i897;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -93,10 +92,6 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final secureStorageModule = _$SecureStorageModule();
-    gh.lazySingleton<_i558.FlutterSecureStorage>(
-      () => secureStorageModule.secureStorage,
-    );
     gh.lazySingleton<_i294.ApiServices>(() => _i294.ApiServices());
     gh.lazySingleton<_i595.ITasksDataSource>(
       () => _i595.TasksRemoteDataSourceImp(gh<_i294.ApiServices>()),
@@ -211,5 +206,3 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
-
-class _$SecureStorageModule extends _i897.SecureStorageModule {}

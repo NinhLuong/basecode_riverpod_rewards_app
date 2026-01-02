@@ -11,7 +11,7 @@ part of 'system_locale_observer.dart';
 /// Provider for system locale observer
 
 @ProviderFor(systemLocaleObserver)
-const systemLocaleObserverProvider = SystemLocaleObserverProvider._();
+final systemLocaleObserverProvider = SystemLocaleObserverProvider._();
 
 /// Provider for system locale observer
 
@@ -24,7 +24,7 @@ final class SystemLocaleObserverProvider
         >
     with $Provider<SystemLocaleObserver> {
   /// Provider for system locale observer
-  const SystemLocaleObserverProvider._()
+  SystemLocaleObserverProvider._()
     : super(
         from: null,
         argument: null,
@@ -64,7 +64,7 @@ String _$systemLocaleObserverHash() =>
 /// Provider that exposes the current system locale as AppLanguages
 
 @ProviderFor(systemLocale)
-const systemLocaleProvider = SystemLocaleProvider._();
+final systemLocaleProvider = SystemLocaleProvider._();
 
 /// Provider that exposes the current system locale as AppLanguages
 
@@ -72,7 +72,7 @@ final class SystemLocaleProvider
     extends $FunctionalProvider<AppLanguages, AppLanguages, AppLanguages>
     with $Provider<AppLanguages> {
   /// Provider that exposes the current system locale as AppLanguages
-  const SystemLocaleProvider._()
+  SystemLocaleProvider._()
     : super(
         from: null,
         argument: null,

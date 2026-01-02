@@ -10,13 +10,13 @@ part of 'tasks_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(tasksRepository)
-const tasksRepositoryProvider = TasksRepositoryProvider._();
+final tasksRepositoryProvider = TasksRepositoryProvider._();
 
 final class TasksRepositoryProvider
     extends
         $FunctionalProvider<TasksRepository, TasksRepository, TasksRepository>
     with $Provider<TasksRepository> {
-  const TasksRepositoryProvider._()
+  TasksRepositoryProvider._()
     : super(
         from: null,
         argument: null,
@@ -52,11 +52,11 @@ final class TasksRepositoryProvider
 String _$tasksRepositoryHash() => r'9056be2713fa35de0dc859db8690d6ab74f7f703';
 
 @ProviderFor(TasksNotifier)
-const tasksProvider = TasksNotifierProvider._();
+final tasksProvider = TasksNotifierProvider._();
 
 final class TasksNotifierProvider
     extends $NotifierProvider<TasksNotifier, TasksState> {
-  const TasksNotifierProvider._()
+  TasksNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -90,7 +90,6 @@ abstract class _$TasksNotifier extends $Notifier<TasksState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<TasksState, TasksState>;
     final element =
         ref.element
@@ -100,16 +99,16 @@ abstract class _$TasksNotifier extends $Notifier<TasksState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(TaskOrdersNotifier)
-const taskOrdersProvider = TaskOrdersNotifierProvider._();
+final taskOrdersProvider = TaskOrdersNotifierProvider._();
 
 final class TaskOrdersNotifierProvider
     extends $NotifierProvider<TaskOrdersNotifier, TaskOrdersState> {
-  const TaskOrdersNotifierProvider._()
+  TaskOrdersNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -144,7 +143,6 @@ abstract class _$TaskOrdersNotifier extends $Notifier<TaskOrdersState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<TaskOrdersState, TaskOrdersState>;
     final element =
         ref.element
@@ -154,16 +152,16 @@ abstract class _$TaskOrdersNotifier extends $Notifier<TaskOrdersState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(ReserveCommentNotifier)
-const reserveCommentProvider = ReserveCommentNotifierProvider._();
+final reserveCommentProvider = ReserveCommentNotifierProvider._();
 
 final class ReserveCommentNotifierProvider
     extends $NotifierProvider<ReserveCommentNotifier, ReserveCommentState> {
-  const ReserveCommentNotifierProvider._()
+  ReserveCommentNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -198,7 +196,6 @@ abstract class _$ReserveCommentNotifier extends $Notifier<ReserveCommentState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<ReserveCommentState, ReserveCommentState>;
     final element =
         ref.element
@@ -208,16 +205,16 @@ abstract class _$ReserveCommentNotifier extends $Notifier<ReserveCommentState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(AddTaskOrderNotifier)
-const addTaskOrderProvider = AddTaskOrderNotifierProvider._();
+final addTaskOrderProvider = AddTaskOrderNotifierProvider._();
 
 final class AddTaskOrderNotifierProvider
     extends $NotifierProvider<AddTaskOrderNotifier, AddTaskOrderState> {
-  const AddTaskOrderNotifierProvider._()
+  AddTaskOrderNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -252,7 +249,6 @@ abstract class _$AddTaskOrderNotifier extends $Notifier<AddTaskOrderState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<AddTaskOrderState, AddTaskOrderState>;
     final element =
         ref.element
@@ -262,12 +258,12 @@ abstract class _$AddTaskOrderNotifier extends $Notifier<AddTaskOrderState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(tasksList)
-const tasksListProvider = TasksListProvider._();
+final tasksListProvider = TasksListProvider._();
 
 final class TasksListProvider
     extends
@@ -277,7 +273,7 @@ final class TasksListProvider
           List<TaskEntity>
         >
     with $Provider<List<TaskEntity>> {
-  const TasksListProvider._()
+  TasksListProvider._()
     : super(
         from: null,
         argument: null,
@@ -313,11 +309,11 @@ final class TasksListProvider
 String _$tasksListHash() => r'a3924df58aad55d9a7fd6e3e78fc6bbe5ad6a103';
 
 @ProviderFor(isTasksLoading)
-const isTasksLoadingProvider = IsTasksLoadingProvider._();
+final isTasksLoadingProvider = IsTasksLoadingProvider._();
 
 final class IsTasksLoadingProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsTasksLoadingProvider._()
+  IsTasksLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -353,12 +349,12 @@ final class IsTasksLoadingProvider extends $FunctionalProvider<bool, bool, bool>
 String _$isTasksLoadingHash() => r'042de74df968bf0cd94014bf47ffee7a27db2d31';
 
 @ProviderFor(tasksErrorMessage)
-const tasksErrorMessageProvider = TasksErrorMessageProvider._();
+final tasksErrorMessageProvider = TasksErrorMessageProvider._();
 
 final class TasksErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const TasksErrorMessageProvider._()
+  TasksErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -394,11 +390,11 @@ final class TasksErrorMessageProvider
 String _$tasksErrorMessageHash() => r'a05ffa3c2525f29450d960d8ee7956ec28c52852';
 
 @ProviderFor(hasTasksError)
-const hasTasksErrorProvider = HasTasksErrorProvider._();
+final hasTasksErrorProvider = HasTasksErrorProvider._();
 
 final class HasTasksErrorProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasTasksErrorProvider._()
+  HasTasksErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -434,11 +430,11 @@ final class HasTasksErrorProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasTasksErrorHash() => r'e17e10c5fa0fc0d88ac6561301dc4cf7ac180192';
 
 @ProviderFor(hasTasksData)
-const hasTasksDataProvider = HasTasksDataProvider._();
+final hasTasksDataProvider = HasTasksDataProvider._();
 
 final class HasTasksDataProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasTasksDataProvider._()
+  HasTasksDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -474,12 +470,12 @@ final class HasTasksDataProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasTasksDataHash() => r'eeab0683bab39c78b36605999ad844daf361099c';
 
 @ProviderFor(isTasksRefreshing)
-const isTasksRefreshingProvider = IsTasksRefreshingProvider._();
+final isTasksRefreshingProvider = IsTasksRefreshingProvider._();
 
 final class IsTasksRefreshingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsTasksRefreshingProvider._()
+  IsTasksRefreshingProvider._()
     : super(
         from: null,
         argument: null,
@@ -515,12 +511,12 @@ final class IsTasksRefreshingProvider
 String _$isTasksRefreshingHash() => r'8891d450066a7e4ca4dd01e0578b3d9c25a075c1';
 
 @ProviderFor(isTaskOrdersLoading)
-const isTaskOrdersLoadingProvider = IsTaskOrdersLoadingProvider._();
+final isTaskOrdersLoadingProvider = IsTaskOrdersLoadingProvider._();
 
 final class IsTaskOrdersLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsTaskOrdersLoadingProvider._()
+  IsTaskOrdersLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -557,12 +553,12 @@ String _$isTaskOrdersLoadingHash() =>
     r'919db27433dcd675f4fcefbcf6fb3bcf0b529843';
 
 @ProviderFor(taskOrdersErrorMessage)
-const taskOrdersErrorMessageProvider = TaskOrdersErrorMessageProvider._();
+final taskOrdersErrorMessageProvider = TaskOrdersErrorMessageProvider._();
 
 final class TaskOrdersErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const TaskOrdersErrorMessageProvider._()
+  TaskOrdersErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -599,7 +595,7 @@ String _$taskOrdersErrorMessageHash() =>
     r'e11cea9102d74409416fc7e021139c5475bb06ff';
 
 @ProviderFor(taskOrdersData)
-const taskOrdersDataProvider = TaskOrdersDataProvider._();
+final taskOrdersDataProvider = TaskOrdersDataProvider._();
 
 final class TaskOrdersDataProvider
     extends
@@ -609,7 +605,7 @@ final class TaskOrdersDataProvider
           TasksOrdersEntity?
         >
     with $Provider<TasksOrdersEntity?> {
-  const TaskOrdersDataProvider._()
+  TaskOrdersDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -646,12 +642,12 @@ final class TaskOrdersDataProvider
 String _$taskOrdersDataHash() => r'6cebca89ef6e77f50608cab96396af8d1e2a539f';
 
 @ProviderFor(isReserveCommentLoading)
-const isReserveCommentLoadingProvider = IsReserveCommentLoadingProvider._();
+final isReserveCommentLoadingProvider = IsReserveCommentLoadingProvider._();
 
 final class IsReserveCommentLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsReserveCommentLoadingProvider._()
+  IsReserveCommentLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -688,13 +684,13 @@ String _$isReserveCommentLoadingHash() =>
     r'0be016ea553eb06ce0b0fd62a89dbe11542e5fa9';
 
 @ProviderFor(reserveCommentErrorMessage)
-const reserveCommentErrorMessageProvider =
+final reserveCommentErrorMessageProvider =
     ReserveCommentErrorMessageProvider._();
 
 final class ReserveCommentErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const ReserveCommentErrorMessageProvider._()
+  ReserveCommentErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -731,7 +727,7 @@ String _$reserveCommentErrorMessageHash() =>
     r'f7134260f4049424eb0219d3296fad1cb22bbfe9';
 
 @ProviderFor(reserveCommentResult)
-const reserveCommentResultProvider = ReserveCommentResultProvider._();
+final reserveCommentResultProvider = ReserveCommentResultProvider._();
 
 final class ReserveCommentResultProvider
     extends
@@ -741,7 +737,7 @@ final class ReserveCommentResultProvider
           ReserveCommentEntity?
         >
     with $Provider<ReserveCommentEntity?> {
-  const ReserveCommentResultProvider._()
+  ReserveCommentResultProvider._()
     : super(
         from: null,
         argument: null,
@@ -779,12 +775,12 @@ String _$reserveCommentResultHash() =>
     r'88f50b10249237df6cdfbc3d6494e2c80d8c34f4';
 
 @ProviderFor(isAddTaskOrderLoading)
-const isAddTaskOrderLoadingProvider = IsAddTaskOrderLoadingProvider._();
+final isAddTaskOrderLoadingProvider = IsAddTaskOrderLoadingProvider._();
 
 final class IsAddTaskOrderLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsAddTaskOrderLoadingProvider._()
+  IsAddTaskOrderLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -821,12 +817,12 @@ String _$isAddTaskOrderLoadingHash() =>
     r'5b23cc5a0d82a9af39ad3e41475f8e8f0686c045';
 
 @ProviderFor(addTaskOrderErrorMessage)
-const addTaskOrderErrorMessageProvider = AddTaskOrderErrorMessageProvider._();
+final addTaskOrderErrorMessageProvider = AddTaskOrderErrorMessageProvider._();
 
 final class AddTaskOrderErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const AddTaskOrderErrorMessageProvider._()
+  AddTaskOrderErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -863,12 +859,12 @@ String _$addTaskOrderErrorMessageHash() =>
     r'ebe5ce9be732005153f38c7b1083b82224911b50';
 
 @ProviderFor(addTaskOrderSuccess)
-const addTaskOrderSuccessProvider = AddTaskOrderSuccessProvider._();
+final addTaskOrderSuccessProvider = AddTaskOrderSuccessProvider._();
 
 final class AddTaskOrderSuccessProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const AddTaskOrderSuccessProvider._()
+  AddTaskOrderSuccessProvider._()
     : super(
         from: null,
         argument: null,

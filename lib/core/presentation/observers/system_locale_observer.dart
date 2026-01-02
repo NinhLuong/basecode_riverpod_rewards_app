@@ -13,7 +13,6 @@ class SystemLocaleObserver extends WidgetsBindingObserver {
     // Register this observer with WidgetsBinding
     WidgetsBinding.instance.addObserver(this);
     _currentLocale = _getSystemLocale();
-    L.info('SystemLocaleObserver initialized with locale: ${_currentLocale.name}');
   }
 
   AppLanguages _currentLocale = AppLanguages.english;
@@ -75,8 +74,6 @@ class SystemLocaleObserver extends WidgetsBindingObserver {
 
     final primaryLocale = locales.first;
     final languageCode = primaryLocale.languageCode.toLowerCase();
-
-    L.debug('Primary system locale language code: $languageCode');
 
     // Map language code to AppLanguages
     switch (languageCode) {

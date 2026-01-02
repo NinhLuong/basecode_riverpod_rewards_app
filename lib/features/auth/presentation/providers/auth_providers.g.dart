@@ -10,12 +10,12 @@ part of 'auth_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(loginUseCase)
-const loginUseCaseProvider = LoginUseCaseProvider._();
+final loginUseCaseProvider = LoginUseCaseProvider._();
 
 final class LoginUseCaseProvider
     extends $FunctionalProvider<LoginUseCase, LoginUseCase, LoginUseCase>
     with $Provider<LoginUseCase> {
-  const LoginUseCaseProvider._()
+  LoginUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -51,13 +51,13 @@ final class LoginUseCaseProvider
 String _$loginUseCaseHash() => r'ed413fe675c673003f41370c188730592e742297';
 
 @ProviderFor(registerUseCase)
-const registerUseCaseProvider = RegisterUseCaseProvider._();
+final registerUseCaseProvider = RegisterUseCaseProvider._();
 
 final class RegisterUseCaseProvider
     extends
         $FunctionalProvider<RegisterUseCase, RegisterUseCase, RegisterUseCase>
     with $Provider<RegisterUseCase> {
-  const RegisterUseCaseProvider._()
+  RegisterUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -93,7 +93,7 @@ final class RegisterUseCaseProvider
 String _$registerUseCaseHash() => r'e177b05fd51671a5fd275057ce2b5514f7a8616b';
 
 @ProviderFor(checkEmailUseCase)
-const checkEmailUseCaseProvider = CheckEmailUseCaseProvider._();
+final checkEmailUseCaseProvider = CheckEmailUseCaseProvider._();
 
 final class CheckEmailUseCaseProvider
     extends
@@ -103,7 +103,7 @@ final class CheckEmailUseCaseProvider
           CheckEmailUseCase
         >
     with $Provider<CheckEmailUseCase> {
-  const CheckEmailUseCaseProvider._()
+  CheckEmailUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -140,7 +140,7 @@ final class CheckEmailUseCaseProvider
 String _$checkEmailUseCaseHash() => r'12f7ded7ddb282df4cde36387be06bb0efa97a77';
 
 @ProviderFor(getUserLocalUseCase)
-const getUserLocalUseCaseProvider = GetUserLocalUseCaseProvider._();
+final getUserLocalUseCaseProvider = GetUserLocalUseCaseProvider._();
 
 final class GetUserLocalUseCaseProvider
     extends
@@ -150,7 +150,7 @@ final class GetUserLocalUseCaseProvider
           GetUserLocalUseCase
         >
     with $Provider<GetUserLocalUseCase> {
-  const GetUserLocalUseCaseProvider._()
+  GetUserLocalUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -188,7 +188,7 @@ String _$getUserLocalUseCaseHash() =>
     r'0e23159b34326c6a5d0cb251a3f793f6282a2afc';
 
 @ProviderFor(saveUserLocalUseCase)
-const saveUserLocalUseCaseProvider = SaveUserLocalUseCaseProvider._();
+final saveUserLocalUseCaseProvider = SaveUserLocalUseCaseProvider._();
 
 final class SaveUserLocalUseCaseProvider
     extends
@@ -198,7 +198,7 @@ final class SaveUserLocalUseCaseProvider
           SaveUserLocalUseCase
         >
     with $Provider<SaveUserLocalUseCase> {
-  const SaveUserLocalUseCaseProvider._()
+  SaveUserLocalUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -236,11 +236,11 @@ String _$saveUserLocalUseCaseHash() =>
     r'ef26450fe3c2fc20300ecf4324971bcd8879e2bd';
 
 @ProviderFor(LoginNotifier)
-const loginProvider = LoginNotifierProvider._();
+final loginProvider = LoginNotifierProvider._();
 
 final class LoginNotifierProvider
     extends $NotifierProvider<LoginNotifier, LoginState> {
-  const LoginNotifierProvider._()
+  LoginNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -274,7 +274,6 @@ abstract class _$LoginNotifier extends $Notifier<LoginState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<LoginState, LoginState>;
     final element =
         ref.element
@@ -284,16 +283,16 @@ abstract class _$LoginNotifier extends $Notifier<LoginState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(RegisterNotifier)
-const registerProvider = RegisterNotifierProvider._();
+final registerProvider = RegisterNotifierProvider._();
 
 final class RegisterNotifierProvider
     extends $NotifierProvider<RegisterNotifier, RegisterState> {
-  const RegisterNotifierProvider._()
+  RegisterNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -327,7 +326,6 @@ abstract class _$RegisterNotifier extends $Notifier<RegisterState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<RegisterState, RegisterState>;
     final element =
         ref.element
@@ -337,16 +335,16 @@ abstract class _$RegisterNotifier extends $Notifier<RegisterState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(EmailCheckNotifier)
-const emailCheckProvider = EmailCheckNotifierProvider._();
+final emailCheckProvider = EmailCheckNotifierProvider._();
 
 final class EmailCheckNotifierProvider
     extends $NotifierProvider<EmailCheckNotifier, EmailCheckState> {
-  const EmailCheckNotifierProvider._()
+  EmailCheckNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -381,7 +379,6 @@ abstract class _$EmailCheckNotifier extends $Notifier<EmailCheckState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<EmailCheckState, EmailCheckState>;
     final element =
         ref.element
@@ -391,16 +388,16 @@ abstract class _$EmailCheckNotifier extends $Notifier<EmailCheckState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(CurrentUserNotifier)
-const currentUserProvider = CurrentUserNotifierProvider._();
+final currentUserProvider = CurrentUserNotifierProvider._();
 
 final class CurrentUserNotifierProvider
     extends $NotifierProvider<CurrentUserNotifier, CurrentUserState> {
-  const CurrentUserNotifierProvider._()
+  CurrentUserNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -435,7 +432,6 @@ abstract class _$CurrentUserNotifier extends $Notifier<CurrentUserState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<CurrentUserState, CurrentUserState>;
     final element =
         ref.element
@@ -445,16 +441,16 @@ abstract class _$CurrentUserNotifier extends $Notifier<CurrentUserState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(isLoginLoading)
-const isLoginLoadingProvider = IsLoginLoadingProvider._();
+final isLoginLoadingProvider = IsLoginLoadingProvider._();
 
 final class IsLoginLoadingProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsLoginLoadingProvider._()
+  IsLoginLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -490,12 +486,12 @@ final class IsLoginLoadingProvider extends $FunctionalProvider<bool, bool, bool>
 String _$isLoginLoadingHash() => r'0057235d1d692b7c4c5f2529515dcba486d00fa1';
 
 @ProviderFor(isRegisterLoading)
-const isRegisterLoadingProvider = IsRegisterLoadingProvider._();
+final isRegisterLoadingProvider = IsRegisterLoadingProvider._();
 
 final class IsRegisterLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsRegisterLoadingProvider._()
+  IsRegisterLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -531,12 +527,12 @@ final class IsRegisterLoadingProvider
 String _$isRegisterLoadingHash() => r'04c1ac370fd3f6d58a0cf7f91937cca34b257255';
 
 @ProviderFor(isEmailCheckLoading)
-const isEmailCheckLoadingProvider = IsEmailCheckLoadingProvider._();
+final isEmailCheckLoadingProvider = IsEmailCheckLoadingProvider._();
 
 final class IsEmailCheckLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsEmailCheckLoadingProvider._()
+  IsEmailCheckLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -573,12 +569,12 @@ String _$isEmailCheckLoadingHash() =>
     r'c5f51ffcb258356cdc41382a217986f675aa4777';
 
 @ProviderFor(loginErrorMessage)
-const loginErrorMessageProvider = LoginErrorMessageProvider._();
+final loginErrorMessageProvider = LoginErrorMessageProvider._();
 
 final class LoginErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const LoginErrorMessageProvider._()
+  LoginErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -614,12 +610,12 @@ final class LoginErrorMessageProvider
 String _$loginErrorMessageHash() => r'84b4c87c1e71381abd7c2ff6fa9e4fa69c995296';
 
 @ProviderFor(registerErrorMessage)
-const registerErrorMessageProvider = RegisterErrorMessageProvider._();
+final registerErrorMessageProvider = RegisterErrorMessageProvider._();
 
 final class RegisterErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const RegisterErrorMessageProvider._()
+  RegisterErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -656,12 +652,12 @@ String _$registerErrorMessageHash() =>
     r'068406e8f79f541badc52c2fe6c7164ff1e5b9a7';
 
 @ProviderFor(emailCheckErrorMessage)
-const emailCheckErrorMessageProvider = EmailCheckErrorMessageProvider._();
+final emailCheckErrorMessageProvider = EmailCheckErrorMessageProvider._();
 
 final class EmailCheckErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const EmailCheckErrorMessageProvider._()
+  EmailCheckErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -698,12 +694,12 @@ String _$emailCheckErrorMessageHash() =>
     r'fbb29123a76a28aac3d63dc3eb0bd7e93a18a3cc';
 
 @ProviderFor(isUserAuthenticated)
-const isUserAuthenticatedProvider = IsUserAuthenticatedProvider._();
+final isUserAuthenticatedProvider = IsUserAuthenticatedProvider._();
 
 final class IsUserAuthenticatedProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsUserAuthenticatedProvider._()
+  IsUserAuthenticatedProvider._()
     : super(
         from: null,
         argument: null,
@@ -740,12 +736,12 @@ String _$isUserAuthenticatedHash() =>
     r'1c3fd3178c466c3819cca4f2be84ddb44588b932';
 
 @ProviderFor(currentUserData)
-const currentUserDataProvider = CurrentUserDataProvider._();
+final currentUserDataProvider = CurrentUserDataProvider._();
 
 final class CurrentUserDataProvider
     extends $FunctionalProvider<UserEntity?, UserEntity?, UserEntity?>
     with $Provider<UserEntity?> {
-  const CurrentUserDataProvider._()
+  CurrentUserDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -781,12 +777,12 @@ final class CurrentUserDataProvider
 String _$currentUserDataHash() => r'441ca128e5219a8a71ffa3259cf8e8caf677ee9a';
 
 @ProviderFor(loginUserData)
-const loginUserDataProvider = LoginUserDataProvider._();
+final loginUserDataProvider = LoginUserDataProvider._();
 
 final class LoginUserDataProvider
     extends $FunctionalProvider<UserEntity?, UserEntity?, UserEntity?>
     with $Provider<UserEntity?> {
-  const LoginUserDataProvider._()
+  LoginUserDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -822,12 +818,12 @@ final class LoginUserDataProvider
 String _$loginUserDataHash() => r'592964b001ea668d4e2321f1731c433119cbfc5d';
 
 @ProviderFor(registerUserData)
-const registerUserDataProvider = RegisterUserDataProvider._();
+final registerUserDataProvider = RegisterUserDataProvider._();
 
 final class RegisterUserDataProvider
     extends $FunctionalProvider<UserEntity?, UserEntity?, UserEntity?>
     with $Provider<UserEntity?> {
-  const RegisterUserDataProvider._()
+  RegisterUserDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -863,7 +859,7 @@ final class RegisterUserDataProvider
 String _$registerUserDataHash() => r'aac129335544afa90468fb5237d10109e591ddf8';
 
 @ProviderFor(emailCheckResult)
-const emailCheckResultProvider = EmailCheckResultProvider._();
+final emailCheckResultProvider = EmailCheckResultProvider._();
 
 final class EmailCheckResultProvider
     extends
@@ -873,7 +869,7 @@ final class EmailCheckResultProvider
           CheckEmailEntity?
         >
     with $Provider<CheckEmailEntity?> {
-  const EmailCheckResultProvider._()
+  EmailCheckResultProvider._()
     : super(
         from: null,
         argument: null,
@@ -910,11 +906,11 @@ final class EmailCheckResultProvider
 String _$emailCheckResultHash() => r'171b3c2067f501b196cf22a4dd08f53f20fecca8';
 
 @ProviderFor(hasLoginError)
-const hasLoginErrorProvider = HasLoginErrorProvider._();
+final hasLoginErrorProvider = HasLoginErrorProvider._();
 
 final class HasLoginErrorProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasLoginErrorProvider._()
+  HasLoginErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -950,12 +946,12 @@ final class HasLoginErrorProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasLoginErrorHash() => r'7d9869f78d22f2b694d97feaa7110a0a5e2e9515';
 
 @ProviderFor(hasRegisterError)
-const hasRegisterErrorProvider = HasRegisterErrorProvider._();
+final hasRegisterErrorProvider = HasRegisterErrorProvider._();
 
 final class HasRegisterErrorProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasRegisterErrorProvider._()
+  HasRegisterErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -991,12 +987,12 @@ final class HasRegisterErrorProvider
 String _$hasRegisterErrorHash() => r'f553ec616ffd0572cd9d6055619b51aa5023b03b';
 
 @ProviderFor(hasEmailCheckError)
-const hasEmailCheckErrorProvider = HasEmailCheckErrorProvider._();
+final hasEmailCheckErrorProvider = HasEmailCheckErrorProvider._();
 
 final class HasEmailCheckErrorProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasEmailCheckErrorProvider._()
+  HasEmailCheckErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -1033,12 +1029,12 @@ String _$hasEmailCheckErrorHash() =>
     r'3ac8677c337472b0294c2e6886fda4617a1d04a0';
 
 @ProviderFor(isCurrentUserLoading)
-const isCurrentUserLoadingProvider = IsCurrentUserLoadingProvider._();
+final isCurrentUserLoadingProvider = IsCurrentUserLoadingProvider._();
 
 final class IsCurrentUserLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsCurrentUserLoadingProvider._()
+  IsCurrentUserLoadingProvider._()
     : super(
         from: null,
         argument: null,

@@ -30,8 +30,7 @@ class NavigationGuards {
     _logNavigationAttempt(currentPath, currentUserState);
 
     // During splash screen display period, prevent any redirects
-    if (currentPath == AppRoutePaths.splash && !splashDisplayTime.isComplete) {
-      L.app('🚀 Splash screen displaying, blocking redirects');
+    if (currentPath == AppRoutePaths.splash && !splashDisplayTime.isComplete) {;
       return null;
     }
 

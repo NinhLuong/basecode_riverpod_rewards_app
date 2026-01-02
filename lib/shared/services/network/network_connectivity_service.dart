@@ -59,8 +59,6 @@ class NetworkConnectivityService {
     final wasConnected = _isConnected;
     _isConnected = _isConnectedFromResults(results);
     
-    L.network('Connection status update: $results -> ${_isConnected ? 'Connected' : 'Disconnected'}');
-    
     // Always emit status changes
     if (wasConnected != _isConnected) {
       _networkStatusController.add(_isConnected);
@@ -110,7 +108,6 @@ class NetworkConnectivityService {
   Future<bool> checkConnectivity() async {
     try {
       final results = await _connectivity.checkConnectivity();
-      L.network('Manual connectivity check: $results');
       _updateConnectionStatus(results);
       return _isConnected;
     } catch (e) {

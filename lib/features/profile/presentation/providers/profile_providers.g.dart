@@ -10,7 +10,7 @@ part of 'profile_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(profileRepository)
-const profileRepositoryProvider = ProfileRepositoryProvider._();
+final profileRepositoryProvider = ProfileRepositoryProvider._();
 
 final class ProfileRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class ProfileRepositoryProvider
           ProfileRepository
         >
     with $Provider<ProfileRepository> {
-  const ProfileRepositoryProvider._()
+  ProfileRepositoryProvider._()
     : super(
         from: null,
         argument: null,
@@ -57,11 +57,11 @@ final class ProfileRepositoryProvider
 String _$profileRepositoryHash() => r'f7fb25357ffa348edff0ee5602118642e3bce412';
 
 @ProviderFor(ProfileNotifier)
-const profileProvider = ProfileNotifierProvider._();
+final profileProvider = ProfileNotifierProvider._();
 
 final class ProfileNotifierProvider
     extends $NotifierProvider<ProfileNotifier, ProfileState> {
-  const ProfileNotifierProvider._()
+  ProfileNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -95,7 +95,6 @@ abstract class _$ProfileNotifier extends $Notifier<ProfileState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<ProfileState, ProfileState>;
     final element =
         ref.element
@@ -105,17 +104,17 @@ abstract class _$ProfileNotifier extends $Notifier<ProfileState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(userProfileBalance)
-const userProfileBalanceProvider = UserProfileBalanceProvider._();
+final userProfileBalanceProvider = UserProfileBalanceProvider._();
 
 final class UserProfileBalanceProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const UserProfileBalanceProvider._()
+  UserProfileBalanceProvider._()
     : super(
         from: null,
         argument: null,
@@ -152,12 +151,12 @@ String _$userProfileBalanceHash() =>
     r'6dcf13250149b54981664198f8ae738a71b578b7';
 
 @ProviderFor(profileRedeemedPoints)
-const profileRedeemedPointsProvider = ProfileRedeemedPointsProvider._();
+final profileRedeemedPointsProvider = ProfileRedeemedPointsProvider._();
 
 final class ProfileRedeemedPointsProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const ProfileRedeemedPointsProvider._()
+  ProfileRedeemedPointsProvider._()
     : super(
         from: null,
         argument: null,
@@ -194,12 +193,12 @@ String _$profileRedeemedPointsHash() =>
     r'f946f46005f15e1078eb802ef2dc15108c2b9c24';
 
 @ProviderFor(profileTotalPoints)
-const profileTotalPointsProvider = ProfileTotalPointsProvider._();
+final profileTotalPointsProvider = ProfileTotalPointsProvider._();
 
 final class ProfileTotalPointsProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const ProfileTotalPointsProvider._()
+  ProfileTotalPointsProvider._()
     : super(
         from: null,
         argument: null,
@@ -236,12 +235,12 @@ String _$profileTotalPointsHash() =>
     r'b604897ffbc06cf306e1a8e260a2447e918c5950';
 
 @ProviderFor(isProfileLoading)
-const isProfileLoadingProvider = IsProfileLoadingProvider._();
+final isProfileLoadingProvider = IsProfileLoadingProvider._();
 
 final class IsProfileLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsProfileLoadingProvider._()
+  IsProfileLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -277,12 +276,12 @@ final class IsProfileLoadingProvider
 String _$isProfileLoadingHash() => r'107c35a30c5ffb33d6e8dbf0414291bac6a890a2';
 
 @ProviderFor(profileErrorMessage)
-const profileErrorMessageProvider = ProfileErrorMessageProvider._();
+final profileErrorMessageProvider = ProfileErrorMessageProvider._();
 
 final class ProfileErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const ProfileErrorMessageProvider._()
+  ProfileErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -319,12 +318,12 @@ String _$profileErrorMessageHash() =>
     r'8e0cff6bb9ece1f4746c379181e8c1f47dc0cee3';
 
 @ProviderFor(hasProfileError)
-const hasProfileErrorProvider = HasProfileErrorProvider._();
+final hasProfileErrorProvider = HasProfileErrorProvider._();
 
 final class HasProfileErrorProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasProfileErrorProvider._()
+  HasProfileErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -360,11 +359,11 @@ final class HasProfileErrorProvider
 String _$hasProfileErrorHash() => r'297ff21e6dae768f1ba0ffc08c9fa4f46684d186';
 
 @ProviderFor(hasProfileData)
-const hasProfileDataProvider = HasProfileDataProvider._();
+final hasProfileDataProvider = HasProfileDataProvider._();
 
 final class HasProfileDataProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasProfileDataProvider._()
+  HasProfileDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -400,12 +399,12 @@ final class HasProfileDataProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasProfileDataHash() => r'ee8cbf7bdd617eb51b52eec3e7a4d6ef03372610';
 
 @ProviderFor(isProfileRefreshing)
-const isProfileRefreshingProvider = IsProfileRefreshingProvider._();
+final isProfileRefreshingProvider = IsProfileRefreshingProvider._();
 
 final class IsProfileRefreshingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsProfileRefreshingProvider._()
+  IsProfileRefreshingProvider._()
     : super(
         from: null,
         argument: null,
@@ -442,12 +441,12 @@ String _$isProfileRefreshingHash() =>
     r'4300f7393d712efe7014ed5cf5b7a578426f2b42';
 
 @ProviderFor(profileData)
-const profileDataProvider = ProfileDataProvider._();
+final profileDataProvider = ProfileDataProvider._();
 
 final class ProfileDataProvider
     extends $FunctionalProvider<ProfileEntity?, ProfileEntity?, ProfileEntity?>
     with $Provider<ProfileEntity?> {
-  const ProfileDataProvider._()
+  ProfileDataProvider._()
     : super(
         from: null,
         argument: null,

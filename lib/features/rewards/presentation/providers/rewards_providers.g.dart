@@ -10,7 +10,7 @@ part of 'rewards_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(rewardsRepository)
-const rewardsRepositoryProvider = RewardsRepositoryProvider._();
+final rewardsRepositoryProvider = RewardsRepositoryProvider._();
 
 final class RewardsRepositoryProvider
     extends
@@ -20,7 +20,7 @@ final class RewardsRepositoryProvider
           RewardsRepository
         >
     with $Provider<RewardsRepository> {
-  const RewardsRepositoryProvider._()
+  RewardsRepositoryProvider._()
     : super(
         from: null,
         argument: null,
@@ -57,11 +57,11 @@ final class RewardsRepositoryProvider
 String _$rewardsRepositoryHash() => r'594a20428f0d902a16b55763977937abf575cf2d';
 
 @ProviderFor(OrdersNotifier)
-const ordersProvider = OrdersNotifierProvider._();
+final ordersProvider = OrdersNotifierProvider._();
 
 final class OrdersNotifierProvider
     extends $NotifierProvider<OrdersNotifier, OrdersState> {
-  const OrdersNotifierProvider._()
+  OrdersNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -95,7 +95,6 @@ abstract class _$OrdersNotifier extends $Notifier<OrdersState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<OrdersState, OrdersState>;
     final element =
         ref.element
@@ -105,16 +104,16 @@ abstract class _$OrdersNotifier extends $Notifier<OrdersState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(TransactionsNotifier)
-const transactionsProvider = TransactionsNotifierProvider._();
+final transactionsProvider = TransactionsNotifierProvider._();
 
 final class TransactionsNotifierProvider
     extends $NotifierProvider<TransactionsNotifier, TransactionsState> {
-  const TransactionsNotifierProvider._()
+  TransactionsNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -149,7 +148,6 @@ abstract class _$TransactionsNotifier extends $Notifier<TransactionsState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<TransactionsState, TransactionsState>;
     final element =
         ref.element
@@ -159,16 +157,16 @@ abstract class _$TransactionsNotifier extends $Notifier<TransactionsState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(PayoutsNotifier)
-const payoutsProvider = PayoutsNotifierProvider._();
+final payoutsProvider = PayoutsNotifierProvider._();
 
 final class PayoutsNotifierProvider
     extends $NotifierProvider<PayoutsNotifier, PayoutsState> {
-  const PayoutsNotifierProvider._()
+  PayoutsNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -202,7 +200,6 @@ abstract class _$PayoutsNotifier extends $Notifier<PayoutsState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<PayoutsState, PayoutsState>;
     final element =
         ref.element
@@ -212,16 +209,16 @@ abstract class _$PayoutsNotifier extends $Notifier<PayoutsState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(RedeemNotifier)
-const redeemProvider = RedeemNotifierProvider._();
+final redeemProvider = RedeemNotifierProvider._();
 
 final class RedeemNotifierProvider
     extends $NotifierProvider<RedeemNotifier, RedeemState> {
-  const RedeemNotifierProvider._()
+  RedeemNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -255,7 +252,6 @@ abstract class _$RedeemNotifier extends $Notifier<RedeemState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<RedeemState, RedeemState>;
     final element =
         ref.element
@@ -265,12 +261,12 @@ abstract class _$RedeemNotifier extends $Notifier<RedeemState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(ordersList)
-const ordersListProvider = OrdersListProvider._();
+final ordersListProvider = OrdersListProvider._();
 
 final class OrdersListProvider
     extends
@@ -280,7 +276,7 @@ final class OrdersListProvider
           List<OrderEntity>
         >
     with $Provider<List<OrderEntity>> {
-  const OrdersListProvider._()
+  OrdersListProvider._()
     : super(
         from: null,
         argument: null,
@@ -317,7 +313,7 @@ final class OrdersListProvider
 String _$ordersListHash() => r'ceee8cafb328ab094b9868cff6604757f54da77b';
 
 @ProviderFor(transactionsList)
-const transactionsListProvider = TransactionsListProvider._();
+final transactionsListProvider = TransactionsListProvider._();
 
 final class TransactionsListProvider
     extends
@@ -327,7 +323,7 @@ final class TransactionsListProvider
           List<TransactionEntity>
         >
     with $Provider<List<TransactionEntity>> {
-  const TransactionsListProvider._()
+  TransactionsListProvider._()
     : super(
         from: null,
         argument: null,
@@ -364,12 +360,12 @@ final class TransactionsListProvider
 String _$transactionsListHash() => r'bbeacf0b062d2d93bf85bb485893d462abe5679b';
 
 @ProviderFor(isOrdersLoading)
-const isOrdersLoadingProvider = IsOrdersLoadingProvider._();
+final isOrdersLoadingProvider = IsOrdersLoadingProvider._();
 
 final class IsOrdersLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsOrdersLoadingProvider._()
+  IsOrdersLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -405,12 +401,12 @@ final class IsOrdersLoadingProvider
 String _$isOrdersLoadingHash() => r'ba2b4009226469b1c43ec80ca3f11f207de16574';
 
 @ProviderFor(isTransactionsLoading)
-const isTransactionsLoadingProvider = IsTransactionsLoadingProvider._();
+final isTransactionsLoadingProvider = IsTransactionsLoadingProvider._();
 
 final class IsTransactionsLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsTransactionsLoadingProvider._()
+  IsTransactionsLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -447,12 +443,12 @@ String _$isTransactionsLoadingHash() =>
     r'e3f875d951df3bc90db4d85b739676031444e953';
 
 @ProviderFor(isPayoutsLoading)
-const isPayoutsLoadingProvider = IsPayoutsLoadingProvider._();
+final isPayoutsLoadingProvider = IsPayoutsLoadingProvider._();
 
 final class IsPayoutsLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsPayoutsLoadingProvider._()
+  IsPayoutsLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -488,12 +484,12 @@ final class IsPayoutsLoadingProvider
 String _$isPayoutsLoadingHash() => r'6229f59a64e1674f920b0c5d2f311b7a42749c19';
 
 @ProviderFor(isRedeemLoading)
-const isRedeemLoadingProvider = IsRedeemLoadingProvider._();
+final isRedeemLoadingProvider = IsRedeemLoadingProvider._();
 
 final class IsRedeemLoadingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsRedeemLoadingProvider._()
+  IsRedeemLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -529,12 +525,12 @@ final class IsRedeemLoadingProvider
 String _$isRedeemLoadingHash() => r'4185f36c0bea815f989666b550b94964c62cb3c8';
 
 @ProviderFor(ordersErrorMessage)
-const ordersErrorMessageProvider = OrdersErrorMessageProvider._();
+final ordersErrorMessageProvider = OrdersErrorMessageProvider._();
 
 final class OrdersErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const OrdersErrorMessageProvider._()
+  OrdersErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -571,12 +567,12 @@ String _$ordersErrorMessageHash() =>
     r'a98d0f1e61a3ae81e2074cac53d0ae9c035a9caf';
 
 @ProviderFor(transactionsErrorMessage)
-const transactionsErrorMessageProvider = TransactionsErrorMessageProvider._();
+final transactionsErrorMessageProvider = TransactionsErrorMessageProvider._();
 
 final class TransactionsErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const TransactionsErrorMessageProvider._()
+  TransactionsErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -613,12 +609,12 @@ String _$transactionsErrorMessageHash() =>
     r'44aff37b1f96b46f33ccb7ac2df634b0c0d1466f';
 
 @ProviderFor(payoutsErrorMessage)
-const payoutsErrorMessageProvider = PayoutsErrorMessageProvider._();
+final payoutsErrorMessageProvider = PayoutsErrorMessageProvider._();
 
 final class PayoutsErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const PayoutsErrorMessageProvider._()
+  PayoutsErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -655,12 +651,12 @@ String _$payoutsErrorMessageHash() =>
     r'950c304a77f4cd0c375fad7b5eacb53a278b57cd';
 
 @ProviderFor(redeemErrorMessage)
-const redeemErrorMessageProvider = RedeemErrorMessageProvider._();
+final redeemErrorMessageProvider = RedeemErrorMessageProvider._();
 
 final class RedeemErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const RedeemErrorMessageProvider._()
+  RedeemErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -697,11 +693,11 @@ String _$redeemErrorMessageHash() =>
     r'9684657cd44cc143d1d083f21021d04ba070b0a5';
 
 @ProviderFor(hasOrdersError)
-const hasOrdersErrorProvider = HasOrdersErrorProvider._();
+final hasOrdersErrorProvider = HasOrdersErrorProvider._();
 
 final class HasOrdersErrorProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasOrdersErrorProvider._()
+  HasOrdersErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -737,12 +733,12 @@ final class HasOrdersErrorProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasOrdersErrorHash() => r'2aecc2c0b50a4527cd2373c346e2d7f9c801b30e';
 
 @ProviderFor(hasTransactionsError)
-const hasTransactionsErrorProvider = HasTransactionsErrorProvider._();
+final hasTransactionsErrorProvider = HasTransactionsErrorProvider._();
 
 final class HasTransactionsErrorProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasTransactionsErrorProvider._()
+  HasTransactionsErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -779,12 +775,12 @@ String _$hasTransactionsErrorHash() =>
     r'459957d55af143c67a8e13a87d672907dd1dab4a';
 
 @ProviderFor(hasPayoutsError)
-const hasPayoutsErrorProvider = HasPayoutsErrorProvider._();
+final hasPayoutsErrorProvider = HasPayoutsErrorProvider._();
 
 final class HasPayoutsErrorProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasPayoutsErrorProvider._()
+  HasPayoutsErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -820,11 +816,11 @@ final class HasPayoutsErrorProvider
 String _$hasPayoutsErrorHash() => r'ed21656f8ade5d27ac98c40a5c23b6ecd285a589';
 
 @ProviderFor(hasRedeemError)
-const hasRedeemErrorProvider = HasRedeemErrorProvider._();
+final hasRedeemErrorProvider = HasRedeemErrorProvider._();
 
 final class HasRedeemErrorProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasRedeemErrorProvider._()
+  HasRedeemErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -860,11 +856,11 @@ final class HasRedeemErrorProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasRedeemErrorHash() => r'00688e0d303ecdabf2e5e8ba38abf2da15034f81';
 
 @ProviderFor(hasOrdersData)
-const hasOrdersDataProvider = HasOrdersDataProvider._();
+final hasOrdersDataProvider = HasOrdersDataProvider._();
 
 final class HasOrdersDataProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasOrdersDataProvider._()
+  HasOrdersDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -900,12 +896,12 @@ final class HasOrdersDataProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasOrdersDataHash() => r'4e1e439dbe951d03fd394e693a1ab1cbfeb38589';
 
 @ProviderFor(hasTransactionsData)
-const hasTransactionsDataProvider = HasTransactionsDataProvider._();
+final hasTransactionsDataProvider = HasTransactionsDataProvider._();
 
 final class HasTransactionsDataProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasTransactionsDataProvider._()
+  HasTransactionsDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -942,11 +938,11 @@ String _$hasTransactionsDataHash() =>
     r'7514334766d2f3a0ef6e1e7e51620d93af60e7f6';
 
 @ProviderFor(hasPayoutsData)
-const hasPayoutsDataProvider = HasPayoutsDataProvider._();
+final hasPayoutsDataProvider = HasPayoutsDataProvider._();
 
 final class HasPayoutsDataProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasPayoutsDataProvider._()
+  HasPayoutsDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -982,11 +978,11 @@ final class HasPayoutsDataProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasPayoutsDataHash() => r'dee9b2affd687558ed9964b8fcf8d9eedce7b947';
 
 @ProviderFor(redeemSuccess)
-const redeemSuccessProvider = RedeemSuccessProvider._();
+final redeemSuccessProvider = RedeemSuccessProvider._();
 
 final class RedeemSuccessProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const RedeemSuccessProvider._()
+  RedeemSuccessProvider._()
     : super(
         from: null,
         argument: null,
@@ -1022,12 +1018,12 @@ final class RedeemSuccessProvider extends $FunctionalProvider<bool, bool, bool>
 String _$redeemSuccessHash() => r'8a399d250658046bbd3a4d905aaffa8b0975ad76';
 
 @ProviderFor(ordersData)
-const ordersDataProvider = OrdersDataProvider._();
+final ordersDataProvider = OrdersDataProvider._();
 
 final class OrdersDataProvider
     extends $FunctionalProvider<OrdersEntity?, OrdersEntity?, OrdersEntity?>
     with $Provider<OrdersEntity?> {
-  const OrdersDataProvider._()
+  OrdersDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -1063,7 +1059,7 @@ final class OrdersDataProvider
 String _$ordersDataHash() => r'7e56363e7329a38e7ab3ce8f5d7be93355a2f6c6';
 
 @ProviderFor(transactionsData)
-const transactionsDataProvider = TransactionsDataProvider._();
+final transactionsDataProvider = TransactionsDataProvider._();
 
 final class TransactionsDataProvider
     extends
@@ -1073,7 +1069,7 @@ final class TransactionsDataProvider
           TransactionsEntity?
         >
     with $Provider<TransactionsEntity?> {
-  const TransactionsDataProvider._()
+  TransactionsDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -1110,12 +1106,12 @@ final class TransactionsDataProvider
 String _$transactionsDataHash() => r'd3847da8e9459defdc7d2dac6c8ec9f5519bbd4c';
 
 @ProviderFor(payoutsData)
-const payoutsDataProvider = PayoutsDataProvider._();
+final payoutsDataProvider = PayoutsDataProvider._();
 
 final class PayoutsDataProvider
     extends $FunctionalProvider<PayoutsEntity?, PayoutsEntity?, PayoutsEntity?>
     with $Provider<PayoutsEntity?> {
-  const PayoutsDataProvider._()
+  PayoutsDataProvider._()
     : super(
         from: null,
         argument: null,

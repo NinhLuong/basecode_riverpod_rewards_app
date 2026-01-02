@@ -11,13 +11,13 @@ part of 'splash_providers.dart';
 /// Provider to track splash screen display timing
 
 @ProviderFor(SplashDisplayTime)
-const splashDisplayTimeProvider = SplashDisplayTimeProvider._();
+final splashDisplayTimeProvider = SplashDisplayTimeProvider._();
 
 /// Provider to track splash screen display timing
 final class SplashDisplayTimeProvider
     extends $NotifierProvider<SplashDisplayTime, SplashDisplayState> {
   /// Provider to track splash screen display timing
-  const SplashDisplayTimeProvider._()
+  SplashDisplayTimeProvider._()
     : super(
         from: null,
         argument: null,
@@ -53,7 +53,6 @@ abstract class _$SplashDisplayTime extends $Notifier<SplashDisplayState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<SplashDisplayState, SplashDisplayState>;
     final element =
         ref.element
@@ -63,6 +62,6 @@ abstract class _$SplashDisplayTime extends $Notifier<SplashDisplayState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

@@ -10,12 +10,12 @@ part of 'home_providers.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(getHomeUseCase)
-const getHomeUseCaseProvider = GetHomeUseCaseProvider._();
+final getHomeUseCaseProvider = GetHomeUseCaseProvider._();
 
 final class GetHomeUseCaseProvider
     extends $FunctionalProvider<GetHomeUseCase, GetHomeUseCase, GetHomeUseCase>
     with $Provider<GetHomeUseCase> {
-  const GetHomeUseCaseProvider._()
+  GetHomeUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -51,7 +51,7 @@ final class GetHomeUseCaseProvider
 String _$getHomeUseCaseHash() => r'315198e350056d3e2ae4786a9afc06fa964c416a';
 
 @ProviderFor(homeGetUserLocalUseCase)
-const homeGetUserLocalUseCaseProvider = HomeGetUserLocalUseCaseProvider._();
+final homeGetUserLocalUseCaseProvider = HomeGetUserLocalUseCaseProvider._();
 
 final class HomeGetUserLocalUseCaseProvider
     extends
@@ -61,7 +61,7 @@ final class HomeGetUserLocalUseCaseProvider
           GetUserLocalUseCase
         >
     with $Provider<GetUserLocalUseCase> {
-  const HomeGetUserLocalUseCaseProvider._()
+  HomeGetUserLocalUseCaseProvider._()
     : super(
         from: null,
         argument: null,
@@ -99,11 +99,11 @@ String _$homeGetUserLocalUseCaseHash() =>
     r'403cc9769d2741af0ba625fd04701865ed80b8ce';
 
 @ProviderFor(HomeNotifier)
-const homeProvider = HomeNotifierProvider._();
+final homeProvider = HomeNotifierProvider._();
 
 final class HomeNotifierProvider
     extends $NotifierProvider<HomeNotifier, HomeState> {
-  const HomeNotifierProvider._()
+  HomeNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -137,7 +137,6 @@ abstract class _$HomeNotifier extends $Notifier<HomeState> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<HomeState, HomeState>;
     final element =
         ref.element
@@ -147,17 +146,17 @@ abstract class _$HomeNotifier extends $Notifier<HomeState> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
 
 @ProviderFor(homeData)
-const homeDataProvider = HomeDataProvider._();
+final homeDataProvider = HomeDataProvider._();
 
 final class HomeDataProvider
     extends $FunctionalProvider<HomeEntity?, HomeEntity?, HomeEntity?>
     with $Provider<HomeEntity?> {
-  const HomeDataProvider._()
+  HomeDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -193,12 +192,12 @@ final class HomeDataProvider
 String _$homeDataHash() => r'a5df0441e56606c962354ac4e16fc55f429ec8a9';
 
 @ProviderFor(homeUserData)
-const homeUserDataProvider = HomeUserDataProvider._();
+final homeUserDataProvider = HomeUserDataProvider._();
 
 final class HomeUserDataProvider
     extends $FunctionalProvider<UserEntity?, UserEntity?, UserEntity?>
     with $Provider<UserEntity?> {
-  const HomeUserDataProvider._()
+  HomeUserDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -234,12 +233,12 @@ final class HomeUserDataProvider
 String _$homeUserDataHash() => r'dffc5eb3adb0ac7d913a7cb196a38a0ef020cadf';
 
 @ProviderFor(userBalance)
-const userBalanceProvider = UserBalanceProvider._();
+final userBalanceProvider = UserBalanceProvider._();
 
 final class UserBalanceProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const UserBalanceProvider._()
+  UserBalanceProvider._()
     : super(
         from: null,
         argument: null,
@@ -275,7 +274,7 @@ final class UserBalanceProvider
 String _$userBalanceHash() => r'8c2afc1c735add2783ca06cc514e26286c7ea4b1';
 
 @ProviderFor(offerWalls)
-const offerWallsProvider = OfferWallsProvider._();
+final offerWallsProvider = OfferWallsProvider._();
 
 final class OfferWallsProvider
     extends
@@ -285,7 +284,7 @@ final class OfferWallsProvider
           List<OfferWallEntity>
         >
     with $Provider<List<OfferWallEntity>> {
-  const OfferWallsProvider._()
+  OfferWallsProvider._()
     : super(
         from: null,
         argument: null,
@@ -322,12 +321,12 @@ final class OfferWallsProvider
 String _$offerWallsHash() => r'a55dfcd905f62d7806f0cf1aab7280896ede2b66';
 
 @ProviderFor(currentUserName)
-const currentUserNameProvider = CurrentUserNameProvider._();
+final currentUserNameProvider = CurrentUserNameProvider._();
 
 final class CurrentUserNameProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const CurrentUserNameProvider._()
+  CurrentUserNameProvider._()
     : super(
         from: null,
         argument: null,
@@ -363,12 +362,12 @@ final class CurrentUserNameProvider
 String _$currentUserNameHash() => r'8135b6a0c83ea1733d936f93bc2ecd289cf7687f';
 
 @ProviderFor(userFullName)
-const userFullNameProvider = UserFullNameProvider._();
+final userFullNameProvider = UserFullNameProvider._();
 
 final class UserFullNameProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const UserFullNameProvider._()
+  UserFullNameProvider._()
     : super(
         from: null,
         argument: null,
@@ -404,12 +403,12 @@ final class UserFullNameProvider
 String _$userFullNameHash() => r'ea740231e7e23be32bd778a5a9b2b8356733c67c';
 
 @ProviderFor(userEmail)
-const userEmailProvider = UserEmailProvider._();
+final userEmailProvider = UserEmailProvider._();
 
 final class UserEmailProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const UserEmailProvider._()
+  UserEmailProvider._()
     : super(
         from: null,
         argument: null,
@@ -445,12 +444,12 @@ final class UserEmailProvider
 String _$userEmailHash() => r'e9e38d60fa4c57074bf569ea61dd3748abecca47';
 
 @ProviderFor(userPoints)
-const userPointsProvider = UserPointsProvider._();
+final userPointsProvider = UserPointsProvider._();
 
 final class UserPointsProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const UserPointsProvider._()
+  UserPointsProvider._()
     : super(
         from: null,
         argument: null,
@@ -486,12 +485,12 @@ final class UserPointsProvider
 String _$userPointsHash() => r'7a133c9a0c1ce5430c13dd1e6b54039fa869d05e';
 
 @ProviderFor(userRedeemedPoints)
-const userRedeemedPointsProvider = UserRedeemedPointsProvider._();
+final userRedeemedPointsProvider = UserRedeemedPointsProvider._();
 
 final class UserRedeemedPointsProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const UserRedeemedPointsProvider._()
+  UserRedeemedPointsProvider._()
     : super(
         from: null,
         argument: null,
@@ -528,11 +527,11 @@ String _$userRedeemedPointsHash() =>
     r'f2eb3ebeed210d83266d02de8b5d6057785e7736';
 
 @ProviderFor(isHomeLoading)
-const isHomeLoadingProvider = IsHomeLoadingProvider._();
+final isHomeLoadingProvider = IsHomeLoadingProvider._();
 
 final class IsHomeLoadingProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsHomeLoadingProvider._()
+  IsHomeLoadingProvider._()
     : super(
         from: null,
         argument: null,
@@ -568,11 +567,11 @@ final class IsHomeLoadingProvider extends $FunctionalProvider<bool, bool, bool>
 String _$isHomeLoadingHash() => r'c7239b6b1eecdc7ec0cc73a8c18d8e5585d114bb';
 
 @ProviderFor(hasHomeError)
-const hasHomeErrorProvider = HasHomeErrorProvider._();
+final hasHomeErrorProvider = HasHomeErrorProvider._();
 
 final class HasHomeErrorProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasHomeErrorProvider._()
+  HasHomeErrorProvider._()
     : super(
         from: null,
         argument: null,
@@ -608,12 +607,12 @@ final class HasHomeErrorProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasHomeErrorHash() => r'185d71ed949034d843bf7f736e15f34c1bbe2281';
 
 @ProviderFor(homeErrorMessage)
-const homeErrorMessageProvider = HomeErrorMessageProvider._();
+final homeErrorMessageProvider = HomeErrorMessageProvider._();
 
 final class HomeErrorMessageProvider
     extends $FunctionalProvider<String?, String?, String?>
     with $Provider<String?> {
-  const HomeErrorMessageProvider._()
+  HomeErrorMessageProvider._()
     : super(
         from: null,
         argument: null,
@@ -649,11 +648,11 @@ final class HomeErrorMessageProvider
 String _$homeErrorMessageHash() => r'06b3973dd65176b7a073f0460e29644c737078ee';
 
 @ProviderFor(hasHomeData)
-const hasHomeDataProvider = HasHomeDataProvider._();
+final hasHomeDataProvider = HasHomeDataProvider._();
 
 final class HasHomeDataProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const HasHomeDataProvider._()
+  HasHomeDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -689,12 +688,12 @@ final class HasHomeDataProvider extends $FunctionalProvider<bool, bool, bool>
 String _$hasHomeDataHash() => r'505fed1336dbffd66bf77d1585c6ddc1e6c4d992';
 
 @ProviderFor(isHomeRefreshing)
-const isHomeRefreshingProvider = IsHomeRefreshingProvider._();
+final isHomeRefreshingProvider = IsHomeRefreshingProvider._();
 
 final class IsHomeRefreshingProvider
     extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
-  const IsHomeRefreshingProvider._()
+  IsHomeRefreshingProvider._()
     : super(
         from: null,
         argument: null,
@@ -730,7 +729,7 @@ final class IsHomeRefreshingProvider
 String _$isHomeRefreshingHash() => r'8d07e5a0c7a3f965f4fd9318d4a8a3c3b96b3188';
 
 @ProviderFor(homeWithUserData)
-const homeWithUserDataProvider = HomeWithUserDataProvider._();
+final homeWithUserDataProvider = HomeWithUserDataProvider._();
 
 final class HomeWithUserDataProvider
     extends
@@ -740,7 +739,7 @@ final class HomeWithUserDataProvider
           HomeWithUserEntity?
         >
     with $Provider<HomeWithUserEntity?> {
-  const HomeWithUserDataProvider._()
+  HomeWithUserDataProvider._()
     : super(
         from: null,
         argument: null,

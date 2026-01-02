@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   #state management
   flutter_riverpod: ^3.0.0
-  riverpod_annotation: ^3.0.0
+  riverpod_annotation: ^4.0.0
 
   #hooks
   flutter_hooks: ^0.21.3+1
@@ -92,7 +92,7 @@ dependencies:
   
   #Local storage
   shared_preferences: ^2.2.1
-  flutter_secure_storage: ^4.2.1
+  flutter_secure_storage: ^10.0.0
 
   #serialization
   json_annotation: ^4.9.0
@@ -135,7 +135,7 @@ dev_dependencies:
   injectable_generator: ^2.6.2
 
   #riverpod generator
-  riverpod_generator: ^3.0.0
+  riverpod_generator: ^4.0.0+1
 
   #riverpod lint
   riverpod_lint: ^3.0.0
